@@ -1,0 +1,36 @@
+/**
+ * Parses any side abbreviation to the proper list of sides
+ * Always returns a list even for one element
+ *
+ * Ex.:
+ * 'b' => bottom (it's a string)
+ * 'tr' => (top, right)
+ * '*' => (top, right, bottom, left) (Alias for 'trbl')
+ * '-t' => (right, bottom, left) Works with one "missing" side only
+ *
+ * @param $input string
+ * @return list
+ */
+@function pal-parse-sides($input) {
+
+  $output: map-get($pal-sides, $input);
+  $output-type: type-of($output);
+
+  @if ($output-type == 'list') {
+    @return $output;
+  }
+
+  @if ($output-type == 'string') {
+    @return ($output);
+  }
+
+  $output: ();
+
+  @for $i from 1 through str-length($input) {
+    $char: str-slice($input, $i, $i);
+    $label: map-get($pal-sides, $char);
+    $output: append($output, $label);
+  }
+
+  @return $output;
+}

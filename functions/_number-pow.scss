@@ -1,0 +1,10 @@
+@function pal-number-pow($base, $exponent: 1) {
+
+  $output: 1;
+
+  @for $i from 1 through $exponent {
+    $output: $output * $base;
+  }
+
+  @return $output;
+}

@@ -1,0 +1,8 @@
+@function pal-if($condition, $true-value, $false-value) {
+
+  @if ($condition) {
+    @return $true-value;
+  }
+
+  @return $false-value;
+}

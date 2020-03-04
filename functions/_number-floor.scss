@@ -1,0 +1,10 @@
+@function pal-number-floor($input) {
+
+  $floor: 0;
+
+  @while($floor + 1 < $input) {
+    $floor: $floor + 1;
+  }
+
+  @return $floor;
+}

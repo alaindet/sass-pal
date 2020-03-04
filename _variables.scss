@@ -1,0 +1,21 @@
+$pal-sides: (
+
+  // 1 side
+  't': 'top',
+  'r': 'right',
+  'b': 'bottom',
+  'l': 'left',
+
+  // 2 sides
+  'x': ('top', 'bottom'),
+  'y': ('right', 'left'),
+
+  // 3 sides
+  '-t': ('right', 'bottom', 'left'),
+  '-r': ('bottom', 'left', 'top'),
+  '-b': ('top', 'right', 'left'),
+  '-l': ('top', 'right', 'bottom'),
+
+  // 4 sides
+  '*': ('top', 'right', 'bottom', 'left'),
+);

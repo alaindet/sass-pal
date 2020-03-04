@@ -1,0 +1,55 @@
+@function pal-string-to-number($input) {
+
+  // Forbid non-strings
+  @if (type-of($input) != 'string') {
+    @error 'Value for `pal-string-to-number` should be a number or a string.';
+  }
+
+  @if (type-of($input) == 'number') {
+    @return $input;
+  }
+
+  $numbers: (
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9
+  );
+  $output: 0;
+  $digits: 0;
+  $is-negative: false;
+
+  // Negative?
+  @if (str-slice($input, 1, 1) == '-') {
+    $is-negative: true;
+    $input: str-slice($input, 2);
+  }
+
+  // Calculate maximum power of 10
+  $dot-index: str-index($input, '.');
+  $integers: str-length($input);
+  @if ($dot-index != null) {
+    $integers: $integers - str-length(str-slice($input, $dot-index));
+  }
+  $power: pal-number-pow(10, $integers - 1);
+
+  @for $i from 1 through str-length($input) {
+    $char: str-slice($input, $i, $i);
+    @if ($char != '.') {
+      $output: $output + map-get($numbers, $char) * $power;
+      $power: $power / 10;
+    }
+  }
+
+  @if ($is-negative) {
+    $output: (-1) * $output;
+  }
+
+  @return $output;
+}

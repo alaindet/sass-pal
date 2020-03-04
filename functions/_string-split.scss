@@ -1,0 +1,15 @@
+@function pal-string-split($string, $separator: ' ') {
+
+  $output: ();
+
+  $index: str-index($string, $separator);
+  @while ($index != null) {
+    $bit: str-slice($string, 1, $index - 1);
+    $output: append($output, $bit);
+    $string: str-slice($string, $index + 1);
+    $index: str-index($string, $separator);
+  }
+  $output: append($output, $string);
+
+  @return $output;
+}

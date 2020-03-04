@@ -1,0 +1,14 @@
+@function pal-list-join($glue, $list) {
+
+  $output: '';
+
+  @each $item in $list {
+    @if ($output == '') {
+      $output: $item;
+    } @else {
+      $output: '#{$output}#{$glue}#{$item}';
+    }
+  }
+
+  @return $output;
+}
