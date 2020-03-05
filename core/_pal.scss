@@ -1,60 +1,29 @@
-/**
- * Checks if the given map is a collection of utility maps grouped by device
- *
- * @param $map map
- * @return boolean
- */
-@function _pal-is-utilities-collection($map)
+@mixin pal($map)
 {
-  $key: nth(map-keys($map), 1);
-  @each $builder in $pal-builders {
-    @if ($builder == $key) {
-      @return false;
+  // Single utility map with no device query
+  @if (_pal-has-device-queries($map) == false) {
+    @each $builder-name, $builer-value in $map {
+      @include pal-builder($builder-name, $builder-value);
     }
   }
-  @return true;
-}
 
-@function _pal-parse-scope()
-{
-  // TODO...
-}
+  // Multiple utility maps grouped by device query
+  @else {
+    @each $query, $group in _pal-group-by-device-query($map) {
 
-@function _pal-group-queries()
-{
-  // TODO...
-}
+      $device: pal-map-get($group, 'query.device');
+      $operator: pal-map-get($group, 'query.operator');
+      $states: pal-map-get($group, 'states');
 
-@mixin pal-util($map)
-{
-  @each $builder, $value in $map {
-    @include pal-builder($builder, $value);
-  }
-}
-
-@mixin pal-util-collection($maps)
-{
-  @each $query, $group in _pal-group-queries($maps) {
-
-    $device: pal-map-get($group, 'scope.device');
-    $operator: pal-map-get($group, 'scope.operator');
-    $states: map-get($group, 'states');
-
-    @include pal-media-query($device, $operator) {
-      @each $state, $value in $states {
-        @include pal-pseudo-class($state) {
-          @include pal-utils($value);
+      @include pal-media-query($device, $operator) {
+        @each $state, $utility-map in $states {
+          @include pal-pseudo-class($state) {
+            @each $builder-name, $builder-value in $utility-map {
+              @include pal-builder($builder-name, $builder-value);
+            }
+          }
         }
       }
     }
-  }
-}
-
-@mixin pal($map)
-{
-  @if (_pal-is-utilities-collection($map)) {
-    @include pal-util-collection($map);
-  } @else {
-    @include pal-util($map);
   }
 }

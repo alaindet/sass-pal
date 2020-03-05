@@ -13,6 +13,11 @@
 @import './functions/map-get';
 
 @import './mixins/media-query';
+@import './mixins/pseudo-class';
 
+@import './core/functions/has-device-queries';
+@import './core/functions/parse-device-queries';
+@import './core/functions/group-by-device-queries';
 @import './core/builders-switch';
+// Import builders here...
 @import './core/pal';

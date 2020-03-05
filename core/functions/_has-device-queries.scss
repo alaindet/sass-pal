@@ -1,0 +1,16 @@
+/**
+ * Checks if the given map is a collection of maps grouped by device queries
+ *
+ * @param $map map
+ * @return boolean
+ */
+@function _pal-has-device-queries($map)
+{
+  $key: nth(map-keys($map), 1);
+  @each $builder in $pal-builders {
+    @if ($builder == $key) {
+      @return false;
+    }
+  }
+  @return true;
+}
