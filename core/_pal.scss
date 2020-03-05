@@ -1,0 +1,60 @@
+/**
+ * Checks if the given map is a collection of utility maps grouped by device
+ *
+ * @param $map map
+ * @return boolean
+ */
+@function _pal-is-utilities-collection($map)
+{
+  $key: nth(map-keys($map), 1);
+  @each $builder in $pal-builders {
+    @if ($builder == $key) {
+      @return false;
+    }
+  }
+  @return true;
+}
+
+@function _pal-parse-scope()
+{
+  // TODO...
+}
+
+@function _pal-group-queries()
+{
+  // TODO...
+}
+
+@mixin pal-util($map)
+{
+  @each $builder, $value in $map {
+    @include pal-builder($builder, $value);
+  }
+}
+
+@mixin pal-util-collection($maps)
+{
+  @each $query, $group in _pal-group-queries($maps) {
+
+    $device: pal-map-get($group, 'scope.device');
+    $operator: pal-map-get($group, 'scope.operator');
+    $states: map-get($group, 'states');
+
+    @include pal-media-query($device, $operator) {
+      @each $state, $value in $states {
+        @include pal-pseudo-class($state) {
+          @include pal-utils($value);
+        }
+      }
+    }
+  }
+}
+
+@mixin pal($map)
+{
+  @if (_pal-is-utilities-collection($map)) {
+    @include pal-util-collection($map);
+  } @else {
+    @include pal-util($map);
+  }
+}

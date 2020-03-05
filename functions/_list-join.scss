@@ -1,5 +1,12 @@
-@function pal-list-join($glue, $list) {
-
+/**
+ * Transforms a plain list into a string
+ *
+ * @param $glue string
+ * @param $list list
+ * @return string
+ */
+@function pal-list-join($glue, $list)
+{
   $output: '';
 
   @each $item in $list {

@@ -1,8 +1,19 @@
-@function pal-string-to-number($input) {
-
+/**
+ * Casts a string to a number. Works with negative and decimals numbers too
+ *
+ * Ex.:
+ * pal-string-to-number('123') => 123
+ * pal-string-to-number('-45.67') => -45.67
+ * pal-string-to-number('-8.9') + 1 => -7.9
+ *
+ * @param $input string|number
+ * @return number
+ */
+@function pal-string-to-number($input)
+{
   // Forbid non-strings
   @if (type-of($input) != 'string') {
-    @error 'Value for `pal-string-to-number` should be a number or a string.';
+    @return null;
   }
 
   @if (type-of($input) == 'number') {

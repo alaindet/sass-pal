@@ -1,0 +1,28 @@
+/**
+ * Chooses the right builder based on its name, since there's no dynamic mixin
+ * invoking in Sass (sadly)
+ *
+ * @param $builder string
+ * @param $value Any value to pass to the builder mixin
+ */
+@mixin pal-builder($builder, $value)
+{
+  @if ('border' == $builder) {
+    @include pal-border($value);
+  }
+  @if ('display' == $builder) {
+    @include pal-display($value);
+  }
+  @if ('flex' == $builder) {
+    @include pal-flex($value);
+  }
+  @if ('position' == $builder) {
+    @include pal-position($value);
+  }
+  @if ('size' == $builder) {
+    @include pal-size($value);
+  }
+  @if ('space' == $builder) {
+    @include pal-space($value);
+  }
+}

@@ -1,0 +1,39 @@
+/**
+ * Wrap all its content into a media query based on given arguments
+ *
+ * @param $device string
+ * @param $operator string
+ */
+@mixin pal-media-query($device: '*', $operator: null)
+{
+  @if ($device == '*' or $device == 'all') {
+    @content;
+  } @else {
+
+    @if ($operator == null) {
+      $operator: $pal-media-query-operator-default;
+    }
+
+    $range: map-get($pal-device-ranges, $device);
+    $min: nth($range, 1);
+    $max: nth($range, 2);
+
+    @if ($operator == 'down') {
+      @media screen and (max-width: $max) {
+        @content;
+      }
+    }
+
+    @else if ($operator == 'in') {
+      @media screen and (min-width: $min) and (max-width: $max) {
+        @content;
+      }
+    }
+
+    @else if ($operator == 'up') {
+      @media screen and (min-width: $min) {
+        @content;
+      }
+    }
+  }
+}

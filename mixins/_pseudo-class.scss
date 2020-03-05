@@ -1,0 +1,10 @@
+@mixin pal-pseudo-class($state: '*')
+{
+  @if ($state == '*' or $state == 'all') {
+    @content;
+  } @else {
+    &:#{$state} {
+      @content;
+    }
+  }
+}

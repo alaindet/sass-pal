@@ -1,21 +1,45 @@
 $pal-sides: (
-
-  // 1 side
   't': 'top',
   'r': 'right',
   'b': 'bottom',
   'l': 'left',
-
-  // 2 sides
   'x': ('top', 'bottom'),
   'y': ('right', 'left'),
-
-  // 3 sides
   '-t': ('right', 'bottom', 'left'),
   '-r': ('bottom', 'left', 'top'),
   '-b': ('top', 'right', 'left'),
   '-l': ('top', 'right', 'bottom'),
-
-  // 4 sides
   '*': ('top', 'right', 'bottom', 'left'),
 );
+
+$pal-builders: (
+  'border',
+  'display',
+  'flex',
+  'position',
+  'size',
+  'space',
+);
+
+
+$pal-devices: (
+  'mobile',
+  'tablet',
+  'desktop',
+  'over',
+);
+
+$pal-device-ranges: (
+  'mobile': (320px, 768px - 0.001px),
+  'tablet': (768px, 1024px - 0.001px),
+  'desktop': (1024px, 1440px - 0.001px),
+  'over': (1440px, 9999px),
+);
+
+$pal-media-query-operators: (
+  '=': 'in', // Default
+  '-': 'down',
+  '+': 'up',
+);
+
+$pal-media-query-operator-default: 'in';

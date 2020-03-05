@@ -11,8 +11,8 @@
  * @param $input string
  * @return list
  */
-@function pal-parse-sides($input) {
-
+@function pal-parse-sides($input)
+{
   $output: map-get($pal-sides, $input);
   $output-type: type-of($output);
 

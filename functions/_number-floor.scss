@@ -1,5 +1,14 @@
-@function pal-number-floor($input) {
-
+/**
+ * Returns the closest smaller integer of a given number
+ * Input should be unit-less
+ *
+ * Ex.: pal-number-ceil(12.34) => 12
+ *
+ * @param $input number
+ * @return number
+ */
+@function pal-number-floor($input)
+{
   $floor: 0;
 
   @while($floor + 1 < $input) {

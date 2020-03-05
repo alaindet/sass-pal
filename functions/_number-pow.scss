@@ -1,5 +1,14 @@
-@function pal-number-pow($base, $exponent: 1) {
-
+/**
+ * Elevates a number to the power of given exponent
+ *
+ * Ex.: pal-number-pow(2, 4) => 16
+ *
+ * @param $base number
+ * @param $base number
+ * @return number
+ */
+@function pal-number-pow($base, $exponent: 1)
+{
   $output: 1;
 
   @for $i from 1 through $exponent {

@@ -1,5 +1,12 @@
-@function pal-string-split($string, $separator: ' ') {
-
+/**
+ * Splits given string by the given separator into a plain list
+ *
+ * @param $string string
+ * @param $separator string
+ * @return list
+ */
+@function pal-string-split($string, $separator: ' ')
+{
   $output: ();
 
   $index: str-index($string, $separator);

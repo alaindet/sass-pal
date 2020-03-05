@@ -1,0 +1,26 @@
+/**
+ * Extends the built-in map-get() by allowing to get nested values like you
+ * would do in JavaScript, ex.: pal-map-get($map, 'foo.bar.baz');
+ *
+ * @param $map map
+ * @param $query string
+ * @return any
+ */
+@function pal-map-get($map, $query)
+{
+  @if (str-index($query, '.') == null) {
+    @return map-get($map, $query);
+  }
+
+  $output: null;
+
+  @each $word in pal-string-split($query, '.') {
+    @if ($output == null) {
+      $output: map-get($map, $word);
+    } @else {
+      $output: map-get($output, $word);
+    }
+  }
+
+  @return $output;
+}

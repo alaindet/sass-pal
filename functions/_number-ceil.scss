@@ -1,0 +1,13 @@
+/**
+ * Returns the closest bigger integer of a given number
+ * Input should be unit-less
+ *
+ * Ex.: pal-number-ceil(12.34) => 13
+ *
+ * @param $input number
+ * @return number
+ */
+@function pal-number-ceil($input)
+{
+  @return pal-number-floor($input) + 1;
+}
