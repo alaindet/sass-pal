@@ -1,0 +1,30 @@
+{
+  "name": "sass-pal",
+  "version": "1.0.0",
+  "description": "Sass Pal helps styling your applications without getting in the way",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node-sass ./dev.scss --output-style=expanded"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alaindet/sass-pal.git"
+  },
+  "keywords": [
+    "sass",
+    "pal",
+    "styling",
+    "utilities"
+  ],
+  "author": "Alain D'Ettorre <alain.det@gmail.com> (https://github.com/alaindet)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alaindet/sass-pal/issues"
+  },
+  "homepage": "https://github.com/alaindet/sass-pal#readme",
+  "devDependencies": {
+    "node-sass": "^4.13.1",
+    "sassdoc": "^2.7.1"
+  }
+}

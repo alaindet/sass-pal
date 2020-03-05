@@ -4,7 +4,7 @@
 
 There's Jarvis and Iron-Man, Alfred and Batman and **Sass Pal** and front end developers. Sass Pal is a utility library written in Sass with SCSS syntax to speed up your development process.
 
-All the library lives in the Sass files only, **no CSS is output** until you request it. It doesn't enforce hard-to-override pre-made components, it doesn't crowd your HTML templates with hundreds of utility classes, it doesn't require complex purging while building your application.
+All the library lives in Sass files only, so that **no CSS is output** until you request it. It doesn't enforce hard-to-override pre-made components, it doesn't flood your HTML templates with hundreds of inline-like utility classes, it doesn't require complex purging when building your application.
 
 Sass Pal offers an on-demand utility system via the `pal()` global mixin, having
 
@@ -12,7 +12,7 @@ Sass Pal offers an on-demand utility system via the `pal()` global mixin, having
 - The ability to define different rules for different devices via *device queries*
 - Fully flexible configuration via variables overriding
 - A plethora of extra `pal-*()` functions and mixins, like `pal-string-split()` and `pal-media-query()`
-- Compatibility with any modern JavaScript framework using Sass
+- Compatibility with any able to understand Sass
 
 ## Installation
 
