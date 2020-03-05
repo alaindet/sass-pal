@@ -1,3 +1,4 @@
 node_modules/
 _dev/
 package-lock.json
+/dev.scss
