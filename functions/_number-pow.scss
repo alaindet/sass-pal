@@ -1,12 +1,16 @@
-/**
- * Elevates a number to the power of given exponent
- *
- * Ex.: pal-number-pow(2, 4) => 16
- *
- * @param $base number
- * @param $base number
- * @return number
- */
+/// Elevates a number to the power of given exponent
+/// 
+/// @access public
+/// @group functions-number
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss
+///   pal-number-pow(2, 4) // 16
+/// 
+/// @param {Number} $base
+/// @param {Number} $expoent [1]
+/// @return {Number}
+/// 
 @function pal-number-pow($base, $exponent: 1)
 {
   $output: 1;

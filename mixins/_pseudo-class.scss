@@ -1,10 +1,33 @@
-@mixin pal-pseudo-class($state: '*')
+/// Wraps given content into a pseudo-selector. It uses the parent selector & so
+/// make sure to use this inside a class. You can optionally provide a custom
+/// parent selector to use. No effect if given a bypass
+/// 
+/// @access public
+/// @group mixins
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @content Rules to wrap into a pseudo class selector
+/// 
+/// @example scss Scope rules for :focus state only
+///   @include pal-pseudo('focus') { .foo { color: red } }
+///   // &:focus { .foo { color: red } }
+/// 
+/// @param {String} $state ['*'] State name (no :) or '*' or 'any' for bypass
+/// @param {String | Null } $parent [null] Custom parent selector name
+/// @output Input rules wrapped in chosen pseudo class
+/// 
+@mixin pal-pseudo($state: '*', $parent: null)
 {
-  @if ($state == '*' or $state == 'all') {
+  @if ($state == '*' or $state == 'any') {
     @content;
   } @else {
-    &:#{$state} {
-      @content;
+    @if ($parent != null) {
+      #{$parent}:#{$state} {
+        @content;
+      }
+    } @else {
+      &:#{$state} {
+        @content;
+      }
     }
   }
 }

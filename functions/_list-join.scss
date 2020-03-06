@@ -1,10 +1,17 @@
-/**
- * Transforms a plain list into a string
- *
- * @param $glue string
- * @param $list list
- * @return string
- */
+/// Transforms a plain list into a string
+///
+/// @access public
+/// @group functions-list
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss Join all devices in a string
+///   pal-list-join('_', ('mobile', 'tablet', 'desktop'))
+///   // 'mobile_tablet_desktop'
+///
+/// @param {String} $glue The separator to use between elements of the list
+/// @param {List} $list
+/// @return {String}
+///
 @function pal-list-join($glue, $list)
 {
   $output: '';

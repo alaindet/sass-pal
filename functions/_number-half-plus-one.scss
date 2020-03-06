@@ -1,13 +1,17 @@
-/**
- * Always returns an integer being the half plus one of any integer input number
- *
- * Ex.:
- * pal-number-half-plus-one(13) => 7
- * pal-number-half-plus-one(30) => 16
- *
- * @param $input number
- * @return number
- */
+/// Always returns an integer as the half plus one of any integer input
+/// Input number should be unit-less
+/// 
+/// @access public
+/// @group functions-number
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss
+///   pal-number-half-plus-one(13) // 7
+///   pal-number-half-plus-one(30) // 16
+/// 
+/// @param {Number} $input
+/// @return {Number}
+/// 
 @function pal-number-half-plus-one($input)
 {
   @return pal-number-ceil($input / 2);

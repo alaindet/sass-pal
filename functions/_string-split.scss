@@ -1,10 +1,17 @@
-/**
- * Splits given string by the given separator into a plain list
- *
- * @param $string string
- * @param $separator string
- * @return list
- */
+/// Splits given string by the given separator into a plain list
+///
+/// @access public
+/// @group functions-string
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss Split a phrase into words
+///   pal-string-split('how are you?', ' ')
+///   // ('how', 'are', 'you?')
+///
+/// @param {String} $string The string to split
+/// @param {String} $seperator The separator to split into
+/// @return {List}
+///
 @function pal-string-split($string, $separator: ' ')
 {
   $output: ();

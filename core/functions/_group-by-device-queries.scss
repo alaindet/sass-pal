@@ -1,3 +1,8 @@
+/// Groups utility maps by the same device query so that Sass Pal will output
+/// less @media rules
+/// 
+/// @todo The whole function
+///
 @function _pal-group-by-device-query()
 {
   // TODO...

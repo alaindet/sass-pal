@@ -1,9 +1,12 @@
-/**
- * Checks if the given map is a collection of maps grouped by device queries
- *
- * @param $map map
- * @return boolean
- */
+/// Checks if map is a collection of utility maps grouped by device queries 
+/// 
+/// @access private
+/// @group core
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @param {Map} $map
+/// @return {Bool}
+///
 @function _pal-has-device-queries($map)
 {
   $key: nth(map-keys($map), 1);

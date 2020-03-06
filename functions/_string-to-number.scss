@@ -1,14 +1,17 @@
-/**
- * Casts a string to a number. Works with negative and decimals numbers too
- *
- * Ex.:
- * pal-string-to-number('123') => 123
- * pal-string-to-number('-45.67') => -45.67
- * pal-string-to-number('-8.9') + 1 => -7.9
- *
- * @param $input string|number
- * @return number
- */
+/// Casts a string to a number. Works with negative and decimals numbers too
+///
+/// @access public
+/// @group functions-string
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss
+///   pal-string-to-number('123') // 123
+///   pal-string-to-number('-45.67') // -45.67
+///   pal-string-to-number('-8.9') + 1 // -7.9'
+///
+/// @param {String | Number} $input
+/// @return {Number}
+///
 @function pal-string-to-number($input)
 {
   // Forbid non-strings

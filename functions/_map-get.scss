@@ -1,11 +1,19 @@
-/**
- * Extends the built-in map-get() by allowing to get nested values like you
- * would do in JavaScript, ex.: pal-map-get($map, 'foo.bar.baz');
- *
- * @param $map map
- * @param $query string
- * @return any
- */
+/// Extends the built-in map-get() by allowing to get nested values like you
+/// would do in JavaScript, ex.: pal-map-get($map, 'foo.bar.baz');
+/// 
+/// @access public
+/// @group functions-map
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss Get nested value
+///   $foo: ('bar': ('baz': ('qez': 123)));
+///   pal-map-get($foo, 'bar.baz.qez');
+///   // 123
+/// 
+/// @param {Map} $map
+/// @param {String} $query
+/// @return {Any}
+///
 @function pal-map-get($map, $query)
 {
   @if (str-index($query, '.') == null) {

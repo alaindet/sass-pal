@@ -1,11 +1,20 @@
-/**
- * Chooses the right builder based on its name, since there's no dynamic mixin
- * invoking in Sass (sadly)
- *
- * @param $builder string
- * @param $value Any value to pass to the builder mixin
- */
-@mixin pal-builder($builder, $value)
+/// Chooses the right builder mixin based on its name and calls it
+/// 
+/// @access private
+/// @group core
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {mixin} pal-border
+/// @require {mixin} pal-display
+/// @require {mixin} pal-flex
+/// @require {mixin} pal-position
+/// @require {mixin} pal-size
+/// @require {mixin} pal-space
+/// 
+/// @param {String} $builder Name of the builder mixin
+/// @param {String | Number | Bool | Color | List | Map} $value
+/// @output Rules defined by called builder mixins
+///
+@mixin _pal-builder($builder, $value)
 {
   @if ('border' == $builder) {
     @include pal-border($value);

@@ -1,9 +1,31 @@
+/// The entry point of the whole Sass Pal system. **Utility maps** have a builder
+/// mixin names as keys and actual instructions as values (whose type depends on
+/// the builder). You can provide a more complex map to scope utility maps on
+/// specific devices, so that keys are **device queries** (defining resolution
+/// ranges, media query operatoror and optional states) adnd values are scoped
+/// utility maps.
+/// 
+/// @access public
+/// @group core
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} _pal-has-device-queries 
+/// @require {function} _pal-group-by-device-query
+/// @require {function} pal-map-get
+/// @require {mixin} _pal-builder
+/// @require {mixin} pal-media-query
+/// @require {mixin} pal-pseudo
+/// 
+/// @example scss
+/// 
+/// @param {Map} $map Can be a *utility map* or a map of *utility maps* by *device queries*
+/// @output A set of rules as described by provided utility map(s)
+///
 @mixin pal($map)
 {
   // Single utility map with no device query
   @if (_pal-has-device-queries($map) == false) {
     @each $builder-name, $builer-value in $map {
-      @include pal-builder($builder-name, $builder-value);
+      @include _pal-builder($builder-name, $builder-value);
     }
   }
 
@@ -17,13 +39,14 @@
 
       @include pal-media-query($device, $operator) {
         @each $state, $utility-map in $states {
-          @include pal-pseudo-class($state) {
+          @include pal-pseudo($state) {
             @each $builder-name, $builder-value in $utility-map {
-              @include pal-builder($builder-name, $builder-value);
+              @include _pal-builder($builder-name, $builder-value);
             }
           }
         }
       }
+
     }
-  }
+  }  
 }

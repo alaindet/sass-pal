@@ -1,12 +1,17 @@
-/**
- * Returns the closest smaller integer of a given number
- * Input should be unit-less
- *
- * Ex.: pal-number-ceil(12.34) => 12
- *
- * @param $input number
- * @return number
- */
+/// Returns the closest smaller integer of a given number
+/// Input should be unit-less
+/// 
+/// @access public
+/// @group functions-number
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss Get previous integer number of 12.34
+///   pal-number-floor(12.34)
+///   // 12
+/// 
+/// @param {Number} $input
+/// @return {Number}
+/// 
 @function pal-number-floor($input)
 {
   $floor: 0;

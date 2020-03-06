@@ -1,9 +1,20 @@
-/**
- * Wrap all its content into a media query based on given arguments
- *
- * @param $device string
- * @param $operator string
- */
+/// Wrap all its content into a media query based on given arguments
+/// 
+/// @access public
+/// @group mixins
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {variable} $pal-media-query-operator-default
+/// @require {variable} $pal-device-ranges
+/// @content Rules to wrap in a @media query
+///
+/// @example scss Scope rules from tablet upward only
+///   @include pal-media-query('tablet', 'in') { .foo { color: red } }
+///   // @media screen and (min-width: 768px) { .foo { color: red } }
+/// 
+/// @param {String} $device ['*'] The device name
+/// @param {String | Null} $operator [null] The device operator (like 'in' or 'up')
+/// @output Input rules wrapped in a custom @media query
+///
 @mixin pal-media-query($device: '*', $operator: null)
 {
   @if ($device == '*' or $device == 'all') {

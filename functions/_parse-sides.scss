@@ -1,16 +1,19 @@
-/**
- * Parses any side abbreviation to the proper list of sides
- * Always returns a list even for one element
- *
- * Ex.:
- * 'b' => bottom (it's a string)
- * 'tr' => (top, right)
- * '*' => (top, right, bottom, left) (Alias for 'trbl')
- * '-t' => (right, bottom, left) Works with one "missing" side only
- *
- * @param $input string
- * @return list
- */
+/// Parses any side abbreviation to the proper list of sides
+/// Always returns a list even for one element
+///
+/// @access public
+/// @group functions-string
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss
+///   pal-parse-sides('b') // ('bottom')
+///   pal-parse-sides('tr') // ('top', 'right')
+///   pal-parse-sides('*') // ('top', 'right', 'bottom', 'left')
+///   pal-parse-sides('-t') // ('right', 'bottom', 'left')
+///
+/// @param {String} $input
+/// @return {List}
+///
 @function pal-parse-sides($input)
 {
   $output: map-get($pal-sides, $input);
