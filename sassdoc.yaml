@@ -7,8 +7,10 @@ autofill:
   - require
 groups:
   core: Core
+  core-variables: Core Variables
   core-functions: Core Functions
   core-builders: Core Builders
+  helper-variables: Helper Variables
   helper-functions-list: Helper Functions for Lists
   helper-functions-map: Helper Functions for Maps
   helper-functions-number: Helper Functions for Numbers

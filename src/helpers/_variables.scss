@@ -1,4 +1,5 @@
 /// @type Map
+/// @group helper-variables
 $pal-sides: (
   't': 'top',
   'r': 'right',
@@ -14,6 +15,7 @@ $pal-sides: (
 ) !default;
 
 /// @type List
+/// @group helper-variables
 $pal-builders: (
   'border',
   'display',
@@ -24,6 +26,7 @@ $pal-builders: (
 ) !default;
 
 /// @type List
+/// @group helper-variables
 $pal-devices: (
   'mobile',
   'tablet',
@@ -32,6 +35,7 @@ $pal-devices: (
 ) !default;
 
 /// @type Map
+/// @group helper-variables
 $pal-device-ranges: (
   'mobile': (320px, 768px - 0.001px),
   'tablet': (768px, 1024px - 0.001px),
@@ -40,6 +44,7 @@ $pal-device-ranges: (
 ) !default;
 
 /// @type Map
+/// @group helper-variables
 $pal-media-query-operators: (
   '=': 'in', // Default
   '-': 'down',
@@ -47,4 +52,5 @@ $pal-media-query-operators: (
 ) !default;
 
 /// @type String
+/// @group helper-variables
 $pal-media-query-operator-default: 'in' !default;
