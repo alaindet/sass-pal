@@ -11,7 +11,7 @@ $pal-sides: (
   '-b': ('top', 'right', 'left'),
   '-l': ('top', 'right', 'bottom'),
   '*': ('top', 'right', 'bottom', 'left'),
-);
+) !default;
 
 /// @type List
 $pal-builders: (
@@ -21,7 +21,7 @@ $pal-builders: (
   'position',
   'size',
   'space',
-);
+) !default;
 
 /// @type List
 $pal-devices: (
@@ -29,7 +29,7 @@ $pal-devices: (
   'tablet',
   'desktop',
   'over',
-);
+) !default;
 
 /// @type Map
 $pal-device-ranges: (
@@ -37,14 +37,14 @@ $pal-device-ranges: (
   'tablet': (768px, 1024px - 0.001px),
   'desktop': (1024px, 1440px - 0.001px),
   'over': (1440px, 9999px),
-);
+) !default;
 
 /// @type Map
 $pal-media-query-operators: (
   '=': 'in', // Default
   '-': 'down',
   '+': 'up',
-);
+) !default;
 
 /// @type String
-$pal-media-query-operator-default: 'in';
+$pal-media-query-operator-default: 'in' !default;

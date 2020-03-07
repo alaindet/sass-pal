@@ -2,17 +2,23 @@
 /// Input number should be unit-less
 /// 
 /// @access public
-/// @group functions-number
+/// @group helpers-functions-number
 /// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-number-floor
 /// 
 /// @example scss Get next integer number of 12.34
-///   pal-number-ceil(12.34)
-///   // 13
+///   pal-number-ceil(12.34) // 13
 /// 
 /// @param {Number} $input
 /// @return {Number}
 /// 
 @function pal-number-ceil($input)
 {
-  @return pal-number-floor($input) + 1;
+  $ceil: 0;
+
+  @while($ceil + 2 < $input) {
+    $ceil: $ceil + 1;
+  }
+
+  @return $ceil;
 }

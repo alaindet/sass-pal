@@ -2,12 +2,11 @@
 /// Input should be unit-less
 /// 
 /// @access public
-/// @group functions-number
+/// @group helpers-functions-number
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// 
 /// @example scss Get previous integer number of 12.34
-///   pal-number-floor(12.34)
-///   // 12
+///   pal-number-floor(12.34) // 12
 /// 
 /// @param {Number} $input
 /// @return {Number}
