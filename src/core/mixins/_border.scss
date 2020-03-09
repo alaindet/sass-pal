@@ -1,13 +1,119 @@
-/// Pal builder for border-* rules
+/// Pal builder for border-* rules. If any value is 'default' or is not set,
+/// then default values are used. If any value is null, that rule is not set.
 /// 
 /// @todo Write mixin, create examples in the doc
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss With 1 value
+///   pal-border(#aaa);
+///   // border-width: 1px;
+///   // border-style: solid;
+///   // border-color: #aaa;
+/// @example scss With 2 values
+///   pal-border(2px #bbb);
+///   // border-width: 2px;
+///   // border-style: solid;
+///   // border-color: #bbb;
+/// @example scss With 3 values
+///   pal-border(3px dashed #ccc);
+///   // border-width: 3px;
+///   // border-style: dashed:
+///   // border-color: #ccc;
+/// @example scss With 4 values
+///   pal-border(4px double #ddd (1rem 2rem));
+///   // border-width: 4px;
+///   // border-style: double;
+///   // border-color: #ddd;
+///   // border-radius: 1rem 2 rem;
+/// @example scss With null values
+///   pal-border(null dotted #eee null);
+///   // border-width: 1px; // Default
+///   // border-style: dotted;
+///   // border-color: #eee;
 /// 
-/// @param {Map} $map
+/// @param {List} $list
 /// @output Border related rules
 /// 
-@mixin pal-border($map) {
-  
+@mixin pal-border($list)
+{
+  $defaults: (
+    'width': 1px,
+    'style': solid,
+    'color': #ccc,
+    'radius': null,
+  );
+
+  $values: ();
+
+  @if (length($list) == 1) {
+    $values: map-merge($values, (
+      'color': nth($list, 1),
+    ));
+  }
+  @else if (length($list) == 2) {
+    $values: map-merge($values, (
+      'width': nth($list, 1),
+      'color': nth($list, 2),
+    ));
+  }
+  @else if (length($list) == 3) {
+    $values: map-merge($values, (
+      'width': nth($list, 1),
+      'style': nth($list, 2),
+      'color': nth($list, 3),
+    ));
+  }
+  @else if (length($list) == 4) {
+    $values: map-merge($values, (
+      'width': nth($list, 1),
+      'style': nth($list, 2),
+      'color': nth($list, 3),
+      'radius': nth($list, 4),
+    ));
+  }
+
+  @each $key, $default in $defaults {
+    $value: map-get($values, $key);
+
+    // Use default if no value is passed
+    @if ($value == null) {
+      $new-values: (#{$key}: $default);
+      $values: map-merge($values, $new-values);
+    }
+
+    // Normalize any list to the same syntax
+    @if (type-of($value) == 'list') {
+      $list: ();
+      @each $item in $value {
+        $list: append($list, $item);
+      }
+      $new-values: (#{$key}: $list);
+      $values: map-merge($values, $new-values);
+    }
+  }
+
+  // Shorthand property
+  @if (length($list) == 3) {
+    $width: map-get($values, 'width');
+    $style: map-get($values, 'style');
+    $color: map-get($values, 'color');
+    border: $width $style $color;
+  } @else {
+    @if (map-get($values, 'width') != null) {
+      border-width: map-get($values, 'width');
+    }
+    @if (map-get($values, 'style') != null) {
+      border-style: map-get($values, 'style');
+    }
+    @if (map-get($values, 'color') != null) {
+      border-color: map-get($values, 'color');
+    }
+  }
+
+  // Specify border radius
+  @if (map-get($values, 'radius') != null) {
+    border-radius: map-get($values, 'radius');
+  }
 }
