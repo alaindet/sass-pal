@@ -24,7 +24,7 @@
 {
   // Single utility map with no device query
   @if (_pal-has-device-queries($map) == false) {
-    @each $builder-name, $builer-value in $map {
+    @each $builder-name, $builder-value in $map {
       @include _pal-builder($builder-name, $builder-value);
     }
   }
