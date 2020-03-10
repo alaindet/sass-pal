@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node-sass ./playground.scss --output-style=expanded",
-    "watch": "node-sass ./playground.scss --watch --output-style=expanded",
+    "start": "node-sass ./playground.scss --watch --output-style=expanded",
     "doc": "sassdoc ./src --config ./sassdoc.yaml"
   },
   "repository": {
