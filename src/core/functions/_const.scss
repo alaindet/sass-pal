@@ -11,7 +11,7 @@
 ///   pal-const('media-query.operator'); // '='
 ///
 /// @param {String} $query
-/// @return {Any}
+/// @return { Null | Bool | Number | Color | String | List | Map }
 ///
 @function pal-const($query)
 {

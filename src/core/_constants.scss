@@ -1,13 +1,13 @@
 /// Map of all Pal's defaults. These cannot be modified, just patched with custom variables
 /// 
 /// @type Map
-/// @prop {List} defaults.builders - List of all Pal's builder mixins
-/// @prop {Map} defaults.sides - Map of all sides of a rectangle. Key: abbrev, value: list of sides
-/// @prop {Map} defaults.devices - Map of all devices. Key: name, value: list of (min, max) resolutions
-/// @prop {Map} defaults.media-query - Map of all media-query related meta data
-/// @prop {String} defaults.media-query.operator - Default media query operator
-/// @prop {Map} defaults.media-query.operators - Map of all media query operators. Key: symbol, value: label
-$pal-defaults: (
+/// @prop {List} constants.builders - List of all Pal's builder mixins
+/// @prop {Map} constants.sides - Map of all sides of a rectangle. Key: abbrev, value: list of sides
+/// @prop {Map} constants.devices - Map of all devices. Key: name, value: list of (min, max) resolutions
+/// @prop {Map} constants.media-query - Map of all media-query related meta data
+/// @prop {String} constants.media-query.operator - Default media query operator
+/// @prop {Map} constants.media-query.operators - Map of all media query operators. Key: symbol, value: label
+$pal-constants: (
   'builders': (
     'border',
     'display',
@@ -45,17 +45,12 @@ $pal-defaults: (
   ),
 );
 
-// No user-defined constants, use defaults to define constants
-@if (variable-exists('pal-constants') == false) {
-  $pal-constants: $pal-defaults;
-}
-
-// Fill missing values with defaults
-@else {
-  @each $key, $default in $pal-defaults {
-    @if (map-get($pal, $key) == null) {
-      $missing-value: (#{$key}: $default);
-      $pal-constants: map-merge($pal-constants, $missing-value);
+// Override with custom values
+@if (variable-exists('pal-overrides')) {
+  @each $key, $value in $pal-overrides {
+    @if (map-get($pal-constants, $key) == null) {
+      $new-value: (#{$key}: $value);
+      $pal-constants: map-merge($pal-constants, $new-value);
     }
   }
 }

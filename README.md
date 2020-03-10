@@ -84,7 +84,7 @@ TODO...
 
 ### Change default values
 
-To override Pal's default values you can define a `$pal-constants` map variable before importing Pal. These values are then merged by key with default values.
+To override Pal's default values you can define a `$pal-overrides` map variable before importing Pal. These values are then merged by key with default values.
 
 Available constant keys are
 
@@ -96,7 +96,7 @@ Example
 
 ```
 // Override some constants
-$pal-constants: (
+$pal-overrides: (
   'devices': (
     'kitchen-sink': (100px, 320px - 0.1px),
     'toaster': (320px, 600px - 0.1px),
