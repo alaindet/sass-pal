@@ -3,6 +3,7 @@
 /// @access private
 /// @group core-functions
 /// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-const
 /// 
 /// @param {Map} $map
 /// @return {Bool}
@@ -10,7 +11,7 @@
 @function _pal-has-device-queries($map)
 {
   $key: nth(map-keys($map), 1);
-  @each $builder in $pal-builders {
+  @each $builder in pal-const('builders') {
     @if ($builder == $key) {
       @return false;
     }

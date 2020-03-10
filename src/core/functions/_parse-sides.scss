@@ -4,7 +4,7 @@
 /// @access public
 /// @group core-functions
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {variable} $pal-sides
+/// @require {function} pal-const
 ///
 /// @example scss
 ///   pal-parse-sides('b') // ('bottom')
@@ -17,22 +17,19 @@
 ///
 @function pal-parse-sides($input)
 {
-  $output: map-get($pal-sides, $input);
-  $output-type: type-of($output);
+  $sides: pal-const('sides');
+  $output: map-get($sides, $input);
 
-  @if ($output-type == 'list') {
+  @if ($output != null) {
     @return $output;
   }
 
-  @if ($output-type == 'string') {
-    @return ($output);
-  }
-
+  // Build the custom sides list, like 'rb': ('right', 'bottom')
   $output: ();
 
   @for $i from 1 through str-length($input) {
     $char: str-slice($input, $i, $i);
-    $label: map-get($pal-sides, $char);
+    $label: map-get($sides, $char);
     $output: append($output, $label);
   }
 

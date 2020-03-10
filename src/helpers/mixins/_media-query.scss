@@ -3,8 +3,7 @@
 /// @access public
 /// @group helper-mixins
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {variable} $pal-media-query-operator-default
-/// @require {variable} $pal-device-ranges
+/// @require {function} pal-const
 /// @content Rules to wrap in a @media query
 ///
 /// @example scss Scope rules from tablet upward only
@@ -22,10 +21,10 @@
   } @else {
 
     @if ($operator == null) {
-      $operator: $pal-media-query-operator-default;
+      $operator: pal-const('media-query.operator');
     }
 
-    $range: map-get($pal-device-ranges, $device);
+    $range: pal-const('devices.#{$device}');
     $min: nth($range, 1);
     $max: nth($range, 2);
 
