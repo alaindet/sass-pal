@@ -89,8 +89,8 @@ To override Pal's default values you can define a `$pal-overrides` map variable 
 Available constant keys are
 
 - `devices`: Map of devices and resolutions. *Key*: device name, *value*: a list of min and max resolutions in pixel
-- `base-unit`: Number with unit (Ex.: 16px) representing the base unit for all units
-- `units`: Map of units used throughout Pal. *Key*: unit label, *value*: any pure number multiplying the `base-unit`. Ex.: ('small': 1/4) will have 'small' = `base-unit` * 1/4
+- `unit`: Base number (Ex.: 16px) representing the base unit for all units
+- `units`: Map of units used throughout Pal. *Key*: label, *value*: any pure number multiplying the `unit`. Ex.: ('small': 1/4) will be 'small': `unit` * 1/4
 
 Example
 
@@ -102,7 +102,7 @@ $pal-overrides: (
     'toaster': (320px, 600px - 0.1px),
     'fridge': (600px, 9999px),
   ),
-  'base-unit': 1rem,
+  'unit-base': 1rem,
   'units': (
     'zero': 0,
     'smallest': 1/8,
