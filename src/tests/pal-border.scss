@@ -3,10 +3,12 @@ $tests: (
   (2px #bbb),
   (3px solid #ccc),
   (4px solid #ddd (0.5rem 0.75rem)),
+  ('t': 1px red, 'b': 2px dashed black),
 );
 $test-prefix: 'pal-border';
 @each $test in $tests {
-  .test-#{$test-prefix} {
+  $i: index($tests, $test);
+  .test-#{$test-prefix}-#{$i} {
     @include pal-border($test);
   }
 }

@@ -31,26 +31,34 @@
 ///   // border-width: 1px; // Default
 ///   // border-style: dotted;
 ///   // border-color: #eee;
+/// @example scss Scoped by side
 /// 
 /// @param { List | Map | Number | String } $border
 /// @output Border related rules
 /// 
 @mixin pal-border($border)
 {
+  // Reset border with 'none'
   @if ($border == 'none') {
     border: none;
-  } @else if ($border == 0) {
-    border: 0;
-  } @else {
+  }
 
-    // Normalize to a map
+  // Reset border with 0
+  @else if ($border == 0) {
+    border: 0;
+  }
+
+  // Process input
+  @else {
+
+    // Normalize input to a map
     @if (type-of($border) != 'map') {
       $border: ('*': $border);
     }
 
     @each $side-key, $list in $border {
 
-      // Normalize to list
+      // Normalize to list if necessary
       @if (type-of($list) != 'list') {
         $list: ($list);
       }
@@ -63,20 +71,26 @@
         'radius': null,
       );
 
+      // Ex.: pal-parse-sides('t'); // ('top');
       $sides: pal-parse-sides($side-key);
       $should-apply-to-all-sides: length($sides) == 4;
 
+      // color
       @if (length($list) == 1) {
         $values: map-merge($values, (
           'color': nth($list, 1),
         ));
       }
+
+      // width color
       @else if (length($list) == 2) {
         $values: map-merge($values, (
           'width': nth($list, 1),
           'color': nth($list, 2),
         ));
       }
+
+      // width style color
       @else if (length($list) == 3) {
         $values: map-merge($values, (
           'width': nth($list, 1),
@@ -84,6 +98,8 @@
           'color': nth($list, 3),
         ));
       }
+
+      // with style color radius
       @else if (length($list) == 4) {
         $values: map-merge($values, (
           'width': nth($list, 1),
@@ -93,6 +109,7 @@
         ));
       }
 
+      // Merge input values with default values
       @each $key, $default in $defaults {
         $value: map-get($values, $key);
 
