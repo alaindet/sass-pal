@@ -1,13 +1,139 @@
 /// Pal builder for flex rules
-/// 
-/// @todo Write mixin, create examples in the doc
+///
+/// Shortcut
+/// $map: 'center'
+///
+/// For the container
+/// $map?.dir string row|row-reverse|column|column-reverse
+/// $map?.wrap boolean
+/// $map?.main-align string flex-start|center|flex-end|space-between|space-around
+/// $map?.cross-align string start|center|end|stretch|baseline
+/// $map?.cross-lines string flex-start|center|flex-end|space-between|space-around
+///
+/// For the item
+/// $map?.self-align string auto|flex-start|center|flex-end|stretch
+/// $map?.basis number|string String is '1/5'|'1/4'|'1/3'|'half'|'full'
+/// $map?.grow number|string String is 'no'|'normal'|'more'
+/// $map?.shrink number|string String is 'least'|'less'|'normal'|'more'|'most'
+/// $map?.order number|string String is 'first'|'last'
+///
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// 
-/// @param {Map} $map
+/// @param {Map | String} $map
 /// @output Flex rules
-/// 
+///
 @mixin pal-flex($map) {
-  
+
+  display: flex;
+
+  @if ($map == 'center') {
+    justify-content: center;
+    align-items: center;
+  } @else {
+
+    // Direction
+    $value: map-get($map, 'dir');
+    $allowed: 'row','row-reverse','column','column-reverse';
+    @if ($value != null and index($allowed, $value) != null) {
+      flex-direction: #{$value};
+    }
+
+    // Wrap
+    @if (map-get($map, 'wrap') == true) {
+      flex-wrap: wrap;
+    }
+
+    // Main axis alignment
+    $value: map-get($map, 'main-align');
+    $allowed: 'flex-start','center','flex-end','space-between','space-around';
+    @if ($value != null and index($allowed, $value)) {
+      justify-content: #{$value};
+    }
+
+    // Cross axis alignment
+    $value: map-get($map, 'cross-align');
+    $allowed: 'start','center','end','stretch','baseline';
+    @if ($value != null and index($allowed, $value)) {
+      align-items: #{$value};
+    }
+
+    // Cross axis lines alignment
+    $value: map-get($map, 'cross-lines');
+    $allowed: 'flex-start','center','flex-end','space-between','space-around';
+    @if ($value != null and index($allowed, $value)) {
+      align-content: #{$value};
+    }
+
+    // Item alignment
+    $value: map-get($map, 'self-align');
+    $allowed: 'auto','flex-start','center','flex-end','stretch';
+    @if ($value != null and index($allowed, $value)) {
+      align-self: #{$value};
+    }
+
+    // Item width
+    $value: map-get($map, 'basis');
+    @if ($value != null) {
+      $helpers: (
+        '1/5': 20%,
+        '1/4': 25%,
+        '1/3': 33.33333%,
+        'half': 50%,
+        'full': 100%,
+      );
+      @if (map-get($helpers, $value) != null) {
+        flex-basis: map-get($helpers, $value);
+      } @else {
+        flex-basis: $value;
+      }
+    }
+
+    // Grow
+    $value: map-get($map, 'grow');
+    @if ($value != null) {
+      $helpers: (
+        'no': 0,
+        'normal': 1,
+        'more': 2,
+      );
+      @if (map-get($helpers, $value) != null) {
+        flex-grow: map-get($helpers, $value);
+      } @else {
+        flex-grow: $value;
+      }
+    }
+
+    // Shrink
+    $value: map-get($map, 'shrink');
+    @if ($value != null) {
+      $helpers: (
+        'least': 0.25,
+        'less': 0.5,
+        'normal': 1,
+        'more': 2,
+        'most': 4,
+      );
+      @if (map-get($helpers, $value) != null) {
+        flex-shrink: map-get($helpers, $value);
+      } @else {
+        flex-shrink: $value;
+      }
+    }
+
+    // Order
+    $value: map-get($map, 'order');
+    @if ($value != null) {
+      $helpers: (
+        'first': -1000,
+        'last': 1000,
+      );
+      @if (map-get($helpers, $value) != null) {
+        order: map-get($helpers, $value);
+      } @else {
+        order: $value;
+      }
+    }
+  }
 }
