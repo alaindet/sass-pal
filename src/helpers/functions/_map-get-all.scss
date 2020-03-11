@@ -1,0 +1,25 @@
+/// Extends the built-in map-get() by allowing to get nested values like you
+/// would do in JavaScript, ex.: pal-map-get($map, 'foo.bar.baz');
+/// 
+/// @access public
+/// @group helper-functions-map
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss Get 'foo' and 'bar' as a list
+///   $map: ('foo': 12, 'bar': 34, 'baz': 56);
+///   $list: pal-map-get-all($map, ('bar', 'baz')); // (34, 56)
+///
+/// @param {Map} $map
+/// @param {List} $queries
+/// @return {List}
+///
+@function pal-map-get-all($map, $queries)
+{
+  $output: ();
+
+  @each $query in $queries {
+    $output: append($output, pal-map-get($map, $query));
+  }
+
+  @return $output;
+}

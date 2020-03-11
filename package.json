@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "node-sass ./playground.scss --output-style=expanded",
-    "watch": "node-sass ./playground.scss --watch --output-style=expanded",
-    "doc": "sassdoc ./src --config ./sassdoc.yaml",
-    "test": "node-sass ./src/tests/tests.scss --output-style=expanded"
+    "start": "node-sass ./playground.scss --watch --output-style=expanded",
+    "doc": "sassdoc ./src --config ./sassdoc.yaml"
   },
   "repository": {
     "type": "git",

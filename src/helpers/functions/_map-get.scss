@@ -12,7 +12,7 @@
 /// 
 /// @param {Map} $map
 /// @param {String} $query
-/// @return {Any}
+/// @return {Null | Bool | Number | Color | String | List | Map}
 ///
 @function pal-map-get($map, $query)
 {

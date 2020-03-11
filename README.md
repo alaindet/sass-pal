@@ -21,7 +21,7 @@ TODO...
 ## Usage
 
 ```
-@import './pal/pal';
+@import '~pal/src/pal';
 
 .foo {
   @include pal((
@@ -46,7 +46,74 @@ TODO...
   ));
 }
 ```
+```
+@media screen and (min-width: 320px) and (max-width: 767.9999px) {
+  .bar {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-left: 1rem solid #ccc;
+    border-right: 1rem solid #ccc;
+    border-top: 1rem solid #ddd;
+    border-bottom: 1rem solid #ddd;
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    left: 4rem;
+    right: 4rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .bar {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 2.5rem
+    padding-bottom: 2.5rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    border-left: 1.5rem solid #ccc;
+    border-right: 1.5rem solid #ccc;
+    border-top: 1.5rem solid #ddd;
+    border-bottom: 1.5rem solid #ddd;
+  }
+}
+```
+
+### Change default values
+
+To override Pal's default values you can define a `$pal-overrides` map variable before importing Pal. These values are then merged by key with default values.
+
+Available constant keys are
+
+- `devices`: Map of devices and resolutions. *Key*: device name, *value*: a list of min and max resolutions in pixel
+- `unit`: Base number (Ex.: 16px) representing the base unit for all units
+- `units`: Map of units used throughout Pal. *Key*: label, *value*: any pure number multiplying the `unit`. Ex.: ('small': 1/4) will be 'small': `unit` * 1/4
+
+Example
 
 ```
-TODO: Compiled code here
+// Override some constants
+$pal-overrides: (
+  'devices': (
+    'kitchen-sink': (100px, 320px - 0.1px),
+    'toaster': (320px, 600px - 0.1px),
+    'fridge': (600px, 9999px),
+  ),
+  'unit-base': 1rem,
+  'units': (
+    'zero': 0,
+    'smallest': 1/8,
+    'very-small': 1/4,
+    'small': 1/2,
+    'normal': 1,
+    'large': 2,
+    'very-large': 4,
+    'largest': 8,
+  ),
+);
+
+@import '~pal/src/pal';
 ```

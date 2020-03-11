@@ -1,6 +1,3 @@
-@import './helpers/variables';
-@import './core/variables';
-
 @import './helpers/functions/list-join';
 @import './helpers/functions/number-floor';
 @import './helpers/functions/number-ceil';
@@ -9,9 +6,13 @@
 @import './helpers/functions/string-split';
 @import './helpers/functions/string-to-number';
 @import './helpers/functions/map-get';
+@import './helpers/functions/map-get-all';
+@import './helpers/functions/map-are-keys';
 @import './helpers/mixins/media-query';
 @import './helpers/mixins/pseudo-class';
 
+@import './core/constants';
+@import './core/functions/const';
 @import './core/functions/has-device-queries';
 @import './core/functions/parse-device-queries';
 @import './core/functions/parse-sides';
