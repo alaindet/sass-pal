@@ -13,7 +13,7 @@
 ///   pal-parse-sides('-t') // ('right', 'bottom', 'left')
 ///
 /// @param {String} $input
-/// @return {List}
+/// @return {List} List of sides
 ///
 @function pal-parse-sides($input)
 {
