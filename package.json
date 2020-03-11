@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node-sass ./playground.scss --output-style=expanded",
     "start": "node-sass ./playground.scss --watch --output-style=expanded",
-    "doc": "sassdoc ./src --config ./sassdoc.yaml"
+    "doc": "sassdoc ./src --config ./sassdoc.yaml",
+    "test": "node-sass ./src/tests/tests.scss --output-style=expanded"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,13 @@
+$tests: (
+  ('absolute', (0, 2rem, auto, 2rem)),
+  ('relative', (10px 20px)),
+  ('fixed', 30px),
+  ('absolute', (null 40px)),
+);
+$test-prefix: 'pal-position';
+@each $test in $tests {
+  $i: index($tests, $test);
+  .test-#{$test-prefix}-#{$i} {
+    @include pal-position($test);
+  }
+}
