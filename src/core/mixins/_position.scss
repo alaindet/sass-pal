@@ -1,13 +1,99 @@
 /// Pal builder for position rules
-/// 
-/// @todo Write mixin, create examples in the doc
+/// Accepts a list where the first value is a string for 'position' and the
+/// second value is a list of 1, 2 or 4 numbers, which are interpreted as
+///
+/// - 4 values: top, right, bottom, left (*clockwise convention*)
+/// - 2 values: top and bottom, right and left
+/// - 1 value: for every side
+///
+/// If instead of any number a null is passed, no rule is defined accordingly
+///
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// 
-/// @param {Map} $map
+///
+/// @example scss With 4 numbers
+///   pal-position(('absolute', (0, 2rem, auto, 2rem)));
+///   // position: absolute;
+///   // top: 0;
+///   // right: 2rem;
+///   // bottom: auto;
+///   // left: 2rem;
+/// @example scss With 2 values (alternate list syntax without comma)
+///   pal-position(('relative', (10px 20px)));
+///   // position: relative;
+///   // top: 10px;
+///   // bottom: 10px;
+///   // right: 20px;
+///   // left: 20px;
+/// @example scss With 1 value
+///   pal-position(('fixed', 30px));
+///   // position: fixed;
+///   // top: 30px;
+///   // bottom: 30px;
+///   // right: 30px;
+///   // left: 30px;
+/// @example scss With null values
+///   pal-position(('absolute', (null 40px)));
+///   // position: absolute;
+///   // right: 40px;
+///   // left: 40px;
+///
+/// @param {List} $list
 /// @output Position rules
 /// 
-@mixin pal-position($map) {
-  
+@mixin pal-position($list)
+{
+  // When given 4 numbers or 1 number
+  $side-rules: 'top', 'right', 'bottom', 'left';
+
+  // When given 2 numbers
+  $side-rule-groups: ('top', 'bottom'), ('left', 'right');
+
+  $position: nth($list, 1);
+  $allowed: 'static', 'fixed', 'absolute', 'relative', 'sticky';
+  @if (index($allowed, $position) != null) {
+    position: $position;
+  }
+
+  $sides: nth($list, 2);
+
+  // 1 value: all sides
+  @if (type-of($sides) == number) {
+    $side: $sides;
+    @each $rule in $side-rules {
+      #{$rule}: $side;
+    }
+  }
+
+  // 1 value: all sides
+  @else if (length($sides) == 1) {
+    $side: nth($sides, 1);
+    @each $rule in $side-rules {
+      #{$rule}: $side;
+    }
+  }
+
+  // 2 values: vertical, horizontal
+  @else if (length($sides) == 2) {
+    @for $i from 1 through 2 {
+      $side: nth($sides, $i);
+      @if ($side != null) {
+        @each $rule in nth($side-rule-groups, $i) {
+          #{$rule}: $side;
+        }
+      }
+    }
+  }
+
+  // 4 values: all sides clockwise from top
+  @else if (length($sides) == 4) {
+    @for $i from 1 through 4 {
+      $side: nth($sides, $i);
+      $rule: nth($side-rules, $i);
+      @if ($side != null) {
+        #{$rule}: $side;
+      }
+    }
+  }
 }
