@@ -9,6 +9,7 @@
 /// $map?.main-align string flex-start|center|flex-end|space-between|space-around
 /// $map?.cross-align string start|center|end|stretch|baseline
 /// $map?.cross-lines string flex-start|center|flex-end|space-between|space-around
+/// $map?.flex list
 ///
 /// For the item
 /// $map?.self-align string auto|flex-start|center|flex-end|stretch
@@ -64,6 +65,12 @@
     $allowed: 'flex-start','center','flex-end','space-between','space-around';
     @if ($value != null and index($allowed, $value)) {
       align-content: #{$value};
+    }
+
+    // Flex shorthand
+    $value: map-get($map, 'flex');
+    @if ($value != null) {
+      flex: $value;
     }
 
     // Item alignment
