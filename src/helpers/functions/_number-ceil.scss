@@ -16,7 +16,7 @@
 {
   $ceil: 0;
 
-  @while($ceil + 2 < $input) {
+  @while ($ceil + 2 < $input) {
     $ceil: $ceil + 1;
   }
 

@@ -25,13 +25,13 @@
 {
   $rules: (
     'w': 'width',
-    'wmin': 'min-width',
-    'wmax': 'max-width',
+    'w-min': 'min-width',
+    'w-max': 'max-width',
     'h': 'height',
-    'hmin': 'min-height',
-    'hmax': 'max-height',
+    'h-min': 'min-height',
+    'h-max': 'max-height',
   );
-  $width-rules: 'w', 'wmin', 'wmax';
+  $width-rules: 'w', 'w-min', 'w-max';
   $rule-keys: map-keys($rules);
 
   @each $size in $sizes {

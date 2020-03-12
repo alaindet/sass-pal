@@ -15,7 +15,7 @@
 {
   $floor: 0;
 
-  @while($floor + 1 < $input) {
+  @while ($floor + 1 < $input) {
     $floor: $floor + 1;
   }
 
