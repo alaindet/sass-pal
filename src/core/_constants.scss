@@ -31,6 +31,32 @@ $pal-constants: (
       '+': 'up',
     ),
   ),
+  'relative-units': (
+    '1/12': 100% * 1 / 12,
+    '2/12': 100% * 2 / 12,
+    '3/12': 100% * 3 / 12,
+    '4/12': 100% * 4 / 12,
+    '5/12': 100% * 5 / 12,
+    '6/12': 100% * 6 / 12,
+    '7/12': 100% * 7 / 12,
+    '8/12': 100% * 8 / 12,
+    '9/12': 100% * 9 / 12,
+    '10/12': 100% * 10 / 12,
+    '11/12': 100% * 11 / 12,
+    '12/12': 100% * 12 / 12,
+    '1/8': 100% * 1 / 8,
+    '1/4': 100% * 1 / 4,
+    '1/3': 100% * 1 / 3,
+    '2/5': 100% * 2 / 5,
+    '1/2': 100% * 1 / 2,
+    '2/3': 100% * 2 / 3,
+    '3/4': 100% * 3 / 4,
+    'quarter': 100% * (1 / 4),
+    'third': 100% * (1 / 3),
+    'half': 100% * (1 / 2),
+    'full': 100%,
+    'auto': auto,
+  ),
   'sides': (
     't': ('top'),
     'r': ('right'),
@@ -45,6 +71,7 @@ $pal-constants: (
     '*': ('top', 'right', 'bottom', 'left'),
   ),
   'unit': 0.5rem,
+  // The factors are later multiplied
   'units': (
     '1/8': 1/8,
     '1/4': 1/4,
@@ -74,15 +101,20 @@ $pal-constants: (
 
 // Override with custom values
 @if (variable-exists('pal-overrides')) {
+
+  // List of overridable keys
+  $pal-overridable-keys: ('devices', 'relative-units', 'unit', 'units');
+
   @each $key, $value in $pal-overrides {
-    @if (map-get($pal-constants, $key) == null) {
+    $is-overridable: index($pal-overridable-keys, $key) != null;
+    @if ($is-overridable) {
       $new-value: (#{$key}: $value);
       $pal-constants: map-merge($pal-constants, $new-value);
     }
   }
 }
 
-// Process units
+// Process 'units' key
 $units: map-get($pal-constants, 'units');
 $unit: map-get($pal-constants, 'unit');
 @each $label, $factor in $units {
