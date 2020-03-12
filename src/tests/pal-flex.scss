@@ -1,0 +1,13 @@
+$tests: (
+  (main-align: flex-end, cross-align: center),
+  center,
+  (self-align: flex-start, grow: 1, shrink: 0, order: -1, basis: 100%),
+  (flex: 1 0 50%),
+);
+$test-prefix: 'pal-flex';
+@each $test in $tests {
+  $i: index($tests, $test);
+  .test-#{$test-prefix}-#{$i} {
+    @include pal-flex($test);
+  }
+}
