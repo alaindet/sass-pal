@@ -1,0 +1,12 @@
+$tests: (
+  ('w-1/2', 'h-3/4'),
+  (w-1/3 h-1/2),
+  (wmin-screen, hmin-screen),
+);
+$test-prefix: 'pal-size';
+@each $test in $tests {
+  $i: index($tests, $test);
+  .test-#{$test-prefix}-#{$i} {
+    @include pal-size($test);
+  }
+}

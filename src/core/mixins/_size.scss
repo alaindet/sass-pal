@@ -1,13 +1,70 @@
-/// Pal builder for size rules (width, height)
-/// 
-/// @todo Write mixin, create examples in the doc
+/// Pal builder for size rules (width, height and min-* and max-*). Sizes 
+/// follow the syntax {RULE_ABBREVIATION}-{RELATIVE_UNIT}
+///
+/// Where
+/// - RULE_ABBREVIATION is any of 'w', 'wmin', 'wmax', 'h', 'hmin', 'hmax'
+/// - RELATIVE_UNIT is any of the 'relative-units' constant, ex.: '1/2', 'full'
+///
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// 
-/// @param {Map} $map
+/// @example scss Set width and height with word aliases as size
+///   pal-size(w-half h-full);
+///   // width: 50%;
+///   // height: 100%;
+/// @example scss Set width and height with fractions
+///   pal-size(w-1/2 h-3/4);
+///   // width: 50%:
+///   // height: 75%;
+///
+/// @param {Map} $sizes
 /// @output Size related rules
 /// 
-@mixin pal-size($map) {
-  
+@mixin pal-size($sizes)
+{
+  $rules: (
+    'w': 'width',
+    'wmin': 'min-width',
+    'wmax': 'max-width',
+    'h': 'height',
+    'hmin': 'min-height',
+    'hmax': 'max-height',
+  );
+  $width-rules: 'w', 'wmin', 'wmax';
+  $rule-keys: map-keys($rules);
+
+  @each $size in $sizes {
+
+    $rule-key: null;
+    $value-key: '';
+    
+    // Extract keys for rule (ex.: wmax) and value (ex.: 1/2)
+    @each $key in $rule-keys {
+      $left-part: str-slice($size, 1, str-length($key));
+      @if ($left-part == $key) {
+        $rule-key: $key;
+        $right-part: str-slice($size, str-length($key) + 2); // Skip the -
+        $value-key: $right-part;
+      }
+    }
+
+    @if ($rule-key != null) {
+
+      // Get rule (ex.: max-width)
+      $rule: map-get($rules, $rule-key);
+      $value: null;
+
+      // Get value (ex.: 50%)
+      @if ($value-key == 'screen') {
+        $is-width-rule: index($width-rules, $rule-key) != null;
+        $value: if($is-width-rule, 100vw, 100vh);
+      } @else {
+        $value: map-get(pal-const('relative-units'), $value-key);
+      }
+
+      // Define the rule
+      #{$rule}: $value;
+    }
+  }
 }
