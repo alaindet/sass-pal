@@ -1,6 +1,5 @@
 /// Map of all Pal's defaults. These cannot be modified, just patched with custom variables
-/// 
-/// @todo Add 'relative-units' with percentages
+///
 /// @type Map
 /// @prop {List} constants.builders - List of all Pal's builder mixins
 /// @prop {Map} constants.devices - Map of all devices. Key: name, value: list of (min, max) resolutions

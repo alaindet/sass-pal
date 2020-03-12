@@ -8,7 +8,8 @@
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// 
+/// @require {function} pal-const
+///
 /// @example scss Set width and height with word aliases as size
 ///   pal-size(w-half h-full);
 ///   // width: 50%;

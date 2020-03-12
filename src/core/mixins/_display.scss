@@ -10,6 +10,7 @@
 /// @param {String} $display
 /// @output Display rule
 /// 
-@mixin pal-display($display) {
-  display: $display;  
+@mixin pal-display($display)
+{
+  display: $display;
 }
