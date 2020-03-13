@@ -89,6 +89,7 @@ To override Pal's default values you can define a `$pal-overrides` map variable 
 Available constant keys are
 
 - `devices`: Map of devices and resolutions. *Key*: device name, *value*: a list of min and max resolutions in pixel
+- `relative-units`: Map of percentage units
 - `unit`: Base number (Ex.: 16px) representing the base unit for all units
 - `units`: Map of units used throughout Pal. *Key*: label, *value*: any pure number multiplying the `unit`. Ex.: ('small': 1/4) will be 'small': `unit` * 1/4
 

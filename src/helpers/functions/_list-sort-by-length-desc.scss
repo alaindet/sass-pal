@@ -1,0 +1,33 @@
+/// Sorts a list of strings by descending string length
+///
+/// @access public
+/// @group helper-functions-list
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss Sort strings by decending length
+///   pal-list-sort-by-length(aa bbbb ccc);
+///   // bbbb ccc aa
+///
+/// @param {List} $words List of strings
+/// @return {List}
+///
+@function pal-list-sort-by-length($words)
+{
+  $swapping: true;
+  @while ($swapping) {
+    $swapping: false;
+    @for $index from 1 to length($words) {
+      $word: nth($words, $index);
+      $len: str-length($word);
+      $next-index: $index + 1;
+      $next-word: nth($words, $next-index);
+      $next-len: str-length($next-word);
+      @if ($len < $next-len) {
+        $swapping: true;
+        $words: set-nth($words, $index, $next-word);
+        $words: set-nth($words, $next-index, $word);
+      }
+    }
+  }
+  @return $words;
+}

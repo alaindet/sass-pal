@@ -2,13 +2,14 @@
 /// follow the syntax {RULE_ABBREVIATION}-{RELATIVE_UNIT}
 ///
 /// Where
-/// - RULE_ABBREVIATION is any of 'w', 'wmin', 'wmax', 'h', 'hmin', 'hmax'
+/// - RULE_ABBREVIATION is any of 'w', 'w-min', 'w-max', 'h', 'h-min', 'h-max'
 /// - RELATIVE_UNIT is any of the 'relative-units' constant, ex.: '1/2', 'full'
 ///
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @require {function} pal-const
+/// @require {function} pal-list-sort-by-length
 ///
 /// @example scss Set width and height with word aliases as size
 ///   pal-size(w-half h-full);
@@ -33,7 +34,7 @@
     'h-max': 'max-height',
   );
   $width-rules: 'w', 'w-min', 'w-max';
-  $rule-keys: map-keys($rules);
+  $rule-keys: pal-list-sort-by-length(map-keys($rules));
 
   @each $size in $sizes {
 
