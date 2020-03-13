@@ -51,7 +51,7 @@
   @if ($dot-index != null) {
     $integers: $integers - str-length(str-slice($input, $dot-index));
   }
-  $power: pal-number-pow(10, $integers - 1);
+  $power: pow(10, $integers - 1);
 
   @for $i from 1 through str-length($input) {
     $char: str-slice($input, $i, $i);

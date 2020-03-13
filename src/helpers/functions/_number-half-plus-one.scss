@@ -14,5 +14,5 @@
 /// 
 @function pal-number-half-plus-one($input)
 {
-  @return pal-number-ceil($input / 2);
+  @return ceil($input / 2);
 }
