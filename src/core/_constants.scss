@@ -62,17 +62,22 @@ $pal-constants: (
     'r': ('right'),
     'b': ('bottom'),
     'l': ('left'),
-    'x': ('top', 'bottom'),
-    'y': ('right', 'left'),
+    'x': ('right', 'left'),
+    'y': ('top', 'bottom'),
     '-t': ('right', 'bottom', 'left'),
     '-r': ('bottom', 'left', 'top'),
     '-b': ('top', 'right', 'left'),
     '-l': ('top', 'right', 'bottom'),
+    '^t': ('right', 'bottom', 'left'), // Alias of -t
+    '^r': ('bottom', 'left', 'top'), // Alias of -r
+    '^b': ('top', 'right', 'left'), // Alias of -b
+    '^l': ('top', 'right', 'bottom'), // Alias of -l
     '*': ('top', 'right', 'bottom', 'left'),
   ),
   'unit': 0.5rem,
   // The factors are later multiplied
   'units': (
+    '0': 0,
     '1/8': 1/8,
     '1/4': 1/4,
     '1/3': 1/3,
@@ -118,7 +123,8 @@ $pal-constants: (
 $units: map-get($pal-constants, 'units');
 $unit: map-get($pal-constants, 'unit');
 @each $label, $factor in $units {
-  $value: $factor * $unit;
+  // Zero should remain unit-less
+  $value: if($label == '0', 0, $factor * $unit);
   $units: map-merge($units, (#{$label}: $value));
 }
 $pal-constants: map-merge($pal-constants, ('units': $units));
