@@ -1,13 +1,113 @@
-/// Pal builder for spacing rules (margins, paddings)
-/// 
-/// @todo Write mixin, create examples in the doc
+/// Pal builder for spacing rules (margins, paddings). Each spacing is a string
+/// with the pattern
+///
+/// {RULE_KEY}{SIDE_KEY}-{UNIT_KEY}
+///
+/// - RULE_KEY is a rule key ('m' for margin or 'p' for padding)
+/// - SIDE_KEY is any side key (@see $pal-constants.sides)
+/// - UNIT_KEY is any of declared units (@see $pal-constants.units)
+///
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-const
+/// @require {function} pal-list-sort-by-length
 /// 
-/// @param {Map} $map
-/// @output Space related rules
+/// @param {List | String} $spacings
+/// @output Margin and/or padding rules
 /// 
-@mixin pal-space($map) {
-  
+@mixin pal-space($spacings)
+{
+  $rules: (
+    'm': 'margin',
+    'p': 'padding',
+  );
+
+  // Sort keys from longest (more specific) to shortest to avoid taking a short
+  // key by mistake (Ex. in ('w', 'w-min') 'w-min' should be checked first)
+  $rule-keys: pal-list-sort-by-length(map-keys($rules));
+  $side-keys: pal-list-sort-by-length(map-keys(pal-const('sides')));
+  $unit-keys: pal-list-sort-by-length(map-keys(pal-const('units')));
+
+  // Normalize string to a 1-element list
+  @if (type-of($spacings) != 'string') {
+    $spacings: ($spacings);
+  }
+
+  @each $spacing in $spacings {
+
+    $temp: $spacing;
+
+    $rule-key: null;
+    $side-key: null;
+    $unit-key: null;
+
+    // Extract rule key
+    $found: false;
+    @each $key in $rule-keys {
+      $index: str-length($key);
+      $slice: str-slice($temp, 1, $index);
+      @if ($found == false and $slice == $key) {
+        $rule-key: $slice;
+        $temp: str-slice($temp, $index + 1);
+      }
+    }
+
+    // ERROR
+    @if ($rule-key == null) {
+      @error 'Spacing \'#{$spacing}\' has an invalid rule key';
+    }
+
+    // Extract side key
+    $found: false;
+    @each $key in $side-keys {
+      $index: str-length($key);
+      $slice: str-slice($temp, 1, $index);
+      @if ($found == false and $slice == $key) {
+        $side-key: $slice;
+        $temp: str-slice($temp, $index + 1);
+      }
+    }
+
+    // Use default side
+    @if ($side-key == null) {
+      $side-key: '*';
+    }
+
+    // Remove side-unit separator
+    $temp: str-slice($temp, 2);
+
+    // Extract unit key
+    $found: false;
+    @each $key in $unit-keys {
+      $index: str-length($key);
+      $slice: str-slice($temp, 1, $index);
+      @if ($found == false and $slice == $key) {
+        $unit-key: $slice;
+        $temp: str-slice($temp, $index + 1);
+      }
+    }
+
+    // ERROR
+    @if ($unit-key == null) {
+      @error 'Spacing \'#{$spacing}\' has an invalid unit key';
+    }
+
+    // Get actual values from keys
+    $rule: map-get($rules, $rule-key);
+    $sides: pal-const('sides.#{$side-key}');
+    $unit: pal-const('units.#{$unit-key}');
+
+    // Shorthand?
+    @if (length($sides) == 4) {
+      #{$rule}: $unit;
+    }
+    
+    // Define rules for each side as needed
+    @else {
+      @each $side in $sides {
+        #{$rule}-#{$side}: $unit;
+      }
+    }
+  }
 }
