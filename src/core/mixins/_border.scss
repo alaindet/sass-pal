@@ -35,6 +35,9 @@
 ///   // border-style: dotted;
 ///   // border-color: #eee;
 /// @example scss Scoped by side
+///   pal-border(('t': 1px red, 'b': 2px dashed black));
+///   // border-top: 1px solid red;      
+///   // border-bottom: 2px dashed black;
 /// 
 /// @param { List | Map | Number | String } $border
 /// @output Border related rules
