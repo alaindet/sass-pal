@@ -1,0 +1,82 @@
+/// Breaks down an input **device query** into a map with properties. A *device
+/// query* is a string following this syntax
+/// 
+/// {DEVICE}{OPERATOR}{PSEUDO_CLASS}
+/// 
+/// Where
+/// - DEVICE can be any allowed device or * wildcard for 'all devices'
+/// - OPERATOR can be
+///   - '+' meaning 'from DEVICE min resolution upward'
+///   - '-' meaning 'from DEVICE max resolution downward'
+///   - '' or '=' means 'between DEVICE min and max resolution only'
+/// - PSEUDO_CLASS can be
+///   - ':hover'
+///   - ':focus'
+///   - ':active'
+///
+/// @access private
+/// @group core-functions
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-const
+///
+/// @example scss Parse device query from tablet downward for hover state
+///   _pal-parse-device-query('tablet-:hover')
+///   // (
+///   //   device: 'tablet',
+///   //   operator: 'down'
+///   //   pseudo-class: 'hover'
+///   // )
+///
+/// @param {String} $query Device query to parse
+/// @return {Map} Parsed query into separate properties of this map
+///
+@function _pal-parse-device-query($query)
+{
+  $parsed: (
+    'device': 'any',
+    'operator': 'in',
+    'pseudo-class': 'any',
+  );
+
+  $temp: $query;
+
+  // Get device
+  $device-keys: map-keys(pal-const('devices'));
+  $found: false;
+  @each $key in $device-keys {
+    $slice: str-slice($temp, 1, str-length($key));
+    @if ($found == false and $slice == $key) {
+      $found: true;
+      $temp: str-slice($temp, str-length($key) + 1);
+      $parsed: map-merge($parsed, ('device': $key));
+    }
+  }
+
+  // Get operator
+  $operators: pal-const('media-query.operators');
+  $operator-symbols: map-keys($operators);
+  $found: false;
+  @each $symbol in $operator-symbols {
+    $slice: str-slice($temp, 1, str-length($symbol));
+    @if ($found == false and $slice == $symbol) {
+      $found: true;
+      $temp: str-slice($temp, str-length($symbol) + 1);
+      $operator: map-get($operators, $symbol);
+      $parsed: map-merge($parsed, ('operator': $operator));
+    }
+  }
+
+  // Get pseudo-class
+  $pseudo-classes: pal-const('pseudo-classes');
+  $found: false;
+  @each $pseudo-class in $pseudo-classes {
+    $slice: str-slice($temp, 1, str-length($pseudo-class));
+    @if ($found == false and $slice == $pseudo-class) {
+      $found: true;
+      $pseudo-class-name: str-slice($pseudo-class, 2);
+      $parsed: map-merge($parsed, ('pseudo-class': $pseudo-class-name));
+    }
+  }
+
+  @return $parsed;
+}
