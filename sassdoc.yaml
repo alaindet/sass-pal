@@ -7,6 +7,7 @@ autofill:
   - require
 groups:
   core: Core
+  core-variables: Core Variables
   core-functions: Core Functions
   core-builders: Core Builders
   helper-variables: Helper Variables
@@ -14,5 +15,5 @@ groups:
   helper-functions-map: Helper Functions for Maps
   helper-functions-number: Helper Functions for Numbers
   helper-functions-string: Helper Functions for Strings
-  variables: Variables
+  helper-mixins: Helper Mixins
   undefined: Extra

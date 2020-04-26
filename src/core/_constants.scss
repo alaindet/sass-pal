@@ -1,6 +1,7 @@
 /// Map of all Pal's defaults. These cannot be modified, just patched with custom variables
 ///
 /// @type Map
+/// @group core-variables
 /// @prop {List} constants.builders - List of all Pal's builder mixins
 /// @prop {Map} constants.devices - Map of all devices. Key: name, value: list of (min, max) resolutions
 /// @prop {Map} constants.media-query - Map of all media-query related meta data
