@@ -10,6 +10,10 @@
 ///
 @function _pal-has-any-device-query($map)
 {
+  @if (length($map) == 0) {
+    @return false;
+  }
+
   $key: nth(map-keys($map), 1);
   @each $builder in pal-const('builders') {
     @if ($builder == $key) {
