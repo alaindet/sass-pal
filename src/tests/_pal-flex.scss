@@ -1,9 +1,29 @@
 $tests: (
-  (main-align: flex-end, cross-align: center),
+
+  // Shortcut
   center,
-  (self-align: flex-start, grow: 1, shrink: 0, order: -1, basis: 100%),
-  (flex: 1 0 50%),
+
+  // Flex container
+  (
+    dir: column,
+    wrap: false,
+    main-align: around,
+    cross-align: end,
+    cross-lines: between,
+    flex: 1 0 50%,
+  ),
+
+  // Flex items
+  (
+    self-align: end,
+    basis: 'quarter',
+    grow: 'more',
+    shrink: 'less',
+    order: 'last',
+  ),
+
 );
+
 $test-prefix: 'pal-flex';
 @each $test in $tests {
   $i: index($tests, $test);

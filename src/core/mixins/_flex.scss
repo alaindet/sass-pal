@@ -1,27 +1,102 @@
-/// Pal builder for flex rules
+/// Pal builder for Flexbox rules. All properties are optional. All passed values
+/// can be either a custom value (ex.: grow: 'more'), an **alias** (ex.: 'start'
+/// for 'flex-start') or any native value for that CSS rule
 ///
-/// Shortcut
-/// $map: 'center'
 ///
-/// For the container
-/// $map?.dir string row|row-reverse|column|column-reverse
-/// $map?.wrap boolean
-/// $map?.main-align string flex-start|center|flex-end|space-between|space-around
-/// $map?.cross-align string start|center|end|stretch|baseline
-/// $map?.cross-lines string flex-start|center|flex-end|space-between|space-around
-/// $map?.flex list
+/// # Shortcut
+/// If input is 'center', output the rules for centering content
+/// (see *Shortcut with 'center'* example)
 ///
-/// For the item
-/// $map?.self-align string auto|flex-start|center|flex-end|stretch
-/// $map?.basis number|string String is any of the defined 'relative-units'
-/// $map?.grow number|string String is 'no'|'normal'|'more'
-/// $map?.shrink number|string String is 'least'|'less'|'normal'|'more'|'most'
-/// $map?.order number|string String is 'first'|'last'
+/// # Aliases
+/// - `start` for `flex-start`
+/// - `end` for `flex-end`
+/// - `between` for `space-between`
+/// - `around` for `space-around`
+///
+/// # Properties for flex containers
+/// - `dir`
+///   - *type*: String
+///   - *note*: Accepts anything `flex-direction` accepts
+/// - `wrap`
+///   - *type*: Bool
+///   - *values*: true|false
+/// - `main-align`
+///   - *type*: String
+///   - *aliases*: start|end|between|around
+///   - *note*: Accepts anything `justify-content` accepts
+/// - `cross-align`
+///   - *type*: String
+///   - *aliases*: start|end
+///   - *note*: Accepts anything `align-items` accepts
+/// - `cross-lines`
+///   - *type*: String
+///   - *aliases*: start|center|end|between|around
+///   - *note*: Accepts anything `align-content` accepts
+/// - `flex`
+///   - *type*: List
+///   - *values*: Any valid List for native `flex` CSS rule
+///
+/// # Properties for flex items
+/// - `self-align`
+///   - *type*: String
+///   - *alias*: start|end
+///   - *note*: Accepts anything `align-self` accepts
+/// - `basis`
+///   - *type*: Number|String
+///   - *values*: Any of the defined `relative-units` (ex.: 'third')
+///   - *note*: Accepts anything `flex-basis` accepts
+/// - `grow`
+///   - *type*: Number|String
+///   - *values*: 'no'|'normal'|'more' or custom Number
+///   - *note*: Accepts anything `flex-grow` accepts
+/// - `shrink`
+///   - *type*: Number|String
+///   - *values*: 'least'|'less'|'normal'|'more'|'most' or custom Number
+///   - *note*: Accepts anything `flex-shrink` accepts
+/// - `order`
+///   - *type*: Number|String
+///   - *values*: 'first'|'last' or custom Number
+///   - *note*: Accepts anything `order` accepts
 ///
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// 
+///
+/// @example scss Shortcut with 'center'
+///   .shortcut {
+///     @include pal-flex('center');
+///   }
+///   // .shortcut {
+///   //   display: flex;
+///   //   justify-content: center;
+///   //   align-items: center;
+///   // }
+/// @example scss A flex container
+///   .container {
+///     @include pal-flex((
+///       main-align: end,
+///       cross-align: stretch
+///     ));
+///   }
+///   // .container {
+///   //   display: flex;
+///   //   justify-content: flex-end;
+///   //   align-items: stretch;
+///   // }
+/// @example scss A flex item
+///   .item {
+///     @include pal-flex((basis: '1/3'));
+///   }
+///   .item-big {
+///     @include pal-flex((grow: more));
+///   }
+///   // .item {
+///   //   flex-basis: 33.33333%;
+///   // }
+///   // .item-big {
+///   //   flex-grow: 2;
+///   // }
+///
 /// @param {Map | String} $map
 /// @output Flex rules
 ///
@@ -34,108 +109,163 @@
     align-items: center;
   } @else {
 
-    // Direction
+    // Container: Direction
     $value: map-get($map, 'dir');
     $allowed: 'row','row-reverse','column','column-reverse';
     @if ($value != null and index($allowed, $value) != null) {
       flex-direction: #{$value};
     }
 
-    // Wrap
+    // Container: Wrap
     @if (map-get($map, 'wrap') == true) {
       flex-wrap: wrap;
     }
 
-    // Main axis alignment
+    // Container: Main axis alignment
     $value: map-get($map, 'main-align');
-    $allowed: 'flex-start','center','flex-end','space-between','space-around';
-    @if ($value != null and index($allowed, $value)) {
+    @if ($value != null) {
+
+      $values: (
+        'start': 'flex-start',
+        'end': 'flex-end',
+        'between': 'space-between',
+        'around': 'space-around',
+      );
+      $allowed: map-keys($values);
+
+      // Controlled value
+      @if (index($allowed, $value)) {
+        $value: map-get($values, $value);
+      }
+
       justify-content: #{$value};
     }
 
-    // Cross axis alignment
+    // Container: Cross axis alignment
     $value: map-get($map, 'cross-align');
-    $allowed: 'start','center','end','stretch','baseline';
-    @if ($value != null and index($allowed, $value)) {
+    @if ($value != null) {
+
+      $values: (
+        'start': 'flex-start',
+        'end': 'flex-end',
+      );
+      $allowed: map-keys($values);
+
+      // Controlled value
+      @if (index($allowed, $value)) {
+        $value: map-get($values, $value);
+      }
+
       align-items: #{$value};
     }
 
-    // Cross axis lines alignment
+    // Container: Cross axis lines alignment
     $value: map-get($map, 'cross-lines');
-    $allowed: 'flex-start','center','flex-end','space-between','space-around';
-    @if ($value != null and index($allowed, $value)) {
+    @if ($value != null) {
+
+      $values: (
+        'start': 'flex-start',
+        'end': 'flex-end',
+        'between': 'space-between',
+        'around': 'space-around',
+      );
+      $allowed: map-keys($values);
+
+      // Controlled value
+      @if (index($allowed, $value)) {
+        $value: map-get($values, $value);
+      }
+
       align-content: #{$value};
     }
 
-    // Flex shorthand
+    // Container: Flex shorthand
     $value: map-get($map, 'flex');
     @if ($value != null) {
       flex: $value;
     }
 
-    // Item alignment
+    // Item: alignment
     $value: map-get($map, 'self-align');
-    $allowed: 'auto','flex-start','center','flex-end','stretch';
-    @if ($value != null and index($allowed, $value)) {
+    @if ($value != null) {
+
+      $values: (
+        'start': 'flex-start',
+        'end': 'flex-end',
+      );
+      $allowed: map-keys($values);
+
+      // Controlled value
+      @if (index($allowed, $value)) {
+        $value: map-get($values, $value);
+      }
+
       align-self: #{$value};
     }
 
-    // Item width
+    // Item: width
     $value: map-get($map, 'basis');
     @if ($value != null) {
-      $relative-units: pal-const('relative-units');
-      $relative-unit: map-get($relative-units, $value);
+
+      $relative-unit: map-get(pal-const('relative-units'), $value);
+
       @if ($relative-unit != null) {
-        flex-basis: $relative-unit;
-      } @else {
-        flex-basis: $value;
+        $value: $relative-unit;
       }
+
+      flex-basis: $value;
     }
 
-    // Grow
+    // Item: Grow
     $value: map-get($map, 'grow');
     @if ($value != null) {
-      $helpers: (
+
+      $values: (
         'no': 0,
         'normal': 1,
         'more': 2,
       );
-      @if (map-get($helpers, $value) != null) {
-        flex-grow: map-get($helpers, $value);
-      } @else {
-        flex-grow: $value;
+
+      @if (map-get($values, $value) != null) {
+        $value: map-get($values, $value);
       }
+
+      flex-grow: $value;
     }
 
-    // Shrink
+    // Item: Shrink
     $value: map-get($map, 'shrink');
     @if ($value != null) {
-      $helpers: (
+      
+      $values: (
         'least': 0.25,
         'less': 0.5,
         'normal': 1,
         'more': 2,
         'most': 4,
       );
-      @if (map-get($helpers, $value) != null) {
-        flex-shrink: map-get($helpers, $value);
-      } @else {
-        flex-shrink: $value;
+
+      @if (map-get($values, $value) != null) {
+        $value: map-get($values, $value);
       }
+
+      flex-shrink: $value;
     }
 
-    // Order
+    // Item: Order
     $value: map-get($map, 'order');
     @if ($value != null) {
-      $helpers: (
+
+      $values: (
         'first': -1000,
         'last': 1000,
       );
-      @if (map-get($helpers, $value) != null) {
-        order: map-get($helpers, $value);
-      } @else {
-        order: $value;
+
+      @if (map-get($values, $value) != null) {
+        $value: map-get($values, $value);
       }
+
+      order: $value;
     }
   }
 }
