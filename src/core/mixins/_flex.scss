@@ -13,7 +13,7 @@
 ///
 /// For the item
 /// $map?.self-align string auto|flex-start|center|flex-end|stretch
-/// $map?.basis number|string String is '1/5'|'1/4'|'1/3'|'half'|'full'
+/// $map?.basis number|string String is any of the defined 'relative-units'
 /// $map?.grow number|string String is 'no'|'normal'|'more'
 /// $map?.shrink number|string String is 'least'|'less'|'normal'|'more'|'most'
 /// $map?.order number|string String is 'first'|'last'
@@ -83,15 +83,10 @@
     // Item width
     $value: map-get($map, 'basis');
     @if ($value != null) {
-      $helpers: (
-        '1/5': 20%,
-        '1/4': 25%,
-        '1/3': 33.33333%,
-        'half': 50%,
-        'full': 100%,
-      );
-      @if (map-get($helpers, $value) != null) {
-        flex-basis: map-get($helpers, $value);
+      $relative-units: pal-const('relative-units');
+      $relative-unit: map-get($relative-units, $value);
+      @if ($relative-unit != null) {
+        flex-basis: $relative-unit;
       } @else {
         flex-basis: $value;
       }
