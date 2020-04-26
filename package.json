@@ -6,7 +6,8 @@
   "scripts": {
     "demo": "node-sass ./demo.scss --watch --output-style=expanded",
     "doc": "sassdoc ./src --config ./sassdoc.yaml",
-    "test": "node-sass ./src/tests/tests.scss --output-style=expanded"
+    "test:legacy": "node-sass ./src/tests/tests.scss --output-style=expanded",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,10 @@
   },
   "homepage": "https://github.com/alaindet/sass-pal#readme",
   "devDependencies": {
+    "glob": "^7.1.6",
+    "jest": "^25.4.0",
     "node-sass": "^4.13.1",
+    "sass-true": "^5.0.0",
     "sassdoc": "^2.7.1"
   }
 }
