@@ -11,10 +11,10 @@
 
 @import './core/constants';
 @import './core/functions/const';
-@import './core/functions/has-device-queries';
-@import './core/functions/parse-device-queries';
+@import './core/functions/has-any-device-query';
+@import './core/functions/parse-device-query';
 @import './core/functions/parse-sides';
-@import './core/functions/group-by-device-queries';
+@import './core/functions/group-by-device-query';
 @import './core/mixins/builders-switch';
 @import './core/mixins/border';
 @import './core/mixins/display';
