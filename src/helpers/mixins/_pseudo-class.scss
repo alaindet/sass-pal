@@ -17,15 +17,15 @@
 /// 
 @mixin pal-pseudo-class($pseudo-class: '*', $parent: null)
 {
-  @if ($state == '*' or $state == 'any') {
+  @if ($pseudo-class == '*' or $pseudo-class == 'any') {
     @content;
   } @else {
     @if ($parent != null) {
-      #{$parent}:#{$state} {
+      #{$parent}:#{$pseudo-class} {
         @content;
       }
     } @else {
-      &:#{$state} {
+      &:#{$pseudo-class} {
         @content;
       }
     }
