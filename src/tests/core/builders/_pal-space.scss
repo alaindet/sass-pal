@@ -6,7 +6,7 @@ $tests: (
   ('mx-6', 'mt-4', 'mb-2', 'p^r-3/4'),
   ('my-16', 'px-1/8', 'py-13'),
 );
-$test-prefix: 'pal-space';
+$test-prefix: 'builder-pal-space';
 @each $test in $tests {
   $i: index($tests, $test);
   .test-#{$test-prefix}-#{$i} {

@@ -24,7 +24,7 @@ $tests: (
 
 );
 
-$test-prefix: 'pal-flex';
+$test-prefix: 'builder-pal-flex';
 @each $test in $tests {
   $i: index($tests, $test);
   .test-#{$test-prefix}-#{$i} {

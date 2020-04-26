@@ -5,7 +5,7 @@ $tests: (
   (4px solid #ddd (0.5rem 0.75rem)),
   ('t': 1px red, 'b': 2px dashed black),
 );
-$test-prefix: 'pal-border';
+$test-prefix: 'builder-pal-border';
 @each $test in $tests {
   $i: index($tests, $test);
   .test-#{$test-prefix}-#{$i} {

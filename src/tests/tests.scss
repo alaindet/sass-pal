@@ -1,7 +1,14 @@
 @import './../pal.scss';
 
-@import './pal-border';
-@import './pal-flex';
-@import './pal-position';
-@import './pal-size';
-@import './pal-space';
+// Builders
+@import './core/builders/pal-border';
+@import './core/builders/pal-flex';
+@import './core/builders/pal-position';
+@import './core/builders/pal-size';
+@import './core/builders/pal-space';
+
+// Single utility map
+@import './core/utility-maps/single';
+
+// // Query-scoped utilities
+@import './core/utility-maps/query-scoped';

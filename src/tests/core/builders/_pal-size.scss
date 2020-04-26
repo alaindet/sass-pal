@@ -4,7 +4,7 @@ $tests: (
   ('w-min-screen', 'h-min-screen'),
   ('w-min-1/2', 'h-min-1/2', 'w-max-full', 'h-max-full', 'w-3/4', 'h-3/4'),
 );
-$test-prefix: 'pal-size';
+$test-prefix: 'builder-pal-size';
 @each $test in $tests {
   $i: index($tests, $test);
   .test-#{$test-prefix}-#{$i} {

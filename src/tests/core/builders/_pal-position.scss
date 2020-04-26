@@ -4,7 +4,7 @@ $tests: (
   ('fixed', 30px),
   ('absolute', (null 40px)),
 );
-$test-prefix: 'pal-position';
+$test-prefix: 'builder-pal-position';
 @each $test in $tests {
   $i: index($tests, $test);
   .test-#{$test-prefix}-#{$i} {
