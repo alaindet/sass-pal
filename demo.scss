@@ -1,0 +1,13 @@
+@import './sass-pal.scss';
+
+// 1. Open the terminal and run `npm run demo`
+// 2. Write any demo code here
+// 3. See the output into the terminal
+// 4. Any saved change updated the output
+// 5. To exit, press Ctrl+C
+
+.pal {
+  @include pal((
+    // ...
+  ));
+}
