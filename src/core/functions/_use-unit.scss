@@ -1,0 +1,29 @@
+/// Pipes a number so that it translates it to a Pal unit if it has no unit on
+/// its own. Fractions **must** be passed as strings
+///
+/// @access private
+/// @group core-functions
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-number-has-unit
+/// @require {function} pal-number-to-string
+///
+/// @example scss
+///   _pal-use-unit(24px) // 24px
+///   _pal-use-unit(3) // 1.5rem (3 units * base-unit)
+///   _pal-use-unit('1/2') // 1.5rem (3 units * base-unit)
+///
+/// @param {Number | String} $input
+/// @return {Number} Piped number
+///
+@function _pal-use-unit($input)
+{
+  @if (type-of($input) == 'string') {
+    @return pal-const('units.#{$input}');
+  }
+
+  @if (pal-number-has-unit($input)) {
+    @return $input;
+  }
+
+  @return pal-const('units.#{$input}');
+}
