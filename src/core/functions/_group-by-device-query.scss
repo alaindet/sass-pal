@@ -1,0 +1,104 @@
+/// Groups utility maps by the same device query so that Sass Pal will output
+/// less @media rules. Device queries differing only in pseudo-classes are
+/// grouped together
+///
+/// @access private
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @group core-functions
+///
+/// @example scss Group media queries. Numbers replace maps for readability
+///   $map: (
+///     'mobile+': 111,
+///     'mobile+:hover': 222,
+///     'mobile+:focus': 333,
+///     'tablet+': 444,
+///     'tablet:hover': 555,
+///     'desktop': 666,
+///   );
+///   
+///   $grouped: _pal-group-by-device-query($map);
+///   
+///   @debug($grouped);
+///   // (
+///   //   (
+///   //     'query': (
+///   //       'device': 'mobile',
+///   //       'operator': 'up',
+///   //     ),
+///   //     'utility-maps': (
+///   //       'any': 111,
+///   //       'hover': 222,
+///   //       'focus': 333,
+///   //     ),
+///   //   ),
+///   //   (
+///   //     'query': (
+///   //       'device': 'tablet',
+///   //       'operator': 'up',
+///   //     ),
+///   //     'utility-maps': (
+///   //       'any': 444,
+///   //     ),
+///   //   ),
+///   //   (
+///   //     'query': (
+///   //       'device': 'tablet',
+///   //       'operator': 'in',
+///   //     ),
+///   //     'utility-maps': (
+///   //       'any': 555
+///   //     ),
+///   //   ),
+///   //   (
+///   //     'query': (
+///   //       'device': 'desktop',
+///   //       'operator': 'in',
+///   //     ),
+///   //     'utility-maps': (
+///   //       'any': 666,
+///   //     )
+///   //   ),
+///   // );
+///
+@function _pal-group-by-device-query($map)
+{
+  $result: ();
+
+  @each $query, $utility-map in $map {
+
+    // Parse the query
+    $parsed: _pal-parse-device-query($query);
+    $device: map-get($parsed, 'device');
+    $operator: map-get($parsed, 'operator');
+    $pseudo-class: map-get($parsed, 'pseudo-class');
+
+    // Build the device query without the pseudo-class
+    $key: '#{$device}#{$operator}';
+
+    // Create new node on result map
+    @if (map-has-key($result, $key) == false) {
+      $result: map-merge($result, (
+        #{$key}: (
+          'query': (
+            'device': $device,
+            'operator': $operator,
+          ),
+          'utility-maps': (
+            #{$pseudo-class}: $utility-map,
+          ),
+        )
+      ));
+    }
+    
+    // Add to existing node on result map
+    @else {
+      $old-node: map-get($result, #{$key});
+      $old-utils: map-get($old-node, 'utility-maps');
+      $new-utils: map-merge($old-utils, (#{$pseudo-class}: $utility-map));
+      $new-node: map-merge($old-node, ('utility-maps': $new-utils));
+      $result: map-merge($result, (#{$key}: $new-node));
+    }
+  }
+
+  @return map-values($result);
+}
