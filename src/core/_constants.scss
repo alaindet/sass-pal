@@ -30,6 +30,17 @@ $pal-constants: (
       '+': 'up',
     ),
   ),
+  'pseudo-classes': (
+    ':hover',
+    ':focus',
+    ':active',
+    ':first-child',
+    ':last-child',
+    ':disabled',
+    ':enabled',
+    ':checked',
+    ':empty',
+  ),
   // These are percentages used for fractions of parent elements
   'relative-units': (
     '1/12': 100% * 1 / 12,
