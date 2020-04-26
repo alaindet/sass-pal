@@ -10,7 +10,7 @@
 /// @example scss
 ///   _pal-use-unit(24px) // 24px
 ///   _pal-use-unit(3) // 1.5rem (3 units * base-unit)
-///   _pal-use-unit('1/2') // 1.5rem (3 units * base-unit)
+///   _pal-use-unit('1/2') // 0.5rem
 ///
 /// @param {Number | String} $input
 /// @return {Number} Piped number

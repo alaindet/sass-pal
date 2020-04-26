@@ -1,0 +1,24 @@
+$tests: (
+  (
+    'given': 24px,
+    'expected': 24px,
+  ),
+  (
+    'given': 3,
+    'expected': 1.5rem,
+  ),
+  (
+    'given': '1/2',
+    'expected': 0.25rem,
+  ),
+);
+
+@include describe('[Core Function] _pal-use-unit') {
+  @include it('Pipes a number and uses a Pal unit if number is unitless') {
+    @each $test in $tests {
+      $assertion: _pal-use-unit(map-get($test, 'given'));
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}

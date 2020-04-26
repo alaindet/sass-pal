@@ -1,0 +1,24 @@
+$tests: (
+  (
+    'given': 'media-query.operators.+',
+    'expected': 'up',
+  ),
+  (
+    'given': 'relative-units.6/12',
+    'expected': 50%,
+  ),
+  (
+    'given': 'devices.mobile',
+    'expected': (320px, 767.999px),
+  ),
+);
+
+@include describe('[Core Function] pal-const') {
+  @include it('Reads values (deep nesting allowed) from Pal constants') {
+    @each $test in $tests {
+      $assertion: pal-const(map-get($test, 'given'));
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}

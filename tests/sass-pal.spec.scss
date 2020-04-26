@@ -1,4 +1,10 @@
 @import 'true';
 @import './../sass-pal.scss';
 
+// Core functions
+@import './core/functions/const.spec';
+@import './core/functions/group-by-device-query.spec';
+@import './core/functions/has-any-device-query.spec';
+@import './core/functions/parse-device-query.spec';
 @import './core/functions/parse-sides.spec';
+@import './core/functions/use-unit.spec';

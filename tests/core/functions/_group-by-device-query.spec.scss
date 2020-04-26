@@ -1,0 +1,62 @@
+$tests: (
+  (
+    'given': (
+      'mobile+': 111,
+      'mobile+:hover': 222,
+      'mobile+:focus': 333,
+      'tablet+': 444,
+      'tablet:hover': 555,
+      'desktop': 666,
+    ),
+    'expected': (
+      (
+        'query': (
+          'device': 'mobile',
+          'operator': 'up',
+        ),
+        'utility-maps': (
+          'any': 111,
+          'hover': 222,
+          'focus': 333,
+        ),
+      ),
+      (
+        'query': (
+          'device': 'tablet',
+          'operator': 'up',
+        ),
+        'utility-maps': (
+          'any': 444,
+        ),
+      ),
+      (
+        'query': (
+          'device': 'tablet',
+          'operator': 'in',
+        ),
+        'utility-maps': (
+          'hover': 555
+        ),
+      ),
+      (
+        'query': (
+          'device': 'desktop',
+          'operator': 'in',
+        ),
+        'utility-maps': (
+          'any': 666,
+        )
+      ),
+    ),
+  ),
+);
+
+@include describe('[Core Function] _pal-group-by-device-query') {
+  @include it('Groups util maps by same device query (optimizes @media rules)') {
+    @each $test in $tests {
+      $assertion: _pal-group-by-device-query(map-get($test, 'given'));
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}

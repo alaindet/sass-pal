@@ -3,7 +3,7 @@ $tests: (
   (2px #bbb),
   (3px solid #ccc),
   (4px solid #ddd (0.5rem 0.75rem)),
-  ('t': 1px red, 'b': 2px dashed black),
+  ('t': 3 red, 'b': 2px dashed black),
 );
 $test-prefix: 'builder-pal-border';
 @each $test in $tests {
