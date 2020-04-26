@@ -6,7 +6,6 @@
   "scripts": {
     "demo": "node-sass ./demo.scss --watch --output-style=expanded",
     "doc": "sassdoc ./src --config ./sassdoc.yaml",
-    "test:legacy": "node-sass ./src/tests/tests.scss --output-style=expanded",
     "test": "jest"
   },
   "repository": {

@@ -1,0 +1,18 @@
+$tests: (
+  'b': ('bottom'),
+  'tr': ('top', 'right'),
+  '*': ('top', 'right', 'bottom', 'left'),
+  '^t': ('right', 'bottom', 'left'),
+);
+
+// Test a function
+@include describe('[Function] pal-parse-sides') {
+  @include it('parses side abbreviations into a list of sides') {
+    @each $test, $expected in $tests {
+      @include assert-equal(
+        pal-parse-sides($test),
+        $expected
+      );
+    }
+  }
+}

@@ -30,7 +30,7 @@
   @for $i from 1 through str-length($input) {
     $char: str-slice($input, $i, $i);
     $label: map-get($sides, $char);
-    $output: append($output, $label);
+    $output: append($output, $label, $separator: 'comma');
   }
 
   @return $output;
