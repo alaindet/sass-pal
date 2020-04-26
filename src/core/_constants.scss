@@ -9,6 +9,8 @@
 /// @prop {Map} constants.media-query.operators - Map of all media query operators. Key: symbol, value: label
 /// @prop {Map} constants.sides - Map of all sides of a rectangle. Key: abbrev, value: list of sides
 $pal-constants: (
+
+ // Sass-Pal builder names
   'builders': (
     'border',
     'display',
@@ -17,13 +19,18 @@ $pal-constants: (
     'size',
     'space',
   ),
+
+  // Availables devices (used for media queries)
   'devices': (
     'mobile': (320px, 768px - 0.001px),
     'tablet': (768px, 1024px - 0.001px),
     'desktop': (1024px, 1440px - 0.001px),
     'over': (1440px, 9999px),
   ),
+
+  // Media query operators
   'media-query': (
+    // Default operator
     'operator': 'in',
     'operators': (
       '=': 'in',
@@ -31,6 +38,8 @@ $pal-constants: (
       '+': 'up',
     ),
   ),
+
+  // Available pseudo-classes
   'pseudo-classes': (
     ':hover',
     ':focus',
@@ -42,6 +51,7 @@ $pal-constants: (
     ':checked',
     ':empty',
   ),
+
   // These are percentages used for fractions of parent elements
   'relative-units': (
     '1/12': 100% * 1 / 12,
@@ -69,13 +79,21 @@ $pal-constants: (
     'full': 100%,
     'auto': auto,
   ),
+
+  // All sides combination of a rectangle
   'sides': (
+
+    // One side
     't': ('top'),
     'r': ('right'),
     'b': ('bottom'),
     'l': ('left'),
+
+    // Two sides
     'x': ('right', 'left'),
     'y': ('top', 'bottom'),
+
+    // Three sides
     '-t': ('right', 'bottom', 'left'),
     '-r': ('bottom', 'left', 'top'),
     '-b': ('top', 'right', 'left'),
@@ -84,10 +102,16 @@ $pal-constants: (
     '^r': ('bottom', 'left', 'top'), // Alias of -r
     '^b': ('top', 'right', 'left'), // Alias of -b
     '^l': ('top', 'right', 'bottom'), // Alias of -l
+
+    // All sides
     '*': ('top', 'right', 'bottom', 'left'),
   ),
+
+  // The base unit
   'unit': 0.5rem,
-  // The factors are later multiplied
+
+  // These factors are later multiplied by the base unit
+  // Ex.: units.5 => 2.5rem
   'units': (
     '0': 0,
     '1/8': 1/8,
