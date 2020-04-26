@@ -1,0 +1,16 @@
+/// Casts a number to string
+/// 
+/// @access public
+/// @group helper-functions-number
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss
+///   pal-number-to-string(123) // '123'
+/// 
+/// @param {Number} $input
+/// @return {String}
+/// 
+@function pal-number-to-string($input)
+{
+  @return inspect($input);
+}
