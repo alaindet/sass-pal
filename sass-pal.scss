@@ -3,6 +3,7 @@
 @import './src/helpers/functions/number-half-plus-one';
 @import './src/helpers/functions/number-get-unit';
 @import './src/helpers/functions/number-has-unit';
+@import './src/helpers/functions/number-to-string';
 @import './src/helpers/functions/string-split';
 @import './src/helpers/functions/string-to-number';
 @import './src/helpers/functions/map-get';
@@ -17,6 +18,7 @@
 @import './src/core/functions/parse-device-query';
 @import './src/core/functions/parse-sides';
 @import './src/core/functions/group-by-device-query';
+@import './src/core/functions/use-unit';
 @import './src/core/mixins/builders-switch';
 @import './src/core/mixins/border';
 @import './src/core/mixins/display';
