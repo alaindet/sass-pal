@@ -1,0 +1,20 @@
+/// Returns the unit of passed number as a string (ex.: 'px', 'rem').
+/// If input has no unit, an empty string is returned
+/// 
+/// @access public
+/// @group helper-functions-number
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss
+///   pal-number-get-unit(24px) // 'px'
+///   pal-number-get-unit(3rem) // 'rem'
+///   pal-number-get-unit(75%) // '%'
+///   pal-number-get-unit(4) // ''
+/// 
+/// @param {Number} $input
+/// @return {String} The number's unit
+/// 
+@function pal-number-get-unit($input)
+{
+  @return str-slice($input * 0 + '', 2);
+}

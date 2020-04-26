@@ -1,0 +1,18 @@
+/// Returns wheter the input number has a unit or not
+/// 
+/// @access public
+/// @group helper-functions-number
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-number-get-unit
+/// 
+/// @example scss
+///   pal-number-has-unit('24px') // true
+///   pal-number-has-unit('12') // false
+/// 
+/// @param {Number} $input
+/// @return {Bool} Has it a unit?
+/// 
+@function pal-number-has-unit($input)
+{
+  @return pal-number-get-unit($input) != '';
+}
