@@ -1,0 +1,25 @@
+@import 'true';
+@import './../src/helpers/mixins/pseudo-class';
+
+// Test a mixin
+@include describe('[Mixin] pal-pseudo-class') {
+  @include it('wraps rules in a pseudo-class') {
+    @include assert {
+
+      @include output {
+        .test {
+          @include pal-pseudo-class('hover') {
+            content: 'This is a test';
+          }
+        }
+      }
+
+      @include expect {
+        .test:hover {
+          content: 'This is a test';
+        }
+      }
+
+    }
+  }
+}
