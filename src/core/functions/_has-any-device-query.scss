@@ -8,7 +8,7 @@
 /// @param {Map} $map
 /// @return {Bool}
 ///
-@function _pal-has-device-queries($map)
+@function _pal-has-any-device-query($map)
 {
   $key: nth(map-keys($map), 1);
   @each $builder in pal-const('builders') {
