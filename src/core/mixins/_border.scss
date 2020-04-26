@@ -7,6 +7,7 @@
 /// @require {function} pal-map-are-keys
 /// @require {function} pal-map-get-all
 /// @require {function} pal-parse-sides
+/// @require {function} _pal-use-unit
 ///
 /// @example scss With 1 value
 ///   pal-border(#aaa);
@@ -91,7 +92,7 @@
       // width color
       @else if (length($list) == 2) {
         $values: map-merge($values, (
-          'width': nth($list, 1),
+          'width': _pal-use-unit(nth($list, 1)),
           'color': nth($list, 2),
         ));
       }
@@ -99,7 +100,7 @@
       // width style color
       @else if (length($list) == 3) {
         $values: map-merge($values, (
-          'width': nth($list, 1),
+          'width': _pal-use-unit(nth($list, 1)),
           'style': nth($list, 2),
           'color': nth($list, 3),
         ));
@@ -108,7 +109,7 @@
       // with style color radius
       @else if (length($list) == 4) {
         $values: map-merge($values, (
-          'width': nth($list, 1),
+          'width': _pal-use-unit(nth($list, 1)),
           'style': nth($list, 2),
           'color': nth($list, 3),
           'radius': nth($list, 4),
