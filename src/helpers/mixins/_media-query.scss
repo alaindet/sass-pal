@@ -16,7 +16,7 @@
 ///
 @mixin pal-media-query($device: '*', $operator: null)
 {
-  @if ($device == '*' or $device == 'all') {
+  @if ($device == '*' or $device == 'any') {
     @content;
   } @else {
 

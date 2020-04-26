@@ -11,11 +11,11 @@
 ///   @include pal-pseudo('focus') { .foo { color: red } }
 ///   // &:focus { .foo { color: red } }
 /// 
-/// @param {String} $state ['*'] State name (no :) or '*' or 'any' for bypass
+/// @param {String} $pseudo-class ['*'] Pseudo-class name (no :) or '*' or 'any' for bypass
 /// @param {String | Null} $parent [null] Custom parent selector name
 /// @output Input rules wrapped in chosen pseudo class
 /// 
-@mixin pal-pseudo($state: '*', $parent: null)
+@mixin pal-pseudo-class($pseudo-class: '*', $parent: null)
 {
   @if ($state == '*' or $state == 'any') {
     @content;
