@@ -1,0 +1,24 @@
+/// Checks if input map has any of given keys (with non-null values)
+/// 
+/// @access public
+/// @group helper-functions-map
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss Check if map has any of given keys
+///   pal-map-is-any-key((a: 1), (a, b, c)); // true
+///   pal-map-are-keys((a: 1), (b, c, d, e)); // false
+/// 
+/// @param {Map} $map
+/// @param {List} $keys
+/// @return {Bool}
+///
+@function pal-map-is-any-key($map, $keys)
+{
+  @each $key in $keys {
+    @if (map-get($map, $key) != null) {
+      @return true;
+    }
+  }
+
+  @return false;
+}

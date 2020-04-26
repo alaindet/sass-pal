@@ -102,12 +102,17 @@
 ///
 @mixin pal-flex($map)
 {
-  display: flex;
-
   @if ($map == 'center') {
+    display: flex;
     justify-content: center;
     align-items: center;
   } @else {
+
+    // Output display: flex only on Flexbox containers, not items!
+    $item-rules: ('self-align', 'basis', 'grow', 'shrink', 'order');
+    @if (pal-map-is-any-key($map, $item-rules) == false) {
+      display: flex;
+    }
 
     // Container: Direction
     $value: map-get($map, 'dir');
