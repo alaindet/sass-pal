@@ -10,5 +10,9 @@
 // Single utility map
 @import './core/utility-maps/single';
 
-// // Query-scoped utilities
+// Query-scoped utilities
 @import './core/utility-maps/query-scoped';
+
+// Helpers
+@import './helpers/number-get-unit';
+@import './helpers/number-has-unit';
