@@ -1,0 +1,81 @@
+// Test a function
+@include describe('[Core Mixin] pal-border') {
+  @include it('Builds border rules') {
+
+    // Test #1
+    @include assert {
+      @include output {
+        .test-1 {
+          @include pal-border((#aaa));
+        }
+      }
+      @include expect {
+        .test-1 {
+          border: 1px solid #aaa;
+        }
+      }
+    }
+
+    // Test #2
+    @include assert {
+      @include output {
+        .test-2 {
+          @include pal-border((2px #bbb));
+        }
+      }
+      @include expect {
+        .test-2 {
+          border: 2px solid #bbb;
+        }
+      }
+    }
+
+    // Test #3
+    @include assert {
+      @include output {
+        .test-3 {
+          @include pal-border((3px solid #ccc));
+        }
+      }
+      @include expect {
+        .test-3 {
+          border: 3px solid #ccc;
+        }
+      }
+    }
+
+    // Test #4
+    @include assert {
+      @include output {
+        .test-4 {
+          @include pal-border((4px solid #ddd (0.5rem 0.75rem)));
+        }
+      }
+      @include expect {
+        .test-4 {
+          border: 4px solid #ddd;
+          border-radius: 0.5rem 0.75rem;
+        }
+      }
+    }
+
+    // Test #5
+    @include assert {
+      @include output {
+        .test-5 {
+          @include pal-border((
+            't': 3 red,
+            'b': 2px dashed black
+          ));
+        }
+      }
+      @include expect {
+        .test-5 {
+          border-top: 1.5rem solid red;
+          border-bottom: 2px dashed black;
+        }
+      }
+    }
+
+  }
+}
