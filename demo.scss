@@ -6,8 +6,8 @@
 // 4. Any saved change updated the output
 // 5. To exit, press Ctrl+C
 
-.pal {
-  @include pal((
-    // ...
-  ));
+.test {
+  @include pal-pseudo-class('hover') {
+    font-size: 1.1rem;
+  }
 }

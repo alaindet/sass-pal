@@ -1,0 +1,15 @@
+@include describe('[Helper Function] pal-string-split') {
+  @include it('Splits a string into a list') {
+
+    // Test #1
+    $assertion: pal-string-split('a.b.c', '.');
+    $expected: 'a' 'b' 'c';
+    @include assert-equal($assertion, $expected);
+
+    // Test #1
+    $assertion: pal-string-split('hello world');
+    $expected: 'hello' 'world';
+    @include assert-equal($assertion, $expected);
+
+  }
+}

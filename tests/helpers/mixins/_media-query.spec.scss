@@ -1,0 +1,23 @@
+@include describe('[Helpers Mixin] pal-media-query') {
+  @include it('Wraps a declaration block in a @media query') {
+
+    // Test #1
+    @include assert {
+      @include output {
+        .test {
+          @include pal-media-query('tablet', 'up') {
+            font-size: 1.1rem;
+          }
+        }
+      }
+      @include expect {
+        @media screen and (min-width: 768px) {
+          .test {
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+
+  }
+}

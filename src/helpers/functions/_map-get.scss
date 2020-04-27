@@ -20,14 +20,10 @@
     @return map-get($map, $query);
   }
 
-  $output: null;
+  $output: $map;
 
-  @each $word in pal-string-split($query, '.') {
-    @if ($output == null) {
-      $output: map-get($map, $word);
-    } @else {
-      $output: map-get($output, $word);
-    }
+  @each $key in pal-string-split($query, '.') {
+    $output: map-get($output, $key);
   }
 
   @return $output;

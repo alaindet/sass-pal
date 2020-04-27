@@ -19,3 +19,20 @@
 
 // Sass Pal
 @import './core/pal.spec';
+
+// Helper functions
+@import './helpers/functions/list-join.spec';
+@import './helpers/functions/list-sort-by-length-desc.spec';
+@import './helpers/functions/map-are-keys.spec';
+@import './helpers/functions/map-get-all.spec';
+@import './helpers/functions/map-get.spec';
+@import './helpers/functions/map-is-any-key.spec';
+@import './helpers/functions/number-get-unit.spec';
+@import './helpers/functions/number-half-plus-one.spec';
+@import './helpers/functions/number-has-unit.spec';
+@import './helpers/functions/number-to-string.spec';
+@import './helpers/functions/string-split.spec';
+
+// Helper mixins
+@import './helpers/mixins/media-query.spec';
+@import './helpers/mixins/pseudo-class.spec';

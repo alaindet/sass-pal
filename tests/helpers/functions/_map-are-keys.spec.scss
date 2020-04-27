@@ -1,0 +1,15 @@
+@include describe('[Helper Function] pal-map-are-keys') {
+  @include it('Checks if a map has all keys of a list and keys are non-null values') {
+
+    // Test #1
+    $assertion: pal-map-are-keys((a: 12, b: 34, c: 56), (a, b));
+    $expected: true;
+    @include assert-equal($assertion, $expected);
+
+    // Test #2
+    $assertion: pal-map-are-keys((a: 12, b: 34), (a, b, c));
+    $expected: false;
+    @include assert-equal($assertion, $expected);
+
+  }
+}
