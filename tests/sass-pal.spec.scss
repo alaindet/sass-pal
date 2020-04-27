@@ -1,25 +1,6 @@
 @import 'true';
 @import './../sass-pal.scss';
 
-// Core functions
-@import './core/functions/const.spec';
-@import './core/functions/group-by-device-query.spec';
-@import './core/functions/has-any-device-query.spec';
-@import './core/functions/parse-device-query.spec';
-@import './core/functions/parse-sides.spec';
-@import './core/functions/use-unit.spec';
-
-// Core mixins
-@import './core/mixins/border.spec';
-@import './core/mixins/display.spec';
-@import './core/mixins/flex.spec';
-@import './core/mixins/position.spec';
-@import './core/mixins/size.spec';
-@import './core/mixins/space.spec';
-
-// Sass Pal
-@import './core/pal.spec';
-
 // Helper functions
 @import './helpers/functions/list-join.spec';
 @import './helpers/functions/list-sort-by-length-desc.spec';
@@ -36,3 +17,23 @@
 // Helper mixins
 @import './helpers/mixins/media-query.spec';
 @import './helpers/mixins/pseudo-class.spec';
+
+// Core functions
+@import './core/functions/const.spec';
+@import './core/functions/color-get.spec';
+@import './core/functions/group-by-device-query.spec';
+@import './core/functions/has-any-device-query.spec';
+@import './core/functions/parse-device-query.spec';
+@import './core/functions/parse-sides.spec';
+@import './core/functions/use-unit.spec';
+
+// Core mixins
+@import './core/mixins/border.spec';
+@import './core/mixins/display.spec';
+@import './core/mixins/flex.spec';
+@import './core/mixins/position.spec';
+@import './core/mixins/size.spec';
+@import './core/mixins/space.spec';
+
+// Sass Pal
+@import './core/pal.spec';

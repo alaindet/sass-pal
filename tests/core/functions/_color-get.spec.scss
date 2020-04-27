@@ -1,0 +1,20 @@
+$tests: (
+  (
+    'given': 'black',
+    'expected': #333,
+  ),
+  (
+    'given': 'indigo-light',
+    'expected': #c3dafe,
+  ),
+);
+
+@include describe('[Core Function] pal-color-get') {
+  @include it('Reads a color from the Pal defined palette') {
+    @each $test in $tests {
+      $assertion: pal-color-get(map-get($test, 'given'));
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}
