@@ -17,6 +17,10 @@
 ///
 @function _pal-use-unit($input)
 {
+  @if ($input == auto) {
+    @return $input;
+  }
+
   @if (type-of($input) == 'string') {
     @return pal-const('units.#{$input}');
   }
