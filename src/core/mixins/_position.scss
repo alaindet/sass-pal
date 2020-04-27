@@ -51,7 +51,7 @@
   // When given 2 numbers
   $side-rule-groups: ('top', 'bottom'), ('left', 'right');
 
-  $position: nth($list, 1);
+  $position: unquote(nth($list, 1));
   $allowed: 'static', 'fixed', 'absolute', 'relative', 'sticky';
   @if (index($allowed, $position) != null) {
     position: $position;
