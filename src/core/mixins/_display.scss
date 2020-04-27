@@ -12,5 +12,5 @@
 /// 
 @mixin pal-display($display)
 {
-  display: $display;
+  display: unquote($display);
 }

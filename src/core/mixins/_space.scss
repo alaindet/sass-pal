@@ -25,7 +25,7 @@
 
   // Sort keys from longest (more specific) to shortest to avoid taking a short
   // key by mistake (Ex. in ('w', 'w-min') 'w-min' should be checked first)
-  $rule-keys: pal-list-sort-by-length(map-keys($rules));
+  $rule-keys: map-keys($rules);
   $side-keys: pal-list-sort-by-length(map-keys(pal-const('sides')));
   $unit-keys: pal-list-sort-by-length(map-keys(pal-const('units')));
 

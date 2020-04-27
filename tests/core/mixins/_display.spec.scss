@@ -1,0 +1,33 @@
+@include describe('[Core Mixin] pal-display') {
+  @include it('Builds display rule') {
+
+    // Test #1
+    @include assert {
+      @include output {
+        .test {
+          @include pal-display(block);
+        }
+      }
+      @include expect {
+        .test {
+          display: block;
+        }
+      }
+    }
+
+    // Test #2
+    @include assert {
+      @include output {
+        .test {
+          @include pal-display('inline-flex');
+        }
+      }
+      @include expect {
+        .test {
+          display: inline-flex;
+        }
+      }
+    }
+
+  }
+}

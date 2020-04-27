@@ -95,11 +95,11 @@ $pal-constants: (
 
     // Three sides
     '-t': ('right', 'bottom', 'left'),
-    '-r': ('bottom', 'left', 'top'),
+    '-r': ('top', 'bottom', 'left'),
     '-b': ('top', 'right', 'left'),
     '-l': ('top', 'right', 'bottom'),
     '^t': ('right', 'bottom', 'left'), // Alias of -t
-    '^r': ('bottom', 'left', 'top'), // Alias of -r
+    '^r': ('top', 'bottom', 'left'), // Alias of -r
     '^b': ('top', 'right', 'left'), // Alias of -b
     '^l': ('top', 'right', 'bottom'), // Alias of -l
 
