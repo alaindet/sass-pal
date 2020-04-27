@@ -26,27 +26,32 @@
 @mixin pal-size($sizes)
 {
   $rules: (
-    'w': 'width',
-    'w-min': 'min-width',
     'w-max': 'max-width',
-    'h': 'height',
-    'h-min': 'min-height',
+    'w-min': 'min-width',
+    'w': 'width',
     'h-max': 'max-height',
+    'h-min': 'min-height',
+    'h': 'height',
   );
-  $width-rules: 'w', 'w-min', 'w-max';
-  $rule-keys: pal-list-sort-by-length(map-keys($rules));
+
+  $width-rules: 'w-max', 'w-min', 'w';
+
+  $rule-keys: map-keys($rules);
 
   @each $size in $sizes {
-
-    $rule-key: null;
-    $value-key: '';
     
-    // Extract keys for rule (ex.: wmax) and value (ex.: 1/2)
+    $rule-key: null;
+    $value-key: null;
+    $found: false;
+
+    // Extract keys for rule (ex.: w-max) and value (ex.: 1/2)
     @each $key in $rule-keys {
       $left-part: str-slice($size, 1, str-length($key));
-      @if ($left-part == $key) {
-        $rule-key: $key;
+      $is: $left-part == $key;
+      @if ($found == false and $left-part == $key) {
+        $found: true;
         $right-part: str-slice($size, str-length($key) + 2); // Skip the -
+        $rule-key: $left-part;
         $value-key: $right-part;
       }
     }
@@ -65,8 +70,9 @@
         $value: map-get(pal-const('relative-units'), $value-key);
       }
 
-      // Define the rule
+      // Declaration
       #{$rule}: $value;
     }
+
   }
 }
