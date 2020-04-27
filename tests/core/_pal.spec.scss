@@ -1,0 +1,115 @@
+@include describe('[Core Mixin] pal') {
+  @include it('The Sass Pal entry point') {
+
+    // Test #1 - A utility map with no device queries
+    @include assert {
+      @include output {
+        .test {
+          @include pal((
+            space: 'm^t-3' 'mb-4' 'py-2' 'px-4',
+            size: 'w-1/3' 'h-1/2',
+            position: absolute (2 4),
+            border: 2 #ccc,
+            flex: (
+              main-align: end,
+              cross-align: center,
+            ),
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          margin-right: 1.5rem;
+          margin-bottom: 1.5rem;
+          margin-left: 1.5rem;
+          margin-bottom: 2rem;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+          padding-right: 2rem;
+          padding-left: 2rem;
+          width: 33.33333%;
+          height: 50%;
+          position: absolute;
+          top: 1rem;
+          bottom: 1rem;
+          left: 2rem;
+          right: 2rem;
+          border: 1rem solid #ccc;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+      }
+    }
+
+    // Test #2 - With device queries
+    @include assert {
+      @include output {
+        .test {
+          @include pal((
+            '*': (
+              space: 'm^t-3' 'mb-4' 'py-2' 'px-4',
+              size: 'w-1/3' 'h-1/2',
+              position: absolute (2 4),
+              border: '1/2' #ccc,
+              flex: (
+                main-align: end,
+                cross-align: center,
+              ),
+            ),
+            'tablet+': (
+              space: 'my-0' 'py-5' 'px-8',
+              border: (x: '1/3' #aaa, y: '1/2' #bbb),
+            ),
+            'tablet+:hover': (
+              size: 'w-full',
+            ),
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          margin-right: 1.5rem;
+          margin-bottom: 1.5rem;
+          margin-left: 1.5rem;
+          margin-bottom: 2rem;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+          padding-right: 2rem;
+          padding-left: 2rem;
+          width: 33.33333%;
+          height: 50%;
+          position: absolute;
+          top: 1rem;
+          bottom: 1rem;
+          left: 2rem;
+          right: 2rem;
+          border: 0.25rem solid #ccc;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+
+        @media screen and (min-width: 768px) {
+          .test {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: 2.5rem;
+            padding-bottom: 2.5rem;
+            padding-right: 4rem;
+            padding-left: 4rem;
+            border-right: 0.16667rem solid #aaa;
+            border-left: 0.16667rem solid #aaa;
+            border-top: 0.25rem solid #bbb;
+            border-bottom: 0.25rem solid #bbb;
+          }
+
+          .test:hover {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+  }
+}
