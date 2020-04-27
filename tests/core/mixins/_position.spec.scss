@@ -1,0 +1,59 @@
+@include describe('[Core Mixin] pal-position') {
+  @include it('Builds position-related rules') {
+
+    // Test #1
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(('absolute', (0, 2rem, auto, 2rem)));
+        }
+      }
+      @include expect {
+        .test {
+          position: absolute;
+          top: 0;
+          right: 2rem;
+          bottom: auto;
+          left: 2rem;
+        }
+      }
+    }
+
+    // Test #2
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(('relative', (10px 20px)));
+        }
+      }
+      @include expect {
+        .test {
+          position: relative;
+          top: 10px;
+          bottom: 10px;
+          left: 20px;
+          right: 20px;
+        }
+      }
+    }
+
+    // Test #3
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(('fixed', 30px));
+        }
+      }
+      @include expect {
+        .test {
+          position: fixed;
+          top: 30px;
+          right: 30px;
+          bottom: 30px;
+          left: 30px;
+        }
+      }
+    }
+
+  }
+}

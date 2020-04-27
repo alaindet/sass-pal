@@ -1,16 +1,15 @@
-// Test a function
 @include describe('[Core Mixin] pal-flex') {
   @include it('Builds Flexbox rules') {
 
     // Test #1
     @include assert {
       @include output {
-        .test-1 {
+        .test {
           @include pal-flex(center);
         }
       }
       @include expect {
-        .test-1 {
+        .test {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -21,7 +20,7 @@
     // Test #2
     @include assert {
       @include output {
-        .test-2 {
+        .test {
           @include pal-flex((
             dir: column,
             wrap: false,
@@ -33,7 +32,7 @@
         }
       }
       @include expect {
-        .test-2 {
+        .test {
           display: flex;
           flex-direction: column;
           justify-content: space-around;
@@ -47,7 +46,7 @@
     // Test #3
     @include assert {
       @include output {
-        .test-3 {
+        .test {
           @include pal-flex((
             self-align: end,
             basis: 'quarter',
@@ -58,7 +57,7 @@
         }
       }
       @include expect {
-        .test-3 {
+        .test {
           align-self: flex-end;
           flex-basis: 25%;
           flex-grow: 2;
