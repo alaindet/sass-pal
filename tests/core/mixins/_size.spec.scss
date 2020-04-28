@@ -35,7 +35,7 @@
     @include assert {
       @include output {
         .test {
-          @include pal-size(('w-min-screen', 'h-min-screen'));
+          @include pal-size(('wmin-screen', 'hmin-screen'));
         }
       }
       @include expect {
@@ -51,10 +51,10 @@
       @include output {
         .test {
           @include pal-size((
-            'w-min-1/2',
-            'h-min-1/2',
-            'w-max-full',
-            'h-max-full',
+            'wmin-1/2',
+            'hmin-1/2',
+            'wmax-full',
+            'hmax-full',
             'w-3/4',
             'h-3/4',
           ));

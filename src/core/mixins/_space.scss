@@ -48,6 +48,7 @@
       $index: str-length($key);
       $slice: str-slice($temp, 1, $index);
       @if ($found == false and $slice == $key) {
+        $found: true;
         $rule-key: $slice;
         $temp: str-slice($temp, $index + 1);
       }
@@ -64,6 +65,7 @@
       $index: str-length($key);
       $slice: str-slice($temp, 1, $index);
       @if ($found == false and $slice == $key) {
+        $found: true;
         $side-key: $slice;
         $temp: str-slice($temp, $index + 1);
       }
@@ -74,15 +76,13 @@
       $side-key: '*';
     }
 
-    // Remove side-unit separator
-    $temp: str-slice($temp, 2);
-
     // Extract unit key
     $found: false;
     @each $key in $unit-keys {
       $index: str-length($key);
       $slice: str-slice($temp, 1, $index);
       @if ($found == false and $slice == $key) {
+        $found: true;
         $unit-key: $slice;
         $temp: str-slice($temp, $index + 1);
       }

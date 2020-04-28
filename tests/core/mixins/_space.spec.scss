@@ -5,7 +5,7 @@
     @include assert {
       @include output {
         .test {
-          @include pal-space('m-2');
+          @include pal-space('m2');
         }
       }
       @include expect {
@@ -19,7 +19,7 @@
     @include assert {
       @include output {
         .test {
-          @include pal-space('p-3' 'pt-0');
+          @include pal-space('p3' 'pt0');
         }
       }
       @include expect {
@@ -34,7 +34,7 @@
     @include assert {
       @include output {
         .test {
-          @include pal-space('p^t-3');
+          @include pal-space('p^t3');
         }
       }
       @include expect {
@@ -50,7 +50,7 @@
     @include assert {
       @include output {
         .test {
-          @include pal-space('m-2' 'p-12' 'pt-0');
+          @include pal-space('m2' 'p12' 'pt0');
         }
       }
       @include expect {
@@ -67,10 +67,10 @@
       @include output {
         .test {
           @include pal-space((
-            'mx-6',
-            'mt-4',
-            'mb-2',
-            'p^r-3/4'
+            'mx6',
+            'mt4',
+            'mb2',
+            'p^r3/4'
           ));
         }
       }
@@ -92,9 +92,9 @@
       @include output {
         .test {
           @include pal-space((
-            'my-16',
-            'px-1/8',
-            'py-13'
+            'my16',
+            'px1/8',
+            'py13'
           ));
         }
       }

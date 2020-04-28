@@ -10,7 +10,7 @@
 /// @prop {Map} constants.sides - Map of all sides of a rectangle. Key: abbrev, value: list of sides
 $pal-constants: (
 
- // Sass-Pal builder names
+  // Sass-Pal builder names
   'builders': (
     'border',
     'display',
@@ -179,11 +179,11 @@ $pal-constants: (
 // Override with custom values
 @if (variable-exists('pal-overrides')) {
 
-  // List of overridable keys
-  $pal-overridable-keys: ('devices', 'relative-units', 'unit', 'units');
+  // List of forbidden keys
+  $pal-forbidden-keys: ('builders', 'media-query', 'sides');
 
   @each $key, $value in $pal-overrides {
-    $is-overridable: index($pal-overridable-keys, $key) != null;
+    $is-overridable: index($pal-forbidden-keys, $key) == null;
     @if ($is-overridable) {
       $new-value: (#{$key}: $value);
       $pal-constants: map-merge($pal-constants, $new-value);

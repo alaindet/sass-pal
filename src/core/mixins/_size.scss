@@ -26,15 +26,15 @@
 @mixin pal-size($sizes)
 {
   $rules: (
-    'w-max': 'max-width',
-    'w-min': 'min-width',
+    'wmax': 'max-width',
+    'wmin': 'min-width',
     'w': 'width',
-    'h-max': 'max-height',
-    'h-min': 'min-height',
+    'hmax': 'max-height',
+    'hmin': 'min-height',
     'h': 'height',
   );
 
-  $width-rules: 'w-max', 'w-min', 'w';
+  $width-rules: 'wmax', 'wmin', 'w';
 
   $rule-keys: map-keys($rules);
 

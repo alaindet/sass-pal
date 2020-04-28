@@ -2,7 +2,7 @@
   "name": "sass-pal",
   "version": "1.0.0",
   "description": "Sass Pal helps styling your applications without getting in the way",
-  "main": "index.js",
+  "main": "sass-pal.scss",
   "scripts": {
     "demo": "node-sass ./demo.scss --watch --output-style=expanded",
     "doc": "sassdoc ./src --config ./sassdoc.yaml",
@@ -13,7 +13,9 @@
     "url": "git+https://github.com/alaindet/sass-pal.git"
   },
   "keywords": [
+    "css",
     "sass",
+    "scss",
     "pal",
     "styling",
     "utilities"
@@ -31,5 +33,8 @@
     "np": "^6.2.2",
     "sass-true": "^5.0.0",
     "sassdoc": "^2.7.1"
+  },
+  "config": {
+    "access": "public"
   }
 }
