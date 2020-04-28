@@ -1,6 +1,6 @@
 {
   "name": "sass-pal",
-  "version": "1.0.1",
+  "version": "0.0.0",
   "description": "Sass Pal helps styling your applications without getting in the way",
   "main": "sass-pal.scss",
   "scripts": {
