@@ -25,7 +25,7 @@
 ///   //       'device': 'mobile',
 ///   //       'operator': 'up',
 ///   //     ),
-///   //     'utility-maps': (
+///   //     'request-maps': (
 ///   //       'any': 111,
 ///   //       'hover': 222,
 ///   //       'focus': 333,
@@ -36,7 +36,7 @@
 ///   //       'device': 'tablet',
 ///   //       'operator': 'up',
 ///   //     ),
-///   //     'utility-maps': (
+///   //     'request-maps': (
 ///   //       'any': 444,
 ///   //     ),
 ///   //   ),
@@ -45,7 +45,7 @@
 ///   //       'device': 'tablet',
 ///   //       'operator': 'in',
 ///   //     ),
-///   //     'utility-maps': (
+///   //     'request-maps': (
 ///   //       'hover': 555
 ///   //     ),
 ///   //   ),
@@ -54,7 +54,7 @@
 ///   //       'device': 'desktop',
 ///   //       'operator': 'in',
 ///   //     ),
-///   //     'utility-maps': (
+///   //     'request-maps': (
 ///   //       'any': 666,
 ///   //     )
 ///   //   ),
@@ -67,7 +67,7 @@
 {
   $result: ();
 
-  @each $query, $utility-map in $map {
+  @each $query, $request-map in $map {
 
     // Parse the query
     $parsed: _pal-parse-device-query($query);
@@ -86,8 +86,8 @@
             'device': $device,
             'operator': $operator,
           ),
-          'utility-maps': (
-            '#{$pseudo-class}': $utility-map,
+          'request-maps': (
+            '#{$pseudo-class}': $request-map,
           ),
         )
       ));
@@ -96,9 +96,9 @@
     // Add to existing node on result map
     @else {
       $old-node: map-get($result, #{$key});
-      $old-utils: map-get($old-node, 'utility-maps');
-      $new-utils: map-merge($old-utils, ('#{$pseudo-class}': $utility-map));
-      $new-node: map-merge($old-node, ('utility-maps': $new-utils));
+      $old-utils: map-get($old-node, 'request-maps');
+      $new-utils: map-merge($old-utils, ('#{$pseudo-class}': $request-map));
+      $new-node: map-merge($old-node, ('request-maps': $new-utils));
       $result: map-merge($result, (#{$key}: $new-node));
     }
   }

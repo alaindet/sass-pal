@@ -37,12 +37,12 @@
 
       $device: pal-map-get($group, 'query.device');
       $operator: pal-map-get($group, 'query.operator');
-      $utility-maps: pal-map-get($group, 'utility-maps');
+      $request-maps: pal-map-get($group, 'request-maps');
 
       @include pal-media-query($device, $operator) {
-        @each $pseudo-class, $utility-map in $utility-maps {
+        @each $pseudo-class, $request-map in $request-maps {
           @include pal-pseudo-class($pseudo-class) {
-            @each $builder-name, $builder-value in $utility-map {
+            @each $builder-name, $builder-value in $request-map {
               @include _pal-builder($builder-name, $builder-value);
             }
           }
