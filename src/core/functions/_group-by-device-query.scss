@@ -60,6 +60,9 @@
 ///   //   ),
 ///   // );
 ///
+/// @param {Map} $map A multi-request map
+/// @return {List} List of device-scoped request maps
+///
 @function _pal-group-by-device-query($map)
 {
   $result: ();

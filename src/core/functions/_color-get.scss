@@ -7,7 +7,7 @@
 /// @require {function} pal-const
 /// 
 /// @example scss Get the blue
-///   pal-color('blue'); // #4299e1
+///   pal-color-get('blue'); // #4299e1
 ///
 /// @param {String} The color name
 /// @return {Color}

@@ -1,0 +1,31 @@
+/// If given a string, it fetches a color from the store
+/// If given a color, it leaves it as it is
+/// 
+/// @access public
+/// @group core-functions
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-color-get
+/// 
+/// @example scss Get the blue
+///   pal-color-parse('blue'); // #4299e1
+///   pal-color-parse(blue); // blue
+///   pal-color-parse(#333); // #333
+///
+/// @param {String | Color} $input An actual color or a color name
+/// @return {Color} Either the input color or a color in store
+///
+@function pal-color-parse($input)
+{
+  $allowed-types: ('color', 'string');
+  $type: type-of($input);
+  
+  @if (index($allowed-types, $type) == null) {
+    @error 'You must provide a color or a string to pal-color-parse';
+  }
+  
+  @if ($type == 'color') {
+    @return $input;
+  }
+  
+  @return pal-color-get($input);
+}

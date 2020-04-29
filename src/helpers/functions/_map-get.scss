@@ -4,6 +4,7 @@
 /// @access public
 /// @group helper-functions-map
 /// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-string-split
 /// 
 /// @example scss Get nested value
 ///   $foo: ('bar': ('baz': ('qez': 123)));
