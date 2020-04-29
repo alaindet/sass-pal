@@ -1,10 +1,10 @@
 /// Extracts a color from the defined palette. It's just an alias for
-/// `pal-const('color.xxx')`
+/// `pal-store-get('color.xxx')`
 /// 
 /// @access public
 /// @group core-functions
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {function} pal-const
+/// @require {function} pal-store-get
 /// 
 /// @example scss Get the blue
 ///   pal-color-get('blue'); // #4299e1
@@ -14,5 +14,5 @@
 ///
 @function pal-color-get($color)
 {
-  @return pal-const('colors.#{$color}');
+  @return pal-store-get('colors.#{$color}');
 }

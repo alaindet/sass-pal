@@ -12,7 +12,7 @@ It offers
 
 - A concise syntax
 - The ability to scope declarations via **device queries**
-- A centralized store of values to be queried via the `pal-const()` function
+- A centralized store of values to be queried via the `pal-store-get()` function
 - Sensible default values for spacing, sizing, colors
 - Flexible configuration via variables overriding
 - A plethora of `pal-*` prefix helper functions and mixins, like `pal-string-split()` and `pal-list-join()`
@@ -262,7 +262,7 @@ These factors are multiplied during compile time by the base unit (Ex.: 5 units 
 
 ## Override default values
 
-To override Pal's default values you can define a `$pal-overrides` map variable before importing Sass Pal. These values will then override default values by key.
+To override Pal's default values you can define a `$pal-store` map variable before importing Sass Pal. These values will then override default values by key.
 
 You can override any constant seen above or even add your own to use Sass Pal as a data store
 
@@ -270,7 +270,7 @@ Example
 
 ```
 // Override some constants
-$pal-overrides: (
+$pal-store: (
   'unit': 1rem,
   'units': (
     'zero': 0,
@@ -291,7 +291,7 @@ $pal-overrides: (
 
 @import '~sass-pal/sass-pal.scss';
 
-@each $piece in pal-const('kitchen') {
+@each $piece in pal-store-get('kitchen') {
   .#{$piece} {
     @include pal((
       space: pvery-large,
@@ -390,7 +390,7 @@ Outputs
 
 ```
 // Define your store
-$pal-overrides: (
+$pal-store: (
   'layout': (
     'navbar': 1,
     'footer': 2,
@@ -402,11 +402,11 @@ $pal-overrides: (
 @import '~sass-pal/sass-pal.scss';
 
 // Access default constants
-$unit: pal-const('unit');
+$unit: pal-store-get('unit');
 
 .navbar {
-  // Access new constants (pal-const accepts a deep nested query)
-  padding: pal-const('layout.navbar') * $unit;
+  // Access new constants (pal-store-get accepts a deep nested query)
+  padding: pal-store-get('layout.navbar') * $unit;
 }
 ```
 

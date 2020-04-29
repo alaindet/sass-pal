@@ -3,7 +3,7 @@
 /// @access private
 /// @group core-functions
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {function} pal-const
+/// @require {function} pal-store-get
 /// 
 /// @param {Map} $map
 /// @return {Bool}
@@ -15,7 +15,7 @@
   }
 
   $key: nth(map-keys($map), 1);
-  @each $builder in pal-const('builders') {
+  @each $builder in pal-store-get('pal.builders') {
     @if ($builder == $key) {
       @return false;
     }

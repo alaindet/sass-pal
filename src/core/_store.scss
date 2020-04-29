@@ -1,0 +1,221 @@
+/// Map of all Pal's defaults. These cannot be modified, just patched with custom variables
+///
+/// @type Map
+/// @group core-variables
+/// @prop {Map} store.pal Contains non-overridable constants used by Sass Pal
+/// @prop {List} store.pal.builders List of all Pal's builder mixins
+/// @prop {Map} store.pal.media-query Map of all media-query related meta data
+/// @prop {String} store.pal.media-query.operator Default media query operator
+/// @prop {Map} store.pal.media-query.operators Map of all media query operators. Key: symbol, value: operator name
+/// @prop {Map} store.pal.sides Map of all sides of a rectangle. Key: abbrev, value: list of sides
+/// @prop {Map} store.colors Color palette as map
+/// @prop {Map} store.devices Map of all devices. Key: name, value: list of (min, max) resolutionslabel
+/// @prop {List} store.pseudo-classes List of all available CSS pseudo-classes
+/// @prop {Map} store.relative-units Map of relative (percentage) units
+/// @prop {Number} store.unit The base unit that multiplies all `units` factors
+/// @prop {Map} store.units Map of factors that multiply base unit. Key: abbrev, value: base unit * factor
+///
+$_PAL_STORE: (
+
+  // Keys defined here cannot be overridden
+  'pal': (
+
+    // Sass-Pal builder names
+    'builders': (
+      'border',
+      'display',
+      'flex',
+      'position',
+      'size',
+      'space',
+    ),
+
+    // Media query operators
+    'media-query': (
+      // Default operator
+      'operator': 'in',
+      'operators': (
+        '=': 'in',
+        '-': 'down',
+        '+': 'up',
+      ),
+    ),
+
+    // All sides combination of a rectangle
+    'sides': (
+
+      // One side
+      't': ('top'),
+      'r': ('right'),
+      'b': ('bottom'),
+      'l': ('left'),
+
+      // Two sides
+      'x': ('right', 'left'),
+      'y': ('top', 'bottom'),
+
+      // Three sides
+      '-t': ('right', 'bottom', 'left'),
+      '-r': ('top', 'bottom', 'left'),
+      '-b': ('top', 'right', 'left'),
+      '-l': ('top', 'right', 'bottom'),
+      '^t': ('right', 'bottom', 'left'), // Alias of -t
+      '^r': ('top', 'bottom', 'left'), // Alias of -r
+      '^b': ('top', 'right', 'left'), // Alias of -b
+      '^l': ('top', 'right', 'bottom'), // Alias of -l
+
+      // All sides
+      '*': ('top', 'right', 'bottom', 'left'),
+    ),
+
+  ),
+
+  // Colors
+  'colors': (
+    'black':        #333333,
+    'white':        #f8f8f8,
+    'gray-dark':    #2d3748,
+    'gray':         #a0aec0,
+    'gray-light':   #edf2f7,
+    'red-dark':     #9b2c2c,
+    'red':          #e53e3e,
+    'red-light':    #fc8181,
+    'orange-dark':  #9c4221,
+    'orange':       #ed8936,
+    'orange-light': #fbd38d,
+    'yellow-dark':  #b7791f,
+    'yellow':       #f6e05e,
+    'yellow-light': #fefcbf,
+    'green-dark':   #276749,
+    'green':        #48bb78,
+    'green-light':  #9ae6b4,
+    'teal-dark':    #285e61,
+    'teal':         #38b2ac,
+    'teal-light':   #b2f5ea,
+    'blue-dark':    #2c5282,
+    'blue':         #4299e1,
+    'blue-light':   #bee3f8,
+    'indigo-dark':  #434190,
+    'indigo':       #667eea,
+    'indigo-light': #c3dafe,
+    'purple-dark':  #553c9a,
+    'purple':       #9f7aea,
+    'purple-light': #e9d8fd,
+    'pink-dark':    #97266d,
+    'pink':         #ed64a6,
+    'pink-light':   #fed7e2,
+  ),
+
+  // Availables devices (used for media queries)
+  'devices': (
+    'mobile':  (320px,  768px  - 0.001px),
+    'tablet':  (768px,  1024px - 0.001px),
+    'desktop': (1024px, 1440px - 0.001px),
+    'over':    (1440px, 9999px),
+  ),
+
+  // Available pseudo-classes
+  'pseudo-classes': (
+    ':hover',
+    ':focus',
+    ':active',
+    ':first-child',
+    ':last-child',
+    ':disabled',
+    ':enabled',
+    ':checked',
+    ':empty',
+  ),
+
+  // The factors are later multiplied by 100%
+  // Ex.: 2/5 => 40%
+  'relative-units': (
+    '0':       0,
+    '1/12':    1/12,
+    '2/12':    2/12,
+    '3/12':    3/12,
+    '4/12':    4/12,
+    '5/12':    5/12,
+    '6/12':    6/12,
+    '7/12':    7/12,
+    '8/12':    8/12,
+    '9/12':    9/12,
+    '10/12':   10/12,
+    '11/12':   11/12,
+    '12/12':   12/12,
+    '1/8':     1/8,
+    '1/4':     1/4,
+    '1/3':     1/3,
+    '2/5':     2/5,
+    '1/2':     1/2,
+    '2/3':     2/3,
+    '3/4':     3/4,
+    'quarter': 1/4,
+    'third':   1/3,
+    'half':    1/2,
+    'full':    1,
+  ),
+
+  // The base unit
+  'unit': 0.5rem,
+
+  // These factors are later multiplied by the base unit
+  // Ex.: 5 => 2.5rem
+  'units': (
+    '0':   0,
+    '1/8': 1/8,
+    '1/4': 1/4,
+    '1/3': 1/3,
+    '1/2': 1/2,
+    '3/5': 3/5,
+    '2/3': 2/3,
+    '3/4': 3/4,
+    '1':   1,
+    '2':   2,
+    '3':   3,
+    '4':   4,
+    '5':   5,
+    '6':   6,
+    '7':   7,
+    '8':   8,
+    '9':   9,
+    '10':  10,
+    '11':  11,
+    '12':  12,
+    '13':  13,
+    '14':  14,
+    '15':  15,
+    '16':  16,
+  ),
+);
+
+// Override with custom values
+@if (variable-exists('pal-store')) {
+
+  $pal-reserved-key: 'pal';
+
+  @each $key, $value in $pal-store {
+    @if ($key != $pal-reserver-key) {
+      $_PAL_STORE: map-merge($_PAL_STORE, (#{$key}: $value));
+    }
+  }
+}
+
+// Process 'relative-units' key
+$relative-units: map-get($_PAL_STORE, 'relative-units');
+$multiplier: 100%;
+@each $label, $factor in $relative-units {
+  $value: if($label == '0', 0, $factor * $multiplier); // 0 is unitless
+  $units: map-merge($relative-units, (#{$label}: $value));
+}
+$_PAL_STORE: map-merge($_PAL_STORE, ('relative-units': $relative-units));
+
+
+// Process 'units' key
+$units: map-get($_PAL_STORE, 'units');
+$multiplier: map-get($_PAL_STORE, 'unit');
+@each $label, $factor in $units {
+  $value: if($label == '0', 0, $factor * $multiplier); // 0 is unitless
+  $units: map-merge($units, (#{$label}: $value));
+}
+$_PAL_STORE: map-merge($_PAL_STORE, ('units': $units));

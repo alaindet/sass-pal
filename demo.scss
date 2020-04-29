@@ -6,8 +6,15 @@
 // 4. Any saved change updated the output
 // 5. To exit, press Ctrl+C
 
-.demo {
+.test {
   @include pal((
-    // ...
+    space: 'm^t3' 'mb4' 'py2' 'px4',
+    size: 'w-1/3' 'h-1/2',
+    position: absolute (2 4),
+    border: 2 #ccc,
+    flex: (
+      main-align: end,
+      cross-align: center,
+    ),
   ));
 }

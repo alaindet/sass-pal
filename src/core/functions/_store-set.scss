@@ -1,0 +1,21 @@
+/// Sets a new key-value into the Sass Pal store or overwrites an existing one
+/// 
+/// @access public
+/// @group core-functions
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss Set base unit
+///   pal-store-set('unit', 1rem);
+///
+/// @param {String} $key
+/// @param {Null | Bool | Number | Color | String | List | Map} $value
+/// @return {Null | Bool | Number | Color | String | List | Map} The set value
+///
+@function pal-store-set($key, $value)
+{
+  @if ($key == 'pal') {
+    @error 'You cannot override the "pal" key on the store';
+  }
+
+  $_PAL_STORE: map-merge($_PAL_STORE, ( #{$key}: $value ));
+}

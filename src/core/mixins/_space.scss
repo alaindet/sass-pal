@@ -4,13 +4,13 @@
 /// {RULE_KEY}{SIDE_KEY}-{UNIT_KEY}
 ///
 /// - RULE_KEY is a rule key ('m' for margin or 'p' for padding)
-/// - SIDE_KEY is any side key (@see $pal-constants.sides)
-/// - UNIT_KEY is any of declared units (@see $pal-constants.units)
+/// - SIDE_KEY is any side key (@see $_PAL_STORE.pal.sides)
+/// - UNIT_KEY is any of declared units (@see $_PAL_STORE.units)
 ///
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {function} pal-const
+/// @require {function} pal-store-get
 /// @require {function} pal-list-sort-by-length
 /// 
 /// @param {List | String} $spacings
@@ -26,8 +26,8 @@
   // Sort keys from longest (more specific) to shortest to avoid taking a short
   // key by mistake (Ex. in ('w', 'w-min') 'w-min' should be checked first)
   $rule-keys: map-keys($rules);
-  $side-keys: pal-list-sort-by-length(map-keys(pal-const('sides')));
-  $unit-keys: pal-list-sort-by-length(map-keys(pal-const('units')));
+  $side-keys: pal-list-sort-by-length(map-keys(pal-store-get('pal.sides')));
+  $unit-keys: pal-list-sort-by-length(map-keys(pal-store-get('units')));
 
   // Normalize string to a 1-element list
   @if (type-of($spacings) != 'string') {
@@ -95,8 +95,8 @@
 
     // Get actual values from keys
     $rule: map-get($rules, $rule-key);
-    $sides: pal-const('sides.#{$side-key}');
-    $unit: pal-const('units.#{$unit-key}');
+    $sides: pal-store-get('pal.sides.#{$side-key}');
+    $unit: pal-store-get('units.#{$unit-key}');
 
     // Shorthand?
     @if (length($sides) == 4) {

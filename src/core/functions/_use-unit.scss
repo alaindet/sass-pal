@@ -22,12 +22,12 @@
   }
 
   @if (type-of($input) == 'string') {
-    @return pal-const('units.#{$input}');
+    @return pal-store-get('units.#{$input}');
   }
 
   @if (pal-number-has-unit($input)) {
     @return $input;
   }
 
-  @return pal-const('units.#{$input}');
+  @return pal-store-get('units.#{$input}');
 }

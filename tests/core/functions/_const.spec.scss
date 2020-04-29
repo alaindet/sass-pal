@@ -13,10 +13,10 @@ $tests: (
   ),
 );
 
-@include describe('[Core Function] pal-const') {
+@include describe('[Core Function] pal-store-get') {
   @include it('Reads values (deep nesting allowed) from Pal constants') {
     @each $test in $tests {
-      $assertion: pal-const(map-get($test, 'given'));
+      $assertion: pal-store-get(map-get($test, 'given'));
       $expected: map-get($test, 'expected');
       @include assert-equal($assertion, $expected);
     }
