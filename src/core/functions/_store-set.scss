@@ -17,5 +17,7 @@
     @error 'You cannot override the "pal" key on the store';
   }
 
-  $_PAL_STORE: map-merge($_PAL_STORE, ( #{$key}: $value ));
+  $_PAL_STORE: map-merge($_PAL_STORE, ( #{$key}: $value )) !global;
+
+  @return null;
 }

@@ -1,6 +1,6 @@
 $tests: (
   (
-    'given': 'media-query.operators.+',
+    'given': 'pal.media-query.operators.+',
     'expected': 'up',
   ),
   (
@@ -14,7 +14,7 @@ $tests: (
 );
 
 @include describe('[Core Function] pal-store-get') {
-  @include it('Reads values (deep nesting allowed) from Pal constants') {
+  @include it('Reads values (deep nesting allowed) from Pal data store') {
     @each $test in $tests {
       $assertion: pal-store-get(map-get($test, 'given'));
       $expected: map-get($test, 'expected');

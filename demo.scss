@@ -7,14 +7,9 @@
 // 5. To exit, press Ctrl+C
 
 .test {
-  @include pal((
-    space: 'm^t3' 'mb4' 'py2' 'px4',
-    size: 'w-1/3' 'h-1/2',
-    position: absolute (2 4),
-    border: 2 #ccc,
-    flex: (
-      main-align: end,
-      cross-align: center,
-    ),
-  ));
+  $given: 123;
+  $discard: pal-store-set('test-1', $given);
+  $assertion: map-get($_PAL_STORE, 'test-1');
+  content: inspect($discard);
+  content: inspect($assertion);
 }

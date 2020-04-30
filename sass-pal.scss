@@ -13,6 +13,8 @@
 @import './src/helpers/mixins/pseudo-class';
 
 @import './src/core/store';
+@import './src/core/functions/store-get';
+@import './src/core/functions/store-set';
 @import './src/core/functions/color-get';
 @import './src/core/functions/color-parse';
 @import './src/core/functions/has-any-device-query';

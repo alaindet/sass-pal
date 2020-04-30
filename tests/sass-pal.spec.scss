@@ -18,8 +18,9 @@
 @import './helpers/mixins/media-query.spec';
 @import './helpers/mixins/pseudo-class.spec';
 
-// Core functions
-@import './core/functions/const.spec';
+// // Core functions
+@import './core/functions/store-get.spec';
+@import './core/functions/store-set.spec';
 @import './core/functions/color-get.spec';
 @import './core/functions/color-parse.spec';
 @import './core/functions/group-by-device-query.spec';

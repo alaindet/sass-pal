@@ -206,7 +206,7 @@ $relative-units: map-get($_PAL_STORE, 'relative-units');
 $multiplier: 100%;
 @each $label, $factor in $relative-units {
   $value: if($label == '0', 0, $factor * $multiplier); // 0 is unitless
-  $units: map-merge($relative-units, (#{$label}: $value));
+  $relative-units: map-merge($relative-units, (#{$label}: $value));
 }
 $_PAL_STORE: map-merge($_PAL_STORE, ('relative-units': $relative-units));
 
