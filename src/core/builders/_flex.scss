@@ -1,4 +1,4 @@
-/// Pal builder for Flexbox rules. All properties are optional. All passed values
+/// Sass Pal builder for Flexbox rules. All properties are optional. All passed values
 /// can be either a custom value (ex.: grow: 'more'), an **alias** (ex.: 'start'
 /// for 'flex-start') or any native value for that CSS rule
 ///
@@ -20,11 +20,11 @@
 /// - `wrap`
 ///   - *type*: Bool
 ///   - *values*: true|false
-/// - `main-align`
+/// - `main-axis`
 ///   - *type*: String
 ///   - *aliases*: start|end|between|around
 ///   - *note*: Accepts anything `justify-content` accepts
-/// - `cross-align`
+/// - `cross-axis`
 ///   - *type*: String
 ///   - *aliases*: start|end
 ///   - *note*: Accepts anything `align-items` accepts
@@ -74,8 +74,8 @@
 /// @example scss A flex container
 ///   .container {
 ///     @include pal-flex((
-///       main-align: end,
-///       cross-align: stretch
+///       main-axis: end,
+///       cross-axis: stretch
 ///     ));
 ///   }
 ///   // .container {
@@ -98,7 +98,7 @@
 ///   // }
 ///
 /// @param {Map | String} $map
-/// @output Flex rules
+/// @output Flexbox rules
 ///
 @mixin pal-flex($map)
 {
@@ -127,7 +127,7 @@
     }
 
     // Container: Main axis alignment
-    $value: map-get($map, 'main-align');
+    $value: map-get($map, 'main-axis');
     @if ($value != null) {
 
       $values: (
@@ -147,7 +147,7 @@
     }
 
     // Container: Cross axis alignment
-    $value: map-get($map, 'cross-align');
+    $value: map-get($map, 'cross-axis');
     @if ($value != null) {
 
       $values: (
