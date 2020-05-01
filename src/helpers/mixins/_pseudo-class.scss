@@ -1,6 +1,7 @@
 /// Wraps given content into a pseudo-selector. It uses the parent selector & so
 /// make sure to use this inside a class. You can optionally provide a custom
-/// parent selector to use. No effect if given a bypass
+/// parent selector to use. It has no effect if you pass a bypass, like '*' or
+/// 'any'
 /// 
 /// @access public
 /// @group helper-mixins

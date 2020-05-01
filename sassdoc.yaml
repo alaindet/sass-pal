@@ -7,7 +7,7 @@ autofill:
   - require
 groups:
   core: Core
-  core-store: Core Store Values
+  core-stored-values: Core Stored Values
   core-functions: Core Functions
   core-reducers: Core Reducers
   core-builders: Core Builders

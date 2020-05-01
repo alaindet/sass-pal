@@ -1,6 +1,16 @@
-/// Parses any side abbreviation to the proper list of sides
-/// Always returns a list even for one element
-///
+/// Parses any sides combination as a string to the proper list of sides.
+/// Always returns a list even for one side. Input strings are words composed of the letters
+/// 
+/// - `t` (top)
+/// - `r` (right)
+/// - `b` (bottom)
+/// - `l` (left)
+/// 
+/// Special modifiers are
+/// 
+/// - `*` is a bypass for all sides
+/// - `^` or `-` negates a side, ex.: `^t`: (right, bottom, left)
+/// 
 /// @access public
 /// @group core-functions
 /// @author Alain D'Ettorre <alain.det@gmail.com>
@@ -11,6 +21,7 @@
 ///   pal-parse-sides('tr') // ('top', 'right')
 ///   pal-parse-sides('*') // ('top', 'right', 'bottom', 'left')
 ///   pal-parse-sides('-t') // ('right', 'bottom', 'left')
+///   pal-parse-sides('^t') // ('right', 'bottom', 'left')
 ///
 /// @param {String} $input
 /// @return {List} List of sides

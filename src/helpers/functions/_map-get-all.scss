@@ -1,5 +1,5 @@
-/// Extends the built-in map-get() by allowing to get nested values like you
-/// would do in JavaScript, ex.: pal-map-get($map, 'foo.bar.baz');
+/// Extracts values from a map, given a list of keys (also nested keys, see
+/// `pal-map-get()`)
 /// 
 /// @access public
 /// @group helper-functions-map

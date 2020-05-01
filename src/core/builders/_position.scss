@@ -45,7 +45,7 @@
 ///   // right: 40px;
 ///   // left: 40px;
 ///
-/// @example scss
+/// @example scss With unitless values (convert to Sass Pal absolute units)
 ///   pal-position(absolute (0 1 2 3));
 ///   // position: absolute;
 ///   // top: 0;

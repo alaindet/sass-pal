@@ -1,17 +1,41 @@
 /// Sass Pal builder for spacing rules (margins, paddings). Each spacing is a
 /// string with the pattern
 ///
-/// {RULE_KEY}{SIDE_KEY}-{UNIT_KEY}
+/// `{RULE_KEY}{SIDE_KEY}{UNIT_KEY}`
 ///
-/// - RULE_KEY is a rule key ('m' for margin or 'p' for padding)
-/// - SIDE_KEY is any side key (@see $_PAL_STORE.pal.sides)
-/// - UNIT_KEY is any of declared units (@see $_PAL_STORE.units)
+/// - `RULE_KEY` is a rule key ('m' for margin or 'p' for padding)
+/// - `SIDE_KEY` is any side key (@see $_PAL_STORE.pal.sides)
+/// - `UNIT_KEY` is any of declared units (@see $_PAL_STORE.units)
 ///
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @require {function} pal-store-get
 /// @require {function} pal-list-sort-by-length
+/// 
+/// @example scss Set margins of 1rem on all sides
+///   pal-space(m2);
+///   // margin: 1rem;
+/// 
+/// @example scss Set padding of 2rem on all sides expect bottom
+///   pal-space(p^b4);
+///   // padding-top: 2rem;
+///   // padding-right: 2rem;
+///   // padding-left: 2rem;
+/// 
+/// @example scss Set horizontal margin
+///   pal-space(mx3);
+///   // margin-right: 1.5rem;
+///   // margin-left: 1.5rem;
+/// 
+/// @example scss Set some margin and padding
+///   pal-space(p2 pt0 mx2 mb1)
+///   // padding: 1rem;
+///   // padding-top: 0;
+///   // margin-right: 1rem;
+///   // margin-left: 1rem;
+///   // margin-bottom: 0.5rem;
+/// 
 /// 
 /// @param {List | String} $spacings
 /// @output Margin and/or padding rules
@@ -56,7 +80,7 @@
 
     // ERROR
     @if ($rule-key == null) {
-      @error 'Spacing \'#{$spacing}\' has an invalid rule key';
+      @error 'Spacing "#{$spacing}" has an invalid rule key';
     }
 
     // Extract side key
@@ -90,7 +114,7 @@
 
     // ERROR
     @if ($unit-key == null) {
-      @error 'Spacing \'#{$spacing}\' has an invalid unit key';
+      @error 'Spacing "#{$spacing}" has an invalid unit key';
     }
 
     // Get actual values from keys

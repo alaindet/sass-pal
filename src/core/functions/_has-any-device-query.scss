@@ -1,10 +1,27 @@
-/// Checks if map is a collection of utility maps grouped by device queries 
+/// Checks if map is a collection of device-scoped request maps or not
 /// 
 /// @access private
 /// @group core-functions
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @require {function} pal-store-get
+///
+/// @example scss Against a map of device-scoped request maps
+///   _pal-has-any-device-query(
+///     (
+///       'tablet': 111,
+///     )
+///   );
+///   // true
 /// 
+/// @example scss Against a simple request map
+///   _pal-has-any-device-query(
+///     (
+///       'position': 111,
+///       'flex': 222,
+///     )
+///   );
+///   // false
+///
 /// @param {Map} $map
 /// @return {Bool}
 ///

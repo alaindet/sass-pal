@@ -1,12 +1,12 @@
-/// Groups utility maps by the same device query so that Sass Pal will output
-/// less @media rules. Device queries differing only in pseudo-classes are
+/// Groups request maps by the same device query so that Sass Pal will output
+/// less @media queries. Device queries differing only in pseudo-classes are
 /// grouped together
 ///
 /// @access private
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @group core-functions
 ///
-/// @example scss Group media queries. Numbers replace maps for readability
+/// @example scss Numbers replace real request maps for readability
 ///   $map: (
 ///     'mobile+': 111,
 ///     'mobile+:hover': 222,

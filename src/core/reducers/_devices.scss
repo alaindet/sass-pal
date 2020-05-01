@@ -1,6 +1,6 @@
-/// Reduce the 'devices' key of the store.
-/// Substract a tiny length to the upper ends so that @media queries do not
-/// collide
+/// Updates the 'devices' key of the store.
+/// Substracts a tiny length to the upper end resolutions so that @media queries
+/// do not collide
 ///
 /// @access private
 /// @group core-reducers

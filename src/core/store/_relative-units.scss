@@ -2,9 +2,9 @@
 /// percentages
 ///
 /// @type Map
-/// @group core-store
+/// @group core-stored-values
 ///
-$pal-relative-units: (
+$relative-units: (
   '0':       0,
   '1/12':    1/12,
   '2/12':    2/12,
@@ -31,4 +31,4 @@ $pal-relative-units: (
   'full':    1,
 );
 
-$null: pal-store-set('relative-units', $pal-relative-units);
+$null: pal-store-set('relative-units', $relative-units);

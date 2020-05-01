@@ -1,5 +1,7 @@
-/// Extends the built-in map-get() by allowing to get nested values like you
-/// would do in JavaScript, ex.: pal-map-get($map, 'foo.bar.baz');
+/// Extends the Sass built-in `map-get()` by allowing to get nested values like
+/// you would do in JavaScript, ex.: pal-map-get($map, 'foo.bar.baz');
+///
+/// You can pass it dot-separated *queries* to access nested values
 /// 
 /// @access public
 /// @group helper-functions-map

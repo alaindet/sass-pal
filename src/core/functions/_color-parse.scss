@@ -1,4 +1,4 @@
-/// If given a string, it fetches a color from the store
+/// If given a string, it fetches a color from the store.
 /// If given a color, it leaves it as it is
 /// 
 /// @access public
@@ -6,9 +6,13 @@
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @require {function} pal-color-get
 /// 
-/// @example scss Get the blue
+/// @example scss Access color by label
 ///   pal-color-parse('blue'); // #4299e1
+///
+/// @example scss Leave input color intact (word form)
 ///   pal-color-parse(blue); // blue
+///
+/// @example scss Leave input color intact (hex form)
 ///   pal-color-parse(#333); // #333
 ///
 /// @param {String | Color} $input An actual color or a color name

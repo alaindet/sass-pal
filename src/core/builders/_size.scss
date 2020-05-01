@@ -1,9 +1,11 @@
-/// Sass Pal builder for size rules (width, height and min-* and max-*). Sizes 
-/// follow the syntax {RULE_ABBREVIATION}-{RELATIVE_UNIT}
+/// Sass Pal builder for size rules (width, height, min-* and max-*). Sizes 
+/// follow the syntax
+///
+/// `{RULE_ABBREVIATION}-{RELATIVE_UNIT}`
 ///
 /// Where
-/// - RULE_ABBREVIATION is any of 'w', 'w-min', 'w-max', 'h', 'h-min', 'h-max'
-/// - RELATIVE_UNIT is any of the 'relative-units' constant, ex.: '1/2', 'full'
+/// - `RULE_ABBREVIATION` is any of *w*, *w-min*, *w-max*, *h*, *h-min*, *h-max*
+/// - `RELATIVE_UNIT` is one of the labels from the *relative-units* stored value, ex.: '1/2', 'full'
 ///
 /// @access public
 /// @group core-builders

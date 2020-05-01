@@ -1,15 +1,15 @@
 /// Breaks down an input **device query** into a map with properties. A *device
 /// query* is a string following this syntax
 /// 
-/// {DEVICE}{OPERATOR}{PSEUDO_CLASS}
+/// `{DEVICE}{OPERATOR}{PSEUDO_CLASS}`
 /// 
 /// Where
-/// - DEVICE can be any allowed device or * wildcard for 'all devices'
-/// - OPERATOR can be
+/// - `DEVICE` can be any allowed device or * wildcard for 'all devices'
+/// - `OPERATOR` can be
 ///   - '+' meaning 'from DEVICE min resolution upward'
 ///   - '-' meaning 'from DEVICE max resolution downward'
 ///   - '' or '=' means 'between DEVICE min and max resolution only'
-/// - PSEUDO_CLASS can be
+/// - `PSEUDO_CLASS` can be any pseudo-class (see `pseudo-classes` stored value for more), ex.:
 ///   - ':hover'
 ///   - ':focus'
 ///   - ':active'
