@@ -1,0 +1,18 @@
+/// List of pseudo-classes
+///
+/// @type List
+/// @group core-store
+///
+$pal-pseudo-classes: (
+  ':hover',
+  ':focus',
+  ':active',
+  ':first-child',
+  ':last-child',
+  ':disabled',
+  ':enabled',
+  ':checked',
+  ':empty',
+);
+
+$null: pal-store-set('pseudo-classes', $pal-pseudo-classes);

@@ -1,0 +1,30 @@
+/// Reduce the 'units' key of the store.
+/// Multiplies all units by the base unit
+///
+/// @access private
+/// @group core-reducers
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @param {Map} $store
+/// @param {Map} $old-value
+/// @output The new store
+///
+@function _pal-units-reducer($store, $old-value)
+{
+  $base-unit: map-get($store, 'unit');
+
+  @if ($base-unit == null) {
+    @return $store;
+  }
+
+  $units: map-get($store, 'units');
+
+  @each $label, $factor in $units {
+    $units: map-merge(
+      $units,
+      (#{$label}: if($factor == 0, 0, $factor * $base-unit))
+    );
+  }
+
+  @return map-merge($store, ('units': $units));
+}

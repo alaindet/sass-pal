@@ -1,0 +1,13 @@
+/// Map of all devices. Key: device name, value: list with min and max resolution
+///
+/// @type Map
+/// @group core-store
+///
+$pal-devices: (
+  'mobile':  (320px,  768px),
+  'tablet':  (768px,  1024px),
+  'desktop': (1024px, 1440px),
+  'over':    (1440px, 9999px),
+);
+
+$null: pal-store-set('devices', $pal-devices);

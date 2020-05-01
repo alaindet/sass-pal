@@ -1,0 +1,23 @@
+/// Reduce the 'relative-units' key of the store.
+/// Transforms all relative units to percentages
+///
+/// @access private
+/// @group core-reducers
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @param {Map} $store
+/// @param {Map} $old-value
+/// @output The new store
+///
+@function _pal-relative-units-reducer($store, $old-value)
+{
+  $relative-units: map-get($store, 'relative-units');
+
+  @each $label, $factor in $relative-units {
+    $relative-units: map-merge($relative-units, (
+      #{$label}: if($factor == 0, 0, $factor * 100%)
+    ));
+  }
+
+  @return map-merge($store, ('relative-units': $relative-units));
+}

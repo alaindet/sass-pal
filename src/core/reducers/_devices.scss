@@ -1,0 +1,26 @@
+/// Reduce the 'devices' key of the store.
+/// Substract a tiny length to the upper ends so that @media queries do not
+/// collide
+///
+/// @access private
+/// @group core-reducers
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @param {Map} $store
+/// @param {Map} $old-value
+/// @output The new store
+///
+@function _pal-devices-reducer($store, $old-value)
+{
+  $devices: map-get($store, 'devices');
+
+  @each $device, $resolutions in $devices {
+    $min: nth($resolutions, 1);
+    $max: nth($resolutions, 2) - 0.0001px;
+    $devices: map-merge($devices, (
+      #{$device}: ($min, $max)
+    ));
+  }
+
+  @return map-merge($store, ('devices': $devices));
+}

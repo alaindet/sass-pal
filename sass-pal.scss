@@ -9,12 +9,11 @@
 @import './src/helpers/functions/map-get-all';
 @import './src/helpers/functions/map-are-keys';
 @import './src/helpers/functions/map-is-any-key';
+@import './src/helpers/functions/map-set';
+
 @import './src/helpers/mixins/media-query';
 @import './src/helpers/mixins/pseudo-class';
 
-@import './src/core/store';
-@import './src/core/functions/store-get';
-@import './src/core/functions/store-set';
 @import './src/core/functions/color-get';
 @import './src/core/functions/color-parse';
 @import './src/core/functions/has-any-device-query';
@@ -22,11 +21,28 @@
 @import './src/core/functions/parse-sides';
 @import './src/core/functions/group-by-device-query';
 @import './src/core/functions/use-unit';
-@import './src/core/mixins/builders-switch';
-@import './src/core/mixins/border';
-@import './src/core/mixins/display';
-@import './src/core/mixins/flex';
-@import './src/core/mixins/position';
-@import './src/core/mixins/size';
-@import './src/core/mixins/space';
+@import './src/core/functions/store-get';
+@import './src/core/functions/store-set';
+
+@import './src/core/reducers/devices';
+@import './src/core/reducers/relative-units';
+@import './src/core/reducers/units';
+@import './src/core/reducers/unit';
+@import './src/core/reducers/reducers';
+
+@import './src/core/store/store';
+@import './src/core/store/colors';
+@import './src/core/store/pseudo-classes';
+@import './src/core/store/devices';
+@import './src/core/store/units';
+@import './src/core/store/relative-units';
+
+@import './src/core/builders/border';
+@import './src/core/builders/display';
+@import './src/core/builders/flex';
+@import './src/core/builders/position';
+@import './src/core/builders/size';
+@import './src/core/builders/space';
+@import './src/core/builders/builders-switch';
+
 @import './src/core/pal';

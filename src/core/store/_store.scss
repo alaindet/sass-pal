@@ -1,0 +1,72 @@
+/// Map of all Pal's defaults. These cannot be modified, just patched with custom variables
+///
+/// @type Map
+/// @group core-variables
+/// @prop {Map} store.pal Contains non-overridable constants used by Sass Pal
+/// @prop {List} store.pal.builders List of all Pal's builder mixins
+/// @prop {Map} store.pal.media-query Map of all media-query related meta data
+/// @prop {String} store.pal.media-query.operator Default media query operator
+/// @prop {Map} store.pal.media-query.operators Map of all media query operators. Key: symbol, value: operator name
+/// @prop {Map} store.pal.sides Map of all sides of a rectangle. Key: abbrev, value: list of sides
+/// @prop {Map} store.colors Color palette as map
+/// @prop {Map} store.devices Map of all devices. Key: name, value: list of (min, max) resolutionslabel
+/// @prop {List} store.pseudo-classes List of all available CSS pseudo-classes
+/// @prop {Map} store.relative-units Map of relative (percentage) units
+/// @prop {Number} store.unit The base unit that multiplies all `units` factors
+/// @prop {Map} store.units Map of factors that multiply base unit. Key: abbrev, value: base unit * factor
+///
+$_PAL_STORE: (
+
+  // Keys defined here cannot be overridden
+  'pal': (
+
+    // Sass-Pal builder names
+    'builders': (
+      'border',
+      'display',
+      'flex',
+      'position',
+      'size',
+      'space',
+    ),
+
+    // Media query operators
+    'media-query': (
+      // Default operator
+      'operator': 'in',
+      'operators': (
+        '=': 'in',
+        '-': 'down',
+        '+': 'up',
+      ),
+    ),
+
+    // All sides combination of a rectangle
+    'sides': (
+
+      // One side
+      't': ('top'),
+      'r': ('right'),
+      'b': ('bottom'),
+      'l': ('left'),
+
+      // Two sides
+      'x': ('right', 'left'),
+      'y': ('top', 'bottom'),
+
+      // Three sides
+      '-t': ('right', 'bottom', 'left'),
+      '-r': ('top', 'bottom', 'left'),
+      '-b': ('top', 'right', 'left'),
+      '-l': ('top', 'right', 'bottom'),
+      '^t': ('right', 'bottom', 'left'), // Alias of -t
+      '^r': ('top', 'bottom', 'left'), // Alias of -r
+      '^b': ('top', 'right', 'left'), // Alias of -b
+      '^l': ('top', 'right', 'bottom'), // Alias of -l
+
+      // All sides
+      '*': ('top', 'right', 'bottom', 'left'),
+    ),
+
+  ),
+);

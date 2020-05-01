@@ -1,0 +1,38 @@
+/// Runs all the reducers
+///
+/// @access private
+/// @group core-reducers
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} _pal-devices-reducer
+/// @require {function} _pal-relative-units-reducer
+/// @require {function} _pal-units-reducer
+/// 
+/// @param {String} $key The key being updated
+/// @param {Map} $old-store The old store
+/// @param {Map} $store The current store
+/// @output The new store
+///
+@function _pal-reducers($key, $old-store, $store)
+{
+  @if ('devices' == $key) {
+    $old-value: map-get($old-store, $key);
+    @return _pal-devices-reducer($store, $old-value);
+  }
+
+  @if ('relative-units' == $key) {
+    $old-value: map-get($old-store, $key);
+    @return _pal-relative-units-reducer($store, $old-value);
+  }
+
+  @if ('unit' == $key) {
+    $old-value: map-get($old-store, $key);
+    @return _pal-unit-reducer($store, $old-value);
+  }
+
+  @if ('units' == $key) {
+    $old-value: map-get($old-store, $key);
+    @return _pal-units-reducer($store, $old-value);
+  }
+
+  @return $store;
+}

@@ -8,6 +8,7 @@
 @import './helpers/functions/map-get-all.spec';
 @import './helpers/functions/map-get.spec';
 @import './helpers/functions/map-is-any-key.spec';
+@import './helpers/functions/map-set.spec';
 @import './helpers/functions/number-get-unit.spec';
 @import './helpers/functions/number-half-plus-one.spec';
 @import './helpers/functions/number-has-unit.spec';
@@ -18,7 +19,13 @@
 @import './helpers/mixins/media-query.spec';
 @import './helpers/mixins/pseudo-class.spec';
 
-// // Core functions
+// Core reducers
+@import './core/reducers/devices.spec';
+@import './core/reducers/relative-units.spec';
+@import './core/reducers/unit.spec';
+@import './core/reducers/units.spec';
+
+// Core functions
 @import './core/functions/store-get.spec';
 @import './core/functions/store-set.spec';
 @import './core/functions/color-get.spec';
@@ -29,13 +36,13 @@
 @import './core/functions/parse-sides.spec';
 @import './core/functions/use-unit.spec';
 
-// Core mixins
-@import './core/mixins/border.spec';
-@import './core/mixins/display.spec';
-@import './core/mixins/flex.spec';
-@import './core/mixins/position.spec';
-@import './core/mixins/size.spec';
-@import './core/mixins/space.spec';
+// Core builders
+@import './core/builders/border.spec';
+@import './core/builders/display.spec';
+@import './core/builders/flex.spec';
+@import './core/builders/position.spec';
+@import './core/builders/size.spec';
+@import './core/builders/space.spec';
 
 // Sass Pal
 @import './core/pal.spec';

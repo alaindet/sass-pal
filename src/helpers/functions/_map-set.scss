@@ -1,0 +1,25 @@
+/// Updates a map with new value for a given key. Overwrites existing keys
+/// 
+/// @access public
+/// @group helper-functions-map
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss Set a new value
+///   $a: ('a': 111);
+///   $a: pal-map-set($a, 'b', 222);
+///   // ('a': 111, 'b': 222)
+///
+/// @example scss Overwrite an existing value
+///   $b: ('a': 111);
+///   $b: pal-map-set($b, 'a', 222);
+///   // ('a': 222)
+/// 
+/// @param {Map} $map The input map
+/// @param {String} $key The new/existing key
+/// @param {Null | Bool | Number | Color | String | List | Map} $value The new value
+/// @return {Map} The updated input map
+///
+@function pal-map-set($map, $key, $value)
+{
+  @return map-merge($map, ('#{$key}': $value));
+}
