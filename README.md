@@ -141,12 +141,14 @@ These are the conventions used. Refer to the **Examples** section for implementa
 - **Request map** - It's a Sass map with keys being *builder* names and values being whatever the builder accepts as a value. You can pass simple or device-scoped request maps to `pal`
 - **Device-scoped request maps** - It's a Sass map with keys being *device queries* and values being request maps. It's used to define different declarations for different resolution ranges (internally, via @media queries) for the same selector
 - **Device** - A *device* for Sass Pal is just a resolution range as a Sass list with a name, ex.: `tablet` is (768px, 1024px) by default
-- **Device query** - It's a string that represents a media query, its *operator* and optionally a pseudo-class. It follows the convention `{DEVICE_NAME}{MEDIA_QUERY_OPERATOR}{PSEUDO_CLASS}`. Media query operators are
+- **Device query** - It's a string that represents a media query, its *operator* and optionally a pseudo-class (see examples below). It follows the convention `{DEVICE_NAME}{MEDIA_QUERY_OPERATOR}{PSEUDO_CLASS}`. Media query operators are
   - *up* (symbol `+`) means "from the lower end of the device's resolution going upward"
   - *down* (symbol `-`) means "from the upper end of the device's resolution going downward"
   - *in* (no symbol, it's the default) means "only between lower and upper resolutions of device"
+- **Store** - It's a Sass map holding all the shared data. You can override default values, define new ones and access shared data via `pal-store-set` and `pal-store-get`
+- **Reducer** - It's a Sass function attached to a stored value which performs some logic to update the store related to that value. It triggers when you set its related value. You can defined custom reducers as well. Ex.: multiply all units by the base unit when you set them
 
-Some examples of valid device queries
+Some examples of valid *device queries*
   - `tablet+` means "from the lower end tablet resolution (768px by default) upward"
   - `desktop-:hover` means "from the upper end desktop resolution downward and only for :hover state"
   - `mobile` means "only between resolution boundaries of mobiles"
@@ -158,7 +160,7 @@ This holds all the Sass Pal values. Some default values are already set and list
 
 ### Colors
 
-Has a reducer? **NO**
+Has a default reducer? **NO**
 
 ```
 'colors': (
@@ -199,7 +201,7 @@ Has a reducer? **NO**
 
 ### Devices
 
-Has a reducer? **YES**
+Has a default reducer? **YES**
 
 The reducer ensures @media queries do not overlap by subtracting a very small length (0.0001px) to all devices' upper ends
 
@@ -214,7 +216,7 @@ The reducer ensures @media queries do not overlap by subtracting a very small le
 
 ### Pseudo-classes
 
-Has a reducer? **NO**
+Has a default reducer? **NO**
 
 Please note you cannot add pseudo-class functions like `:host()`, but `:host` is fine
 
@@ -234,7 +236,7 @@ Please note you cannot add pseudo-class functions like `:host()`, but `:host` is
 
 ### Relative units
 
-Has a reducer? **YES**
+Has a default reducer? **YES**
 
 The reducer transforms all these factors to percentages
 
@@ -268,7 +270,7 @@ The reducer transforms all these factors to percentages
 
 ### Base unit
 
-Has a reducer? **YES**
+Has a default reducer? **YES**
 
 The reducer multiplies all *units* (see below) by the new base unit
 
@@ -278,7 +280,7 @@ The reducer multiplies all *units* (see below) by the new base unit
 
 ### Units
 
-Has a reducer? **YES**
+Has a default reducer? **YES**
 
 The reducer multiplies all given values by the existing base unit
 
@@ -359,6 +361,91 @@ $_: pal-store-set('navbar', (
   color: #e0e0e0;        
   height: 100px;
   margin-bottom: 0.67rem;
+}
+*/
+```
+
+## Defining custom reducers
+
+If you define a function called `pal-custom-reducers` you can hook into Sass Pal's reducer system and perform some logic. Let's try to add a custom reducer to calculate the relative height of some kittens (why not?)
+
+```
+@import '~sass-pal/sass-pal';
+
+/// Calculates the relative height of a bunch of kittens
+///
+@function kittens-reducer($store)
+{
+  $old-kittens: map-get($store, 'kittens');
+  $kittens: ();
+  $tallest: 0;
+
+  // Find the tallest fluffy ball
+  @each $kitten in $old-kittens {
+    $height: map-get($kitten, 'height');
+    @if ($height > $tallest) {
+      $tallest: $height;
+    }
+  }
+
+  // Calculate relative height for each kitten
+  @each $kitten in $old-kittens {
+    $kittens: append($kittens, (
+      'name': map-get($kitten, 'name'),
+      'height': map-get($kitten, 'height'),
+      'relative-height': map-get($kitten, 'height') / $tallest,
+    ));
+  }
+
+  @return map-merge($store, ('kittens': $kittens));
+}
+
+/// Define the custom function to hook into Sass Pal's reducers
+///
+/// @param {String} The keys the user is setting
+/// @param {Map} $old-store The old store, before setting the new value
+/// @param {Map} $store The current store with new value (transform this)
+///
+@function pal-custom-reducers($key, $old-store, $store)
+{
+  @if ('kittens' == $key) {
+    @return kittens-reducer($store);
+  }
+
+  // Add any other custom reducer here...
+
+  @return $store;
+}
+
+// Set a new stored value with the 'kittens' key
+$_: pal-store-set('kittens', (
+  ( name: 'mr-fancy-pants', height: 4.0in ),
+  ( name: 'sir-eat-alot', height: 3.5in ),
+  ( name: 'snowball', height: 3.0in ),
+));
+
+// Use the data calculated by the custom reducer
+.kitten {
+  @each $kitten in pal-store-get('kittens') {
+    $name: map-get($kitten, 'name');
+    $relative-height: map-get($kitten, 'relative-height');
+    &.#{$name} {
+      height: #{$relative-height}rem;
+    }
+  }
+}
+
+/* Output
+.kitten.mr-fancy-pants {
+  height: 1rem;
+}
+
+.kitten.sir-eat-alot {
+  height: 0.875rem;
+}
+
+.kitten.snowball {
+  height: 0.75rem;
 }
 */
 ```
