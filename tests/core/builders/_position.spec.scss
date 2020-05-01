@@ -41,7 +41,7 @@
     @include assert {
       @include output {
         .test {
-          @include pal-position(('fixed', 30px));
+          @include pal-position(fixed (30px));
         }
       }
       @include expect {
@@ -51,6 +51,24 @@
           right: 30px;
           bottom: 30px;
           left: 30px;
+        }
+      }
+    }
+
+    // Test #4
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(absolute (0 1 2 3));
+        }
+      }
+      @include expect {
+        .test {
+          position: absolute;
+          top: 0;
+          right: 0.5rem;
+          bottom: 1rem;
+          left: 1.5rem;
         }
       }
     }

@@ -24,8 +24,8 @@
           @include pal-flex((
             dir: column,
             wrap: false,
-            main-align: around,
-            cross-align: end,
+            main-axis: around,
+            cross-axis: end,
             cross-lines: between,
             flex: 1 0 50%,
           ));

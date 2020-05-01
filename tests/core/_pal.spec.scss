@@ -11,8 +11,8 @@
             position: absolute (2 4),
             border: 2 #ccc,
             flex: (
-              main-align: end,
-              cross-align: center,
+              main-axis: end,
+              cross-axis: center,
             ),
           ));
         }
@@ -53,8 +53,8 @@
               position: absolute (2 4),
               border: '1/2' #ccc,
               flex: (
-                main-align: end,
-                cross-align: center,
+                main-axis: end,
+                cross-axis: center,
               ),
             ),
             'tablet+': (

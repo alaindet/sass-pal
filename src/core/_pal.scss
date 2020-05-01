@@ -1,11 +1,9 @@
-/// The entry point of the whole Sass Pal system. **Utility maps** have a builder
-/// mixin name as keys and actual instructions as values (whose type depends on
+/// The entry point of the whole Sass Pal system. **Utility maps** have builder
+/// mixin names as keys and actual instructions as values (whose type depends on
 /// the builder). You can provide a more complex map to scope utility maps on
-/// specific devices, so that keys are **device queries** (defining resolution
-/// ranges, media query operatoror and optional states) and values are scoped
-/// utility maps.
+/// specific devices, so that keys are **device queries** and values are
+/// request maps
 ///
-/// @todo Add examples
 /// @access public
 /// @group core
 /// @author Alain D'Ettorre <alain.det@gmail.com>
@@ -17,9 +15,42 @@
 /// @require {mixin} pal-pseudo-class
 /// 
 /// @example scss
+///   .test {
+///     @include pal((
+///       space: 'm^t3' 'mb4' 'py2' 'px4',
+///       size: 'w-1/3' 'h-1/2',
+///       position: absolute (2 4),
+///       border: 2 #ccc,
+///       flex: (
+///         main-align: end,
+///         cross-align: center,
+///       ),
+///     ));
+///   }
+///   // .test {
+///   //   margin-right: 1.5rem;
+///   //   margin-bottom: 1.5rem;
+///   //   margin-left: 1.5rem;
+///   //   margin-bottom: 2rem;
+///   //   padding-top: 1rem;
+///   //   padding-bottom: 1rem;
+///   //   padding-right: 2rem;
+///   //   padding-left: 2rem;
+///   //   width: 33.33333%;
+///   //   height: 50%;
+///   //   position: absolute;
+///   //   top: 1rem;
+///   //   bottom: 1rem;
+///   //   left: 2rem;
+///   //   right: 2rem;
+///   //   border: 1rem solid #ccc;
+///   //   display: flex;
+///   //   justify-content: flex-end;
+///   //   align-items: center;
+///   // }
 /// 
-/// @param {Map} $map Can be a *utility map* or a map of *utility maps* by *device queries*
-/// @output A set of rules as described by provided utility map(s)
+/// @param {Map} $map Can be a *request map* or a map of device-scoped request maps
+/// @output A set of rules as described by the passed request map(s)
 ///
 @mixin pal($map)
 {
