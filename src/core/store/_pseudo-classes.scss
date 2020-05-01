@@ -1,9 +1,10 @@
-/// List of all supported pseudo-classes
+/// List of default pseudo-classes. Avoid adding pseudo-class functions like
+/// `:host()` (`:host` is fine)
 ///
 /// @type List
 /// @group core-stored-values
 ///
-$pseudo-classes: (
+$pal-devices: pal-store-set('pseudo-classes', (
   ':hover',
   ':focus',
   ':active',
@@ -13,6 +14,4 @@ $pseudo-classes: (
   ':enabled',
   ':checked',
   ':empty',
-);
-
-$null: pal-store-set('pseudo-classes', $pseudo-classes);
+));

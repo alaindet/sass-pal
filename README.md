@@ -6,39 +6,38 @@
 
 ## What
 
-Sass Pal helps you write short and consistent Sass stylesheets without getting in the way. **No CSS is explitcly output** until you request it, so you can import it anywhere multiple times without worrying about CSS declarations leaking somewhere. You can even use Sass Pal in any existing project since it doesn't interfere with any of the existing CSS.
+Sass Pal helps you write short and consistent Sass stylesheets without getting in the way. **No CSS is explitcly output** until you request it, so you can import it anywhere multiple times without worrying about CSS declarations leaking somewhere. You can even use Sass Pal in any existing project without collisions.
 
-You call the `pal()` mixin anywhere, pass it a **request** map and Sass Pal does the rest.
+You call the `pal` mixin anywhere, pass it a **request** map and Sass Pal does the rest.
 
-To its core, Sass Pal is a layer of functions and mixins (called *builders*) wrapped around a store of values (sizes, colors, device ranges) which is exposed to the developer via the `pal()` mixin, so no hard-to-override pre-made components, no flooding of your HTML templates with hundreds of inline-like utility classes, no complex purging when building your application, you just get the CSS output you ask for.
+To its core, Sass Pal is a layer of functions and mixins (called *builders*) wrapped around a store of values (sizes, colors, device ranges) which is exposed to the developer via the `pal` mixin, so no hard-to-override pre-made components, no flooding of your HTML templates with hundreds of inline-like utility classes, no complex purging when building your application: your styling belongs to stylesheets and you only get as much CSS output as you demand.
 
 It offers
 
 - A concise syntax
 - The ability to scope request maps via **device queries**
-- A centralized store of values to be queried via the `pal-store-get()` function
+- A centralized store of values to be queried via the `pal-store-get` function
 - Sensible default values for spacing, sizing and colors
-- Flexible overriding
-- A plethora of `pal-*` prefixed functions and mixins, like `pal-string-split()` and `pal-list-join()`
+- A plethora of `pal-*` prefixed functions and mixins, like `pal-string-split` and `pal-list-join`
 - A comprehensive automated testing suite
-- Compatibility with anything able to understand Sass
+- Compatibility with anything able to understand Sass, even existing projects
 
 ## Installation
 
 ```
-npm instal --save-dev sass-pal
+npm install --save-dev sass-pal
 ```
 
 If you're in a Webpack project, import it like this
 
 ```
-@import '~sass-pal/sass-pal.scss';
+@import '~sass-pal/sass-pal';
 ```
 
 Otherwise
 
 ```
-@import '{RELATIVE_PATH_ROOT}/node_modules/sass-pal/sass-pal.scss';
+@import '{ROOT}/node_modules/sass-pal/sass-pal.scss';
 ```
 
 ## Usage
@@ -46,7 +45,7 @@ Otherwise
 ### Single request map
 
 ```
-@import '~sass-pal/sass-pal.scss';
+@import '~sass-pal/sass-pal';
 
 .single-request-map {
   @include pal((
@@ -58,8 +57,9 @@ Otherwise
 }
 ```
 
+Outputs
+
 ```
-// Output
 .single-request-map {
   margin-bottom: 2rem;
   padding-top: 1rem;
@@ -94,6 +94,8 @@ Otherwise
   ));
 }
 ```
+
+Outputs
 
 ```
 .device-scoped-request-maps {
@@ -134,27 +136,29 @@ Otherwise
 
 These are the conventions used. Refer to the **Examples** section for implementation and to the [Documentation](https://alaindet.github.io/sass-pal/) for further details
 
-- **store** - It's a Sass map with a peculiar name, storing all important values for Sass Pal, like spacing and sizing units, relative units (aka percentages), color palettes, etc. You can override default values or add your own and refer to them later (see examples)
-- **builder** - It's a Sass mixin that builds CSS output related to the builder's name (ex.: `position`, `flex`, `space`). You can call builders as key-value pairs of a *request map* passed to the `pal()` global mixin, or you can use them via specific builder mixins like `pal-position()`, `pal-flex()` etc.
-- **request map** - It's a Sass map with keys being *builder* names and values being whatever the builder accepts as a value. You can pass simple or device-scoped request maps to `pal()`
-- **device-scoped request maps** - It's a Sass map with keys being *device queries* and values being request maps. It's used to define different declarations for different resolution ranges (internally, via @media queries) for the same selector
-- **device** - A *device* for Sass Pal is just a resolution range as a Sass list with a name, ex.: `tablet` is (768px, 1024px) by default
-- **device query** - It's a string that represents a media query, its *operator* and optionally a pseudo-class. It follows this convention `{DEVICE_NAME}{MEDIA_QUERY_OPERATOR}{PSEUDO_CLASS}`. Media query operators are
+- **Store** - It's a Sass map with a peculiar name to avoid collisions (`$_PAL_STORE`), storing all important values for Sass Pal, like spacing and sizing units, relative units (aka percentages), color palettes, etc. You can override default values or add your own and refer to them later (see examples)
+- **Builder** - It's a Sass mixin that builds CSS output related to the builder's name (ex.: `position`, `flex`, `space`). You can call builders as key-value pairs of a *request map* passed to the `pal` global mixin, or you can use them via specific builder mixins like `pal-position`, `pal-flex` etc.
+- **Request map** - It's a Sass map with keys being *builder* names and values being whatever the builder accepts as a value. You can pass simple or device-scoped request maps to `pal`
+- **Device-scoped request maps** - It's a Sass map with keys being *device queries* and values being request maps. It's used to define different declarations for different resolution ranges (internally, via @media queries) for the same selector
+- **Device** - A *device* for Sass Pal is just a resolution range as a Sass list with a name, ex.: `tablet` is (768px, 1024px) by default
+- **Device query** - It's a string that represents a media query, its *operator* and optionally a pseudo-class. It follows the convention `{DEVICE_NAME}{MEDIA_QUERY_OPERATOR}{PSEUDO_CLASS}`. Media query operators are
   - *up* (symbol `+`) means "from the lower end of the device's resolution going upward"
   - *down* (symbol `-`) means "from the upper end of the device's resolution going downward"
   - *in* (no symbol, it's the default) means "only between lower and upper resolutions of device"
 
 Some examples of valid device queries
-  - `tablet+` means "from the low end tablet resolution (768px by default) upward"
-  - `desktop-:hover` means "from the high end desktop resolution downward and only for :hover state"
+  - `tablet+` means "from the lower end tablet resolution (768px by default) upward"
+  - `desktop-:hover` means "from the upper end desktop resolution downward and only for :hover state"
   - `mobile` means "only between resolution boundaries of mobiles"
   - `table:focus` means "only between resolution boundaries of tablets and only for :focus state"
 
 ## Store
 
-These are all the default Sass Pal values. You can add and/or overwrite anything (see below)
+This holds all the Sass Pal values. Some default values are already set and listed below. You can override existing keys or add new ones, except for the `pal` which holds some core values. Some keys have **reducers** bound to them, which are functions running every time those keys are set in order to perform some predictable actions (like multiply all incoming values by a fixed factor or adding the same length unit).
 
 ### Colors
+
+Has a reducer? **NO**
 
 ```
 'colors': (
@@ -195,18 +199,22 @@ These are all the default Sass Pal values. You can add and/or overwrite anything
 
 ### Devices
 
-A *device* is just a range of resolutions for Sass Pal. The 0.001px subtraction ensures @media queries do not overlap
+Has a reducer? **YES**
+
+The reducer ensures @media queries do not overlap by subtracting a very small length (0.0001px) to all devices' upper ends
 
 ```
 'devices': (
-  'mobile':  (320px,  768px  - 0.001px),
-  'tablet':  (768px,  1024px - 0.001px),
-  'desktop': (1024px, 1440px - 0.001px),
+  'mobile':  (320px,  768px),
+  'tablet':  (768px,  1024px),
+  'desktop': (1024px, 1440px),
   'over':    (1440px, 9999px),
 )
 ```
 
 ### Pseudo-classes
+
+Has a reducer? **NO**
 
 Please note you cannot add pseudo-class functions like `:host()`, but `:host` is fine
 
@@ -226,37 +234,43 @@ Please note you cannot add pseudo-class functions like `:host()`, but `:host` is
 
 ### Relative units
 
-These factors are later transformed in *percentages*
+Has a reducer? **YES**
+
+The reducer transforms all these factors to percentages
 
 ```
 'relative-units': (
-  '1/12':     1 / 12,
-  '2/12':     2 / 12,
-  '3/12':     3 / 12,
-  '4/12':     4 / 12,
-  '5/12':     5 / 12,
-  '6/12':     6 / 12,
-  '7/12':     7 / 12,
-  '8/12':     8 / 12,
-  '9/12':     9 / 12,
-  '10/12':   10 / 12,
-  '11/12':   11 / 12,
-  '12/12':   12 / 12,
-  '1/8':      1 / 8,
-  '1/4':      1 / 4,
-  '1/3':      1 / 3,
-  '2/5':      2 / 5,
-  '1/2':      1 / 2,
-  '2/3':      2 / 3,
-  '3/4':      3 / 4,
-  'quarter':  1 / 4,
-  'third':    1 / 3,
-  'half':     1 / 2,
+  '1/12':     1/12,
+  '2/12':     2/12,
+  '3/12':     3/12,
+  '4/12':     4/12,
+  '5/12':     5/12,
+  '6/12':     6/12,
+  '7/12':     7/12,
+  '8/12':     8/12,
+  '9/12':     9/12,
+  '10/12':   10/12,
+  '11/12':   11/12,
+  '12/12':   12/12,
+  '1/8':      1/8,
+  '1/4':      1/4,
+  '1/3':      1/3,
+  '2/5':      2/5,
+  '1/2':      1/2,
+  '2/3':      2/3,
+  '3/4':      3/4,
+  'quarter':  1/4,
+  'third':    1/3,
+  'half':     1/2,
   'full':     1,
 )
 ```
 
 ### Base unit
+
+Has a reducer? **YES**
+
+The reducer multiplies all *units* (see below) by the new base unit
 
 ```
 'unit': 0.5rem,
@@ -264,7 +278,9 @@ These factors are later transformed in *percentages*
 
 ### Units
 
-These factors are later multipled by the defined **base unit**
+Has a reducer? **YES**
+
+The reducer multiplies all given values by the existing base unit
 
 ```
 'units': (
@@ -295,88 +311,116 @@ These factors are later multipled by the defined **base unit**
 )
 ```
 
-## Override default stored values
+## Changing stored values
 
-To override default stored values you can define a `$pal-store` map variable before importing Sass Pal. These values will then override default values by key.
-
-You can override any constant seen above or even add your own to use Sass Pal as a data store
+You can override existing values on the store as well as define new ones with the `pal-store-set` core function. Data fetching is done with `pal-store-get`.
 
 Example
 
 ```
-// Override some constants
-$pal-store: (
-  'unit': 1rem,
-  'units': (
-    'zero': 0,
-    'smallest': 1/8,
-    'very-small': 1/4,
-    'small': 1/2,
-    'normal': 1,
-    'large': 2,
-    'very-large': 4,
-    'largest': 8,
-  ),
-  'kitchen': (
-    'fridge',
-    'oven',
-    'sink',
-  ),
-);
+@import '~sass-pal/sass-pal';
 
-@import '~sass-pal/sass-pal.scss';
+// Overriding (this triggers any existing reducer)
+$_: pal-store-set('unit', 0.67rem);
 
-@each $piece in pal-store-get('kitchen') {
-  .#{$piece} {
-    @include pal((
-      space: pvery-large,
-    ));
+// Store new values
+$_: pal-store-set('navbar', (
+  'base': (
+    'color': #fff,
+    'height': 150px,
+  ),
+  'collapsed': (
+    'color': #e0e0e0,
+    'height': 100px,
+  )
+));
+
+// Use stored values
+.navbar {
+  color: pal-store-get('navbar.base.color');
+  height: pal-store-get('navbar.base.height');
+  @include pal(( space: mb2 ));
+
+  &.collapsed {
+    color: pal-store-get('navbar.collapsed.color');
+    height: pal-store-get('navbar.collapsed.height');
+    @include pal(( space: mb1 ));
   }
 }
-```
 
-Outputs
-
-```
-.fridge {
-  padding: 4rem;
+/* Output
+.navbar {
+  color: #fff;
+  height: 150px;
+  margin-bottom: 1.34rem;
 }
 
-.oven {
-  padding: 4rem;
+.navbar.collapsed {      
+  color: #e0e0e0;        
+  height: 100px;
+  margin-bottom: 0.67rem;
 }
-
-.sink {
-  padding: 4rem;
-}
+*/
 ```
 
 ## Examples
 
-### Use `pal-*()` builders directly
-
-You can use Sass Pal builders on their own
+### A simple request map
 
 ```
-@import '~sass-pal/sass-pal.scss';
+@import '~sass-pal/sass-pal';
+
+.test {
+  @include pal((
+    space: my2 px1,
+    size: w-half h-full,
+    border: #ccc,
+    flex: center,
+  ));
+}
+
+/* Output
+.test {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  width: 50%;
+  height: 100%;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+*/
+```
+
+### Using a builder directly
+
+You can use Sass Pal builders on their own. Builders are just `pal-` prefixed mixins
+
+```
+@import '~sass-pal/sass-pal';
 
 .give-me-space {
   @include pal-space(m4 px3);
+  @include pal-size(w-1/3);
 }
-```
-Outputs
-```
+
+/* Output
 .give-me-space {        
   margin: 2rem;
   padding-right: 1.5rem;
   padding-left: 1.5rem; 
+  width: 33.33333%;
 }
+*/
 ```
 
 ### Fun with rectangles
 
 ```
-@import '~sass-pal/sass-pal.scss';
+@import '~sass-pal/sass-pal';
 
 .one-side {
   @include pal-space(mt2);
@@ -396,11 +440,8 @@ Outputs
 .four-sides {
   @include pal-space(p5);
 }
-```
 
-Outputs
-
-```
+/* Output
 .one-side {
   margin-top: 1rem;
 }
@@ -419,36 +460,44 @@ Outputs
 .four-sides {
   padding: 2.5rem;
 }
+*/
 ```
 
-### Access constants
+### Using Sass Pal helpers
+
+Sass Pal provides a number of all-purpose helper functions and mixins as well
 
 ```
-// Define your store
-$pal-store: (
-  'layout': (
-    'navbar': 1,
-    'footer': 2,
-    'sidebar': 1,
-  ),
-  'some-other-data': 42,
-);
+$sentence: 'how are you';
 
-@import '~sass-pal/sass-pal.scss';
-
-// Access default constants
-$unit: pal-store-get('unit');
-
-.navbar {
-  // Access new constants (pal-store-get accepts a deep nested query)
-  padding: pal-store-get('layout.navbar') * $unit;
+.word {
+  @include pal(( space: mx2 py3 ));
 }
-```
 
-Outputs
-
-```
-.navbar {
-  padding: 0.5rem;
+@each $word in pal-string-split($sentence) {
+  .word.#{$word} {
+    content: $word;
+  }
 }
+
+/* Output
+.word {
+  margin-right: 1rem;    
+  margin-left: 1rem;     
+  padding-top: 1.5rem;   
+  padding-bottom: 1.5rem;
+}
+
+.word.how {
+  content: "how";        
+}
+
+.word.are {
+  content: "are";        
+}
+
+.word.you {
+  content: "you";        
+}
+*/
 ```

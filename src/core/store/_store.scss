@@ -1,14 +1,14 @@
 /// All Sass Pal stored values are stored here. Unmodifiable values are already
-/// set
+/// set inside the 'pal' key
 ///
 /// @type Map
 /// @group core-stored-values
-/// @prop {Map} store.pal Contains Unmodifiable values used by Sass Pal
-/// @prop {List} store.pal.builders List of all Sass Pal builders
-/// @prop {Map} store.pal.media-query Map of all @media query related data
-/// @prop {String} store.pal.media-query.operator Default @media query operator
-/// @prop {Map} store.pal.media-query.operators Map of all @media query operators. Key: symbol, value: operator name
-/// @prop {Map} store.pal.sides Map of all sides of a rectangle. Key: abbreviation, value: list of sides
+/// @prop {Map} pal Contains Unmodifiable values used by Sass Pal
+/// @prop {List} pal.builders List of all Sass Pal builders
+/// @prop {Map} pal.media-query Map of all @media query related data
+/// @prop {String} pal.media-query.operator Default @media query operator
+/// @prop {Map} pal.media-query.operators Map of all @media query operators. Key: symbol, value: operator name
+/// @prop {Map} pal.sides Map of all sides of a rectangle. Key: abbreviation, value: list of sides
 ///
 $_PAL_STORE: (
 

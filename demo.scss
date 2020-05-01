@@ -1,4 +1,4 @@
-@import './sass-pal.scss';
+@import './sass-pal';
 
 // 1. Open the terminal and run `npm run demo`
 // 2. Write any demo code here
@@ -7,9 +7,7 @@
 // 5. To exit, press Ctrl+C
 
 .test {
-  $given: 123;
-  $discard: pal-store-set('test-1', $given);
-  $assertion: map-get($_PAL_STORE, 'test-1');
-  content: inspect($discard);
-  content: inspect($assertion);
+  @include pal((
+    // ...
+  ));
 }

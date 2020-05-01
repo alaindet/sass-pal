@@ -1,20 +1,18 @@
-/// Base unit, multiplies all other units
+/// Default base unit, multiplies all other units
 ///
 /// @type Number
 /// @group core-stored-values
 ///
-$unit: 0.5rem;
-
-$null: pal-store-set('unit', $unit);
+$pal-unit: pal-store-set('unit', 0.5rem);
 
 
-/// Absolute units. Key: label, value: number. The reducer multiplies them by the
-/// base unit
+/// Default absolute units. Key: label, value: number. The reducer multiplies
+/// them by the base unit
 ///
 /// @type Map
 /// @group core-stored-values
 ///
-$units: (
+$pal-units: pal-store-set('units', (
   '0':   0,
   '1/8': 1/8,
   '1/4': 1/4,
@@ -39,6 +37,4 @@ $units: (
   '14':  14,
   '15':  15,
   '16':  16,
-);
-
-$null: pal-store-set('units', $units);
+));
