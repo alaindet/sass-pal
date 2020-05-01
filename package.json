@@ -6,7 +6,7 @@
   "scripts": {
     "demo": "node-sass ./demo.scss --watch --output-style=expanded",
     "doc": "sassdoc ./src --config ./sassdoc.yaml",
-    "update-docs": "./scripts/doc.sh",
+    "update-docs": "scripts/doc.sh",
     "test": "jest"
   },
   "repository": {
