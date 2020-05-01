@@ -33,5 +33,9 @@
     @return _pal-units-reducer($store, $old-value);
   }
 
+  @if (function-exists('pal-custom-reducers') == true) {
+    @return pal-custom-reducers($key, $old-store, $store);
+  }
+
   @return $store;
 }

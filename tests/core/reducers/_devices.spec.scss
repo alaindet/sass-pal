@@ -12,8 +12,8 @@ $backup: $_PAL_STORE;
       'fridge': (100px, 199.9999px),
       'oven': (200px, 299.9999px),
     );
-    $null: pal-store-set('devices', $given);
-    $assertion: pal-store-get('devices');
+    $_: pal-set('devices', $given);
+    $assertion: pal-get('devices');
     @include assert-equal($assertion, $expected);
 
   }

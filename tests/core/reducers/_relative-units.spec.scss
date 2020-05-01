@@ -12,8 +12,8 @@ $backup: $_PAL_STORE;
       'three-quarters': 75%,
       'half': 50%,
     );
-    $null: pal-store-set('relative-units', $given);
-    $assertion: pal-store-get('relative-units');
+    $_: pal-set('relative-units', $given);
+    $assertion: pal-get('relative-units');
     @include assert-equal($assertion, $expected);
 
   }

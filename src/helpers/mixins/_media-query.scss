@@ -3,7 +3,7 @@
 /// @access public
 /// @group helper-mixins
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {function} pal-store-get
+/// @require {function} pal-get
 /// @content Rules to wrap in a @media query
 ///
 /// @example scss Wrap @content into a @media query for tablets only
@@ -21,10 +21,10 @@
   } @else {
 
     @if ($operator == null) {
-      $operator: pal-store-get('pal.media-query.operator');
+      $operator: pal-get('pal.media-query.operator');
     }
 
-    $range: pal-store-get('devices.#{$device}');
+    $range: pal-get('devices.#{$device}');
     $min: nth($range, 1);
     $max: nth($range, 2);
 

@@ -6,13 +6,13 @@
 /// @require {function} _pal-reducers
 /// 
 /// @example scss Set base unit
-///   pal-store-set('unit', 1rem); // null
+///   pal-set('unit', 1rem); // null
 ///
 /// @param {String} $key
 /// @param {Null | Bool | Number | Color | String | List | Map} $value
 /// @return {Null | Bool | Number | Color | String | List | Map} The set value
 ///
-@function pal-store-set($key, $value)
+@function pal-set($key, $value)
 {
   @if ($key == 'pal') {
     @error 'You cannot override the "pal" key on the store';

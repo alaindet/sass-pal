@@ -17,7 +17,7 @@
 /// @access private
 /// @group core-functions
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {function} pal-store-get
+/// @require {function} pal-get
 ///
 /// @example scss Parse device query from tablet downward for hover state
 ///   _pal-parse-device-query('tablet-:hover')
@@ -41,7 +41,7 @@
   $temp: $query;
 
   // Get device
-  $device-keys: map-keys(pal-store-get('devices'));
+  $device-keys: map-keys(pal-get('devices'));
   $found: false;
   @each $key in $device-keys {
     $slice: str-slice($temp, 1, str-length($key));
@@ -53,7 +53,7 @@
   }
 
   // Get operator
-  $operators: pal-store-get('pal.media-query.operators');
+  $operators: pal-get('pal.media-query.operators');
   $operator-symbols: map-keys($operators);
   $found: false;
   @each $symbol in $operator-symbols {
@@ -67,7 +67,7 @@
   }
 
   // Get pseudo-class
-  $pseudo-classes: pal-store-get('pseudo-classes');
+  $pseudo-classes: pal-get('pseudo-classes');
   $found: false;
   @each $pseudo-class in $pseudo-classes {
     $slice: str-slice($temp, 1, str-length($pseudo-class));

@@ -1,9 +1,9 @@
-/// Map of all colors. Key: color name, value: color as RGB
+/// Map of default colors. Key: color name, value: color as RGB
 ///
 /// @type Map
 /// @group core-stored-values
 ///
-$colors: (
+$pal-colors: pal-set('colors', (
   'black':        #333333,
   'white':        #f8f8f8,
   'gray-dark':    #2d3748,
@@ -36,6 +36,4 @@ $colors: (
   'pink-dark':    #97266d,
   'pink':         #ed64a6,
   'pink-light':   #fed7e2,
-);
-
-$null: pal-store-set('colors', $colors);
+));
