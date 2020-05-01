@@ -28,7 +28,7 @@
 @import './src/core/reducers/relative-units';
 @import './src/core/reducers/units';
 @import './src/core/reducers/unit';
-@import './src/core/reducers/reducers';
+@import './src/core/reducers/_reducers';
 
 @import './src/core/store/store';
 @import './src/core/store/colors';
@@ -43,6 +43,6 @@
 @import './src/core/builders/position';
 @import './src/core/builders/size';
 @import './src/core/builders/space';
-@import './src/core/builders/builders-switch';
+@import './src/core/builders/_builders';
 
 @import './src/core/pal';
