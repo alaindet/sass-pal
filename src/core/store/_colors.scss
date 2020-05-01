@@ -38,4 +38,4 @@ $colors: (
   'pink-light':   #fed7e2,
 );
 
-$null: pal-store-set('colors', $pal-colors);
+$null: pal-store-set('colors', $colors);
