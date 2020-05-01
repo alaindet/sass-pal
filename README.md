@@ -145,8 +145,7 @@ These are the conventions used. Refer to the **Examples** section for implementa
   - *up* (symbol `+`) means "from the lower end of the device's resolution going upward"
   - *down* (symbol `-`) means "from the upper end of the device's resolution going downward"
   - *in* (no symbol, it's the default) means "only between lower and upper resolutions of device"
-- **Store** - It's a Sass map holding all the shared data. You can override default values, define new ones and access shared data via `pal-set` and `pal-get`
-- **Reducer** - It's a Sass function attached to a stored value which performs some logic to update the store related to that value. It triggers when you set its related value. You can defined custom reducers as well. Ex.: multiply all units by the base unit when you set them
+- **Reducer** - It's a Sass function attached to a stored value which performs some logic to update the store related to that value. It triggers when you set its related value. You can define custom reducers as well. Ex.: multiply all units by the base unit when you set them
 
 Some examples of valid *device queries*
   - `tablet+` means "from the lower end tablet resolution (768px by default) upward"
@@ -154,9 +153,50 @@ Some examples of valid *device queries*
   - `mobile` means "only between resolution boundaries of mobiles"
   - `table:focus` means "only between resolution boundaries of tablets and only for :focus state"
 
+## Builders
+
+- border
+- display
+- flex
+- position
+- size
+- space
+
+You can call a builder as a key of request map passed to `pal` or directly via its mixin. All builders' mixins have the `pal-` prefix (ex.: `pal-size`)
+
+Example
+
+```
+.as-key {
+  @include pal((
+    size: w-1/2,
+    space: m2,
+  ));
+}
+
+.as-builders {
+  @include pal-size(w-1/2);
+  @include pal-space(m2);
+}
+
+/* Output
+.as-key {      
+  width: 50%;  
+  margin: 1rem;
+}
+
+.as-builders { 
+  width: 50%;  
+  margin: 1rem;
+}
+*/
+```
+
 ## Store
 
-This holds all the Sass Pal values. Some default values are already set and listed below. You can override existing keys or add new ones, except for the `pal` which holds some core values. Some keys have **reducers** bound to them, which are functions running every time those keys are set in order to perform some predictable actions (like multiply all incoming values by a fixed factor or adding the same length unit).
+This holds all the Sass Pal values. Some default values are already set and listed below. You can override existing keys or add new ones, except for the `pal` key which holds core unmodifiable values.
+
+Some keys have **reducers** bound to them, which are functions running every time those keys are set in order to perform some predictable actions (like multiply all incoming values by a fixed factor or adding the same length unit).
 
 ### Colors
 
@@ -238,7 +278,7 @@ Please note you cannot add pseudo-class functions like `:host()`, but `:host` is
 
 Has a default reducer? **YES**
 
-The reducer transforms all these factors to percentages
+The reducer transforms all these factors into percentages
 
 ```
 'relative-units': (
@@ -418,9 +458,10 @@ If you define a function called `pal-custom-reducers` you can hook into Sass Pal
 }
 
 // Set a new stored value with the 'kittens' key
+// $_ is unused but it's needed because Sass functions must return something
 $_: pal-set('kittens', (
   ( name: 'mr-fancy-pants', height: 4.0in ),
-  ( name: 'sir-eat-alot', height: 3.5in ),
+  ( name: 'sir-eats-alot', height: 3.5in ),
   ( name: 'snowball', height: 3.0in ),
 ));
 
@@ -440,7 +481,7 @@ $_: pal-set('kittens', (
   height: 1rem;
 }
 
-.kitten.sir-eat-alot {
+.kitten.sir-eats-alot {
   height: 0.875rem;
 }
 
@@ -483,8 +524,6 @@ $_: pal-set('kittens', (
 ```
 
 ### Using a builder directly
-
-You can use Sass Pal builders on their own. Builders are just `pal-` prefixed mixins
 
 ```
 @import '~sass-pal/sass-pal';
@@ -552,7 +591,7 @@ You can use Sass Pal builders on their own. Builders are just `pal-` prefixed mi
 
 ### Using Sass Pal helpers
 
-Sass Pal provides a number of all-purpose helper functions and mixins as well
+Sass Pal provides a number of all-purpose helper functions and mixins as well. The complete list is available in the [Documentation](https://alaindet.github.io/sass-pal/)
 
 ```
 $sentence: 'how are you';
