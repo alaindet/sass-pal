@@ -29,7 +29,7 @@ mv ./doc/index.html ./index.html
 
 echo "${PREFIX} 06/08 # Commit and push new documention"
 git add .
-git commit -m "${PREFIX} Update documentation version ${1}"
+git commit -m "Update documentation to version ${1}"
 git push origin gh-pages
 
 echo "${PREFIX} 07/08 # Switch back to master branch"
