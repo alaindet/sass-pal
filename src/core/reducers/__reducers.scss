@@ -10,7 +10,6 @@
 /// @param {String} $key The key being updated
 /// @param {Map} $old-store The old store
 /// @param {Map} $store The current store
-/// @output The new store
 ///
 @function _pal-reducers($key, $old-store, $store)
 {
