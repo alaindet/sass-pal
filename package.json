@@ -2,7 +2,7 @@
   "name": "sass-pal",
   "version": "0.4.1",
   "description": "Sass Pal helps styling your applications without getting in the way",
-  "main": "sass-pal.scss",
+  "main": "_sass-pal.scss",
   "scripts": {
     "demo": "node-sass ./demo.scss --watch --output-style=expanded",
     "doc": "sassdoc ./src --config ./sassdoc.yaml",
