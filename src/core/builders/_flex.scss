@@ -212,7 +212,7 @@
     $value: map-get($map, 'basis');
     @if ($value != null) {
 
-      $relative-unit: map-get(pal-store-get('relative-units'), $value);
+      $relative-unit: map-get(pal-get('relative-units'), $value);
 
       @if ($relative-unit != null) {
         $value: $relative-unit;

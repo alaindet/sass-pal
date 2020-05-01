@@ -3,7 +3,7 @@
 /// @type Number
 /// @group core-stored-values
 ///
-$pal-unit: pal-store-set('unit', 0.5rem);
+$pal-unit: pal-set('unit', 0.5rem);
 
 
 /// Default absolute units. Key: label, value: number. The reducer multiplies
@@ -12,7 +12,7 @@ $pal-unit: pal-store-set('unit', 0.5rem);
 /// @type Map
 /// @group core-stored-values
 ///
-$pal-units: pal-store-set('units', (
+$pal-units: pal-set('units', (
   '0':   0,
   '1/8': 1/8,
   '1/4': 1/4,

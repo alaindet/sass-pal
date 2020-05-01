@@ -4,7 +4,7 @@
 /// @type List
 /// @group core-stored-values
 ///
-$pal-devices: pal-store-set('pseudo-classes', (
+$pal-devices: pal-set('pseudo-classes', (
   ':hover',
   ':focus',
   ':active',

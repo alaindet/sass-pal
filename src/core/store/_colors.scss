@@ -3,7 +3,7 @@
 /// @type Map
 /// @group core-stored-values
 ///
-$pal-colors: pal-store-set('colors', (
+$pal-colors: pal-set('colors', (
   'black':        #333333,
   'white':        #f8f8f8,
   'gray-dark':    #2d3748,

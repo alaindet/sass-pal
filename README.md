@@ -16,7 +16,7 @@ It offers
 
 - A concise syntax
 - The ability to scope request maps via **device queries**
-- A centralized store of values to be queried via the `pal-store-get` function
+- A centralized store of values to be queried via the `pal-get` function
 - Sensible default values for spacing, sizing and colors
 - A plethora of `pal-*` prefixed functions and mixins, like `pal-string-split` and `pal-list-join`
 - A comprehensive automated testing suite
@@ -145,7 +145,7 @@ These are the conventions used. Refer to the **Examples** section for implementa
   - *up* (symbol `+`) means "from the lower end of the device's resolution going upward"
   - *down* (symbol `-`) means "from the upper end of the device's resolution going downward"
   - *in* (no symbol, it's the default) means "only between lower and upper resolutions of device"
-- **Store** - It's a Sass map holding all the shared data. You can override default values, define new ones and access shared data via `pal-store-set` and `pal-store-get`
+- **Store** - It's a Sass map holding all the shared data. You can override default values, define new ones and access shared data via `pal-set` and `pal-get`
 - **Reducer** - It's a Sass function attached to a stored value which performs some logic to update the store related to that value. It triggers when you set its related value. You can defined custom reducers as well. Ex.: multiply all units by the base unit when you set them
 
 Some examples of valid *device queries*
@@ -315,7 +315,7 @@ The reducer multiplies all given values by the existing base unit
 
 ## Changing stored values
 
-You can override existing values on the store as well as define new ones with the `pal-store-set` core function. Data fetching is done with `pal-store-get`.
+You can override existing values on the store as well as define new ones with the `pal-set` core function. Data fetching is done with `pal-get`.
 
 Example
 
@@ -323,10 +323,10 @@ Example
 @import '~sass-pal/sass-pal';
 
 // Overriding (this triggers any existing reducer)
-$_: pal-store-set('unit', 0.67rem);
+$_: pal-set('unit', 0.67rem);
 
 // Store new values
-$_: pal-store-set('navbar', (
+$_: pal-set('navbar', (
   'base': (
     'color': #fff,
     'height': 150px,
@@ -339,13 +339,13 @@ $_: pal-store-set('navbar', (
 
 // Use stored values
 .navbar {
-  color: pal-store-get('navbar.base.color');
-  height: pal-store-get('navbar.base.height');
+  color: pal-get('navbar.base.color');
+  height: pal-get('navbar.base.height');
   @include pal(( space: mb2 ));
 
   &.collapsed {
-    color: pal-store-get('navbar.collapsed.color');
-    height: pal-store-get('navbar.collapsed.height');
+    color: pal-get('navbar.collapsed.color');
+    height: pal-get('navbar.collapsed.height');
     @include pal(( space: mb1 ));
   }
 }
@@ -418,7 +418,7 @@ If you define a function called `pal-custom-reducers` you can hook into Sass Pal
 }
 
 // Set a new stored value with the 'kittens' key
-$_: pal-store-set('kittens', (
+$_: pal-set('kittens', (
   ( name: 'mr-fancy-pants', height: 4.0in ),
   ( name: 'sir-eat-alot', height: 3.5in ),
   ( name: 'snowball', height: 3.0in ),
@@ -426,7 +426,7 @@ $_: pal-store-set('kittens', (
 
 // Use the data calculated by the custom reducer
 .kitten {
-  @each $kitten in pal-store-get('kittens') {
+  @each $kitten in pal-get('kittens') {
     $name: map-get($kitten, 'name');
     $relative-height: map-get($kitten, 'relative-height');
     &.#{$name} {

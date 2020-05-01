@@ -4,7 +4,7 @@
 /// @type Map
 /// @group core-stored-values
 ///
-$pal-devices: pal-store-set('relative-units', (
+$pal-devices: pal-set('relative-units', (
   '0':       0,
   '1/12':    1/12,
   '2/12':    2/12,

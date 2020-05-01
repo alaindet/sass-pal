@@ -14,7 +14,7 @@
 /// @access public
 /// @group core-functions
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {function} pal-store-get
+/// @require {function} pal-get
 ///
 /// @example scss
 ///   pal-parse-sides('b') // ('bottom')
@@ -28,7 +28,7 @@
 ///
 @function pal-parse-sides($input)
 {
-  $sides: pal-store-get('pal.sides');
+  $sides: pal-get('pal.sides');
   $output: map-get($sides, $input);
 
   @if ($output != null) {

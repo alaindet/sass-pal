@@ -5,15 +5,15 @@
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 ///
 /// @example scss Get default media query operator
-///   pal-store-get('pal.media-query.operator'); // '='
+///   pal-get('pal.media-query.operator'); // '='
 ///
 /// @example scss Get the base unit
-///   pal-store-get('unit'); // 0.5rem
+///   pal-get('unit'); // 0.5rem
 ///
 /// @param {String} $query
 /// @return { Null | Bool | Number | Color | String | List | Map }
 ///
-@function pal-store-get($query)
+@function pal-get($query)
 {
   @return pal-map-get($_PAL_STORE, $query);
 }

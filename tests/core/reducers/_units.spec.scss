@@ -15,8 +15,8 @@ $backup: $_PAL_STORE;
       'twentyfold': 10rem,
       'thirtyfold': 15rem,
     );
-    $null: pal-store-set('units', $units);
-    $assertion: pal-store-get('units');
+    $null: pal-set('units', $units);
+    $assertion: pal-get('units');
     @include assert-equal($assertion, $expected);
 
   }
