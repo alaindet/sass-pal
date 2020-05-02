@@ -37,7 +37,7 @@ If you're in a Webpack project, import it like this
 Otherwise
 
 ```
-@import '{ROOT}/node_modules/sass-pal/sass-pal.scss';
+@import '{ROOT}/node_modules/sass-pal/sass-pal';
 ```
 
 ## Usage
