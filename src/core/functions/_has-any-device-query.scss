@@ -31,11 +31,21 @@
     @return false;
   }
 
+  // Get the first key
   $key: nth(map-keys($map), 1);
-  @each $builder in pal-get('pal.builders') {
-    @if ($builder == $key) {
-      @return false;
+
+  // Devices wildcard
+  @if ($key == '*' or $key == 'any') {
+    @return true;
+  }
+
+  // Check if the left part of the key matches any device
+  // Ex.: tablet+:hover matches 'tablet' device
+  @each $device in map-keys(pal-get('devices')) {
+    @if (str-slice($key, 1, str-length($device)) == $device) {
+      @return true;
     }
   }
-  @return true;
+
+  @return false;
 }
