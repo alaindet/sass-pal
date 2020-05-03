@@ -182,7 +182,20 @@
 
       // Specify border radius (works on shorthand border-radius only)
       @if (map-get($values, 'radius') != null and $should-apply-to-all-sides) {
-        border-radius: map-get($values, 'radius');
+        $radii: map-get($values, 'radius');
+
+        @if (type-of($radii) == 'list') {
+          @each $radius in $radii {
+            $index: index($radii, $radius);
+            $_: set-nth($radii, $index, _pal-use-unit($radius));
+          }
+        }
+
+        @if (type-of($radii) == 'number') {
+          $radii: _pal-use-unit($radii);
+        }
+
+        border-radius: $radii;
       }
     }
   }
