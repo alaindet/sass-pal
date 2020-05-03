@@ -3,6 +3,7 @@
 
 // Helper functions
 @import './helpers/functions/list-join.spec';
+@import './helpers/functions/list-get.spec';
 @import './helpers/functions/list-sort-by-length-desc.spec';
 @import './helpers/functions/map-are-keys.spec';
 @import './helpers/functions/map-get-all.spec';
@@ -14,6 +15,7 @@
 @import './helpers/functions/number-has-unit.spec';
 @import './helpers/functions/number-to-string.spec';
 @import './helpers/functions/string-split.spec';
+@import './helpers/functions/string-starts-with.spec';
 
 // Helper mixins
 @import './helpers/mixins/media-query.spec';
@@ -38,11 +40,13 @@
 
 // Core builders
 @import './core/builders/border.spec';
+@import './core/builders/color.spec';
 @import './core/builders/display.spec';
 @import './core/builders/flex.spec';
 @import './core/builders/position.spec';
 @import './core/builders/size.spec';
 @import './core/builders/space.spec';
+@import './core/builders/content.spec';
 
 // Sass Pal
 @import './core/pal.spec';

@@ -1,0 +1,23 @@
+/// Returns an element from the list by its index. Returns null if index
+/// doesn't exist
+///
+/// @access public
+/// @group helper-functions-list
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss Get elements from a list
+///   pal-list-get(a b c, 2); // b
+///   pal-list-get(a b c, 42); // null
+///
+/// @param {List} $list
+/// @param {Number} $index
+/// @return {Null | Bool | Number | Color | String | List | Map}
+///
+@function pal-list-get($list, $index)
+{
+  @if (length($list) < $index) {
+    @return null;
+  }
+
+  @return nth($list, $index);
+}

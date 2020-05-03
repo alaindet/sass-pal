@@ -11,28 +11,31 @@ fi
 
 echo "${PREFIX} Version passed: ${1}"
 
-echo "${PREFIX} 01/08 # Checkout to gh-pages branch"
+echo "${PREFIX} 01/09 # Checkout to gh-pages branch"
 git checkout gh-pages
 
-echo "${PREFIX} 02/08 # Merge with master branch"
+echo "${PREFIX} 02/09 # Merge with master branch"
 git merge master
 
-echo "${PREFIX} 03/08 # Generate documentation"
+echo "${PREFIX} 03/09 # Generate documentation"
 npm run doc
 
-echo "${PREFIX} 04/08 # Cleanup old documentation"
+echo "${PREFIX} 04/09 # Cleanup old documentation"
 rm -rf ./assets ./index.html
 
-echo "${PREFIX} 05/08 # Move new documentation to root"
+echo "${PREFIX} 05/09 # Move new documentation to root"
 mv ./doc/assets/ ./assets/
 mv ./doc/index.html ./index.html
 
-echo "${PREFIX} 06/08 # Commit and push new documention"
+echo "${PREFIX} 06/09 # Commit and push new documention"
 git add .
 git commit -m "Update documentation to version ${1}"
 git push origin gh-pages
 
-echo "${PREFIX} 07/08 # Switch back to master branch"
+echo "${PREFIX} 07/09 # Switch back to master branch"
 git checkout master
 
-echo "${PREFIX} 08/08 # Finished"
+echo "${PREFIX} 08/09 # Cleanup old documentation again"
+rm -rf ./assets ./index.html
+
+echo "${PREFIX} 09/09 # Finished"

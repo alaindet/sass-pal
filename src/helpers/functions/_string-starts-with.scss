@@ -1,0 +1,22 @@
+/// Checks if a given string starts with a given substring
+/// 
+/// @access public
+/// @group helper-functions-string
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss Check if a string starts with given substring
+///   pal-string-starts-with('hello world', 'hell'); // true
+///   pal-string-starts-with('hello world', 'world'); // false
+/// 
+/// @param {String} $haystack The string to search into
+/// @param {String} $needle The substring
+/// @return {Bool}
+/// 
+@function pal-string-starts-with($haystack, $needle: 'pal')
+{
+  @if (type-of($haystack) != 'string') {
+    @return false;
+  }
+
+  @return str-slice($haystack, 1, str-length($needle)) == $needle;
+}

@@ -45,6 +45,8 @@
 /// 
 @mixin pal-border($border)
 {
+  @content;
+
   // Reset border with 'none'
   @if ($border == 'none') {
     border: none;
@@ -71,6 +73,7 @@
       }
 
       $values: ();
+
       $defaults: (
         'width': 1px,
         'style': solid,
@@ -118,6 +121,7 @@
 
       // Merge input values with default values
       @each $key, $default in $defaults {
+
         $value: map-get($values, $key);
 
         // Use default if no value is passed
@@ -182,7 +186,20 @@
 
       // Specify border radius (works on shorthand border-radius only)
       @if (map-get($values, 'radius') != null and $should-apply-to-all-sides) {
-        border-radius: map-get($values, 'radius');
+        $radii: map-get($values, 'radius');
+
+        @if (type-of($radii) == 'list') {
+          @each $radius in $radii {
+            $index: index($radii, $radius);
+            $_: set-nth($radii, $index, _pal-use-unit($radius));
+          }
+        }
+
+        @if (type-of($radii) == 'number') {
+          $radii: _pal-use-unit($radii);
+        }
+
+        border-radius: $radii;
       }
     }
   }

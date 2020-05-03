@@ -1,0 +1,112 @@
+/// Sass Pal builder for color rules. It accepts either a map or a list. If given
+/// strings instead of colors
+///
+/// @access public
+/// @group core-builders
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-map-set
+/// @require {function} pal-list-get
+/// @require {function} pal-color-parse
+///
+/// @example scss Set the background color
+///   .test {
+///     @include pal-color(#aaa);
+///   }
+///   // .test {
+///   //   background-color: #aaa;
+///   // }
+/// 
+/// @example scss Set all colors
+///   .test {
+///     @include pal-color(#aaa #bbb #ccc);
+///   }
+///   // .test {
+///   //   background-color: #aaa;
+///   //   color: #bbb;
+///   //   border-color: #ccc;
+///   // }
+/// 
+/// @example scss Use Pal colors (pass strings)
+///   .test {
+///     @include pal-color('pink-light' blue 'red');
+///   }
+///   // .test {
+///   //   background-color: #fed7e2;
+///   //   color: blue;
+///   //   border-color: #e53e3e;
+///   // }
+/// 
+/// @example scss Use a map
+///   .test {
+///     @include pal-color((
+///       background: #aaa,
+///       text: #bbb,
+///       border: #ccc,
+///     ));
+///   }
+///   // .test {
+///   //   background-color: #aaa;
+///   //   color: #bbb;
+///   //   border-color: #ccc;
+///   // }
+/// 
+/// @example scss Pass any number of map keys
+///   .test {
+///     @include pal-color((
+///       border: #ccc,
+///     ));
+///   }
+///   // .test {
+///   //   border-color: #ccc;
+///   // }
+/// 
+/// @example scss Set all colors
+///   .test {
+///     @include pal-color(#aaa null #ccc);
+///   }
+///   // .test {
+///   //   background-color: #aaa;
+///   //   border-color: #ccc;
+///   // }
+///
+/// 
+/// @param { List | Map | Number | String } $_input
+/// @output Color related rules
+///
+@mixin pal-color($_input)
+{
+  @content;
+
+  $input: $_input;
+  $type: type-of($input);
+
+  @if ($type != 'map') {
+
+    // Normalize input to list
+    @if ($type != 'list') {
+      $input: ($input);
+    }
+
+    // Normalize input to map
+    $input: (
+      'background': pal-list-get($input, 1),
+      'text': pal-list-get($input, 2),
+      'border': pal-list-get($input, 3),
+    );
+  }
+
+  $background: map-get($input, 'background');
+  @if ($background != null) {
+    background-color: pal-color-parse($background);
+  }
+
+  $text: map-get($input, 'text');
+  @if ($text != null) {
+    color: pal-color-parse($text);
+  }
+
+  $border: map-get($input, 'border');
+  @if ($border != null) {
+    border-color: pal-color-parse($border);
+  }
+}

@@ -17,25 +17,44 @@
 @mixin _pal-builder($builder, $value)
 {
   @if ('border' == $builder) {
-    @include pal-border($value);
+    @include pal-border($value) {
+      @content;
+    }
+  }
+  @if ('color' == $builder) {
+    @include pal-color($value) {
+      @content;
+    }
   }
   @if ('display' == $builder) {
-    @include pal-display($value);
+    @include pal-display($value) {
+      @content;
+    }
   }
   @if ('flex' == $builder) {
-    @include pal-flex($value);
+    @include pal-flex($value) {
+      @content;
+    }
   }
   @if ('position' == $builder) {
-    @include pal-position($value);
+    @include pal-position($value) {
+      @content;
+    }
   }
   @if ('size' == $builder) {
-    @include pal-size($value);
+    @include pal-size($value) {
+      @content;
+    }
   }
   @if ('space' == $builder) {
-    @include pal-space($value);
+    @include pal-space($value) {
+      @content;
+    }
   }
 
   @if (mixin-exists('pal-custom-builders')) {
-    @include pal-custom-builders($builder, $value);
+    @include pal-custom-builders($builder, $value) {
+      @content;
+    }
   }
 }
