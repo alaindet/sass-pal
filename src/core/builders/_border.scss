@@ -45,6 +45,8 @@
 /// 
 @mixin pal-border($border)
 {
+  @content;
+
   // Reset border with 'none'
   @if ($border == 'none') {
     border: none;
@@ -71,6 +73,7 @@
       }
 
       $values: ();
+
       $defaults: (
         'width': 1px,
         'style': solid,
@@ -118,6 +121,7 @@
 
       // Merge input values with default values
       @each $key, $default in $defaults {
+
         $value: map-get($values, $key);
 
         // Use default if no value is passed

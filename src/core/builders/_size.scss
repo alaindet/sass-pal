@@ -27,6 +27,8 @@
 /// 
 @mixin pal-size($sizes)
 {
+  @content;
+
   $rules: (
     'wmax': 'max-width',
     'wmin': 'min-width',

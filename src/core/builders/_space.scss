@@ -42,6 +42,8 @@
 /// 
 @mixin pal-space($spacings)
 {
+  @content;
+
   $rules: (
     'm': 'margin',
     'p': 'padding',

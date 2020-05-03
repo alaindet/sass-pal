@@ -58,6 +58,8 @@
 /// 
 @mixin pal-position($list)
 {
+  @content;
+
   // When given 4 numbers or 1 number
   $side-rules: 'top', 'right', 'bottom', 'left';
 
