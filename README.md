@@ -233,6 +233,7 @@ Outputs
 List of current default builders
 
 - border
+- color
 - display
 - flex
 - position

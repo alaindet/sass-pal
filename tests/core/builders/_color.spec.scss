@@ -116,5 +116,20 @@
       }
     }
 
+    // Test #8
+    @include assert {
+      @include output {
+        .test {
+          @include pal-color(#aaa null #bbb);
+        }
+      }
+      @include expect {
+        .test {
+          background-color: #aaa;
+          border-color: #bbb;
+        }
+      }
+    }
+
   }
 }

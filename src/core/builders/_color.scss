@@ -8,8 +8,67 @@
 /// @require {function} pal-list-get
 /// @require {function} pal-color-parse
 ///
-/// @example scss Some example here
-///   pal-color(#aaa); 
+/// @example scss Set the background color
+///   .test {
+///     @include pal-color(#aaa);
+///   }
+///   // .test {
+///   //   background-color: #aaa;
+///   // }
+/// 
+/// @example scss Set all colors
+///   .test {
+///     @include pal-color(#aaa #bbb #ccc);
+///   }
+///   // .test {
+///   //   background-color: #aaa;
+///   //   color: #bbb;
+///   //   border-color: #ccc;
+///   // }
+/// 
+/// @example scss Use Pal colors (pass strings)
+///   .test {
+///     @include pal-color('pink-light' blue 'red');
+///   }
+///   // .test {
+///   //   background-color: #fed7e2;
+///   //   color: blue;
+///   //   border-color: #e53e3e;
+///   // }
+/// 
+/// @example scss Use a map
+///   .test {
+///     @include pal-color((
+///       background: #aaa,
+///       text: #bbb,
+///       border: #ccc,
+///     ));
+///   }
+///   // .test {
+///   //   background-color: #aaa;
+///   //   color: #bbb;
+///   //   border-color: #ccc;
+///   // }
+/// 
+/// @example scss Pass any number of map keys
+///   .test {
+///     @include pal-color((
+///       border: #ccc,
+///     ));
+///   }
+///   // .test {
+///   //   border-color: #ccc;
+///   // }
+/// 
+/// @example scss Set all colors
+///   .test {
+///     @include pal-color(#aaa null #ccc);
+///   }
+///   // .test {
+///   //   background-color: #aaa;
+///   //   border-color: #ccc;
+///   // }
+///
 /// 
 /// @param { List | Map | Number | String } $_input
 /// @output Color related rules
