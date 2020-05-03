@@ -1,0 +1,120 @@
+@include describe('[Core Mixin] pal-color') {
+  @include it('Builds color rules') {
+
+    // Test #1
+    @include assert {
+      @include output {
+        .test {
+          @include pal-color(#aaa);
+        }
+      }
+      @include expect {
+        .test {
+          background-color: #aaa;
+        }
+      }
+    }
+
+    // Test #2
+    @include assert {
+      @include output {
+        .test {
+          @include pal-color(#aaa #bbb);
+        }
+      }
+      @include expect {
+        .test {
+          background-color: #aaa;
+          color: #bbb;
+        }
+      }
+    }
+
+    // Test #3
+    @include assert {
+      @include output {
+        .test {
+          @include pal-color(#aaa #bbb #ccc);
+        }
+      }
+      @include expect {
+        .test {
+          background-color: #aaa;
+          color: #bbb;
+          border-color: #ccc;
+        }
+      }
+    }
+
+    // Test #4
+    @include assert {
+      @include output {
+        .test {
+          @include pal-color(red green blue);
+        }
+      }
+      @include expect {
+        .test {
+          background-color: red;
+          color: green;
+          border-color: blue;
+        }
+      }
+    }
+
+    // Test #5
+    @include assert {
+      @include output {
+        .test {
+          @include pal-color('red' 'teal' 'indigo-dark');
+        }
+      }
+      @include expect {
+        .test {
+          background-color: #e53e3e;
+          color: #38b2ac;
+          border-color: #434190;    
+        }
+      }
+    }
+
+    // Test #6
+    @include assert {
+      @include output {
+        .test {
+          @include pal-color((
+            background: 'pink',
+            text: red,
+            border: #abc,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          background-color: #ed64a6;
+          color: red;
+          border-color: #abc;
+        }
+      }
+    }
+
+    // Test #7
+    @include assert {
+      @include output {
+        .test {
+          @include pal-color((
+            background: 'pink',
+            text: white,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          background-color: #ed64a6;
+          color: white;
+        }
+      }
+    }
+
+  }
+}

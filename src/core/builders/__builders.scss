@@ -21,6 +21,11 @@
       @content;
     }
   }
+  @if ('color' == $builder) {
+    @include pal-color($value) {
+      @content;
+    }
+  }
   @if ('display' == $builder) {
     @include pal-display($value) {
       @content;
