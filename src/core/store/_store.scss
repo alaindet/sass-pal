@@ -15,22 +15,12 @@ $_PAL_STORE: (
   // Unmodifiable values
   'pal': (
 
-    // Sass-Pal builder names
-    'builders': (
-      'border',
-      'display',
-      'flex',
-      'position',
-      'size',
-      'space',
-    ),
-
     'media-query': (
 
       // Default media query operator
       'operator': 'in',
 
-      // Al media query operators
+      // Media query operators
       'operators': (
         '=': 'in',
         '-': 'down',
