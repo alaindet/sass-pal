@@ -34,4 +34,8 @@
   @if ('space' == $builder) {
     @include pal-space($value);
   }
+
+  @if (mixin-exists('pal-custom-builders')) {
+    @include pal-custom-builders($builder, $value);
+  }
 }
