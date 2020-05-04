@@ -15,6 +15,22 @@ $tests: (
       'pseudo-class': 'any',
     ),
   ),
+  (
+    'given': 'any:hover',
+    'expected': (
+      'device': 'any',
+      'operator': 'in',
+      'pseudo-class': 'hover',
+    ),
+  ),
+  (
+    'given': ':focus',
+    'expected': (
+      'device': 'any',
+      'operator': 'in',
+      'pseudo-class': 'focus',
+    ),
+  ),
 );
 
 @include describe('[Core Function] _pal-parse-device-query') {
