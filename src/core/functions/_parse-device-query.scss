@@ -18,6 +18,7 @@
 /// @group core-functions
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @require {function} pal-get
+/// @require {function} pal-string-starts-with
 ///
 /// @example scss Parse device query from tablet downward for hover state
 ///   _pal-parse-device-query('tablet-:hover')
@@ -42,10 +43,11 @@
 
   // Get device
   $device-keys: map-keys(pal-get('devices'));
+  $device-keys: append($device-keys, 'any');
+  $device-keys: append($device-keys, '*');
   $found: false;
   @each $key in $device-keys {
-    $slice: str-slice($temp, 1, str-length($key));
-    @if ($found == false and $slice == $key) {
+    @if ($found == false and pal-string-starts-with($temp, $key)) {
       $found: true;
       $temp: str-slice($temp, str-length($key) + 1);
       $parsed: map-merge($parsed, ('device': $key));
@@ -57,8 +59,7 @@
   $operator-symbols: map-keys($operators);
   $found: false;
   @each $symbol in $operator-symbols {
-    $slice: str-slice($temp, 1, str-length($symbol));
-    @if ($found == false and $slice == $symbol) {
+    @if ($found == false and pal-string-starts-with($temp, $symbol)) {
       $found: true;
       $temp: str-slice($temp, str-length($symbol) + 1);
       $operator: map-get($operators, $symbol);
@@ -70,8 +71,7 @@
   $pseudo-classes: pal-get('pseudo-classes');
   $found: false;
   @each $pseudo-class in $pseudo-classes {
-    $slice: str-slice($temp, 1, str-length($pseudo-class));
-    @if ($found == false and $slice == $pseudo-class) {
+    @if ($found == false and pal-string-starts-with($temp, $pseudo-class)) {
       $found: true;
       $pseudo-class-name: str-slice($pseudo-class, 2);
       $parsed: map-merge($parsed, ('pseudo-class': $pseudo-class-name));

@@ -330,7 +330,7 @@ Outputs
 
 ## Device queries
 
-A *device* is a resolution range with a name. You can use default devices or redefine them. A *device query* is a string instructing Sass Pal on how to wrap styling. It follows this syntax
+A *device* is a resolution range with a name. You can use default devices or redefine them. A *device query* is a string instructing Sass Pal on how to wrap styling. It consists of three pieces of information, all optional
 
 `{DEVICE_NAME}{MEDIA_QUERY_OPERATOR}:{PSEUDO_CLASS}`
 
@@ -339,11 +339,11 @@ A *device* is a resolution range with a name. You can use default devices or red
   - `tablet` is (768px,  1024px - 0.0001px)
   - `desktop` is (1024px, 1440px - 0.0001px)
   - `wider` is (1440px, 9999px)
-- `MEDIA_QUERY_OPERATOR` *(optional)*: Should be one of the following operators, if none then `=` is used
+- `MEDIA_QUERY_OPERATOR` should be one of the following operators, if none then `=` is used
   - `=` is the **in** operator, meaning "between device's min and max resolution"
   - `+` is the **up** operator, meaning "from the device's min resolution going up"
   - `-` is the **down** operator, meaning "from the device's max resolution going down"
-- `PSEUDO_CLASS` *(optional)*: Any of the available (or custom defined) pseudo classes, like `hover` and `focus`
+- `PSEUDO_CLASS` is any of the available (or custom defined) pseudo classes, like `hover`, `focus` or `active`
 
 Examples
 
