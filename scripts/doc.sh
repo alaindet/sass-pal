@@ -17,11 +17,11 @@ git checkout gh-pages
 echo "${PREFIX} 02/09 # Merge with master branch"
 git merge master
 
-echo "${PREFIX} 03/09 # Generate documentation"
-npm run doc
-
-echo "${PREFIX} 04/09 # Cleanup old documentation"
+echo "${PREFIX} 03/09 # Cleanup old documentation"
 rm -rf ./assets ./index.html
+
+echo "${PREFIX} 04/09 # Generate documentation"
+npm run doc
 
 echo "${PREFIX} 05/09 # Move new documentation to root"
 mv ./doc/assets/ ./assets/
