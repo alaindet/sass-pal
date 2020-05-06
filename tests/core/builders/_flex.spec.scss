@@ -67,5 +67,29 @@
       }
     }
 
+    // Test #4
+    @include assert {
+      @include output {
+        .test {
+          @include pal-flex((
+            'dir': column,
+            'main-axis': around,
+            'cross-axis': stretch,
+            'grow': normal,
+            'inline': true,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          display: inline-flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: stretch;
+          flex-grow: 1;
+        }
+      }
+    }
+
   }
 }

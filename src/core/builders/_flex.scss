@@ -17,6 +17,9 @@
 /// - `dir`
 ///   - *type*: String
 ///   - *note*: Accepts anything `flex-direction` accepts
+/// - `inline`
+///   - *type*: Bool
+///   - *note*: Outputs `display: inline-flex`
 /// - `wrap`
 ///   - *type*: Bool
 ///   - *values*: true|false
@@ -110,10 +113,16 @@
     align-items: center;
   } @else {
 
-    // Output display: flex only on Flexbox containers, not items!
-    $item-rules: ('self-align', 'basis', 'grow', 'shrink', 'order');
-    @if (pal-map-is-any-key($map, $item-rules) == false) {
-      display: flex;
+    // Output display: flex|inline-flex only for Flexbox containers!
+    $requires-display: ('dir', 'wrap', 'main-axis', 'cross-axis', 'cross-lines');
+    @if (pal-map-is-any-key($map, $requires-display)) {
+
+      // Container: Inline
+      @if (map-get($map, 'inline') == true) {
+        display: inline-flex;
+      } @else {
+        display: flex;
+      }
     }
 
     // Container: Direction
