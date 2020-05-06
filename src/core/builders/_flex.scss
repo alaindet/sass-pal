@@ -32,9 +32,6 @@
 ///   - *type*: String
 ///   - *aliases*: start|center|end|between|around
 ///   - *note*: Accepts anything `align-content` accepts
-/// - `flex`
-///   - *type*: List
-///   - *values*: Any valid List for native `flex` CSS rule
 ///
 /// # Properties for flex items
 /// - `self-align`
@@ -57,6 +54,9 @@
 ///   - *type*: Number|String
 ///   - *values*: 'first'|'last' or custom Number
 ///   - *note*: Accepts anything `order` accepts
+/// - `flex`
+///   - *type*: List
+///   - *values*: Any valid List for native `flex` CSS rule
 ///
 /// @access public
 /// @group core-builders
