@@ -91,5 +91,26 @@
       }
     }
 
+    // Test #4
+    @include assert {
+      @include output {
+        .test {
+          @include pal-flex((
+            'dir': col,
+            'main-axis': center,
+            'cross-axis': stretch,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: stretch;
+        }
+      }
+    }
+
   }
 }
