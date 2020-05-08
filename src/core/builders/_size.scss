@@ -21,6 +21,10 @@
 ///   pal-size(w-1/2 h-3/4);
 ///   // width: 50%:
 ///   // height: 75%;
+/// @example scss Use absolute units
+///   pal-size(w-3u h-4u);
+///   // width: 1.5rem;
+///   // height: 2rem;
 ///
 /// @param {Map} $sizes
 /// @output Size related rules
@@ -46,6 +50,8 @@
     
     $rule-key: null;
     $value-key: null;
+    $rule: null;
+    $value: null;
     $found: false;
 
     // Extract keys for rule (ex.: w-max) and value (ex.: 1/2)
@@ -60,21 +66,32 @@
       }
     }
 
+    // Absolute 'screen' value
+    @if ($value-key == 'screen') {
+      $is-width-rule: index($width-rules, $rule-key) != null;
+      $value: if($is-width-rule, 100vw, 100vh);
+    }
+
+    // Absolute unit with 'u' suffix
+    @else if (str-slice($value-key, -1) == 'u') {
+      $value-key: str-slice($value-key, 0, str-length($value-key) - 1);
+      $value: pal-get('units.#{$value-key}');
+    }
+    
+    // Relative unit with '%' suffix
+    @else if (str-slice($value-key, -1) == '%') {
+      $value-key: str-slice($value-key, 0, str-length($value-key) - 1);
+      $value: pal-get('relative-units.#{$value-key}');
+    }
+
+    // Default: relative unit with no suffix
+    @else {
+      $value: pal-get('relative-units.#{$value-key}');
+    }
+
+    // Declaration
     @if ($rule-key != null) {
-
-      // Get rule (ex.: max-width)
       $rule: map-get($rules, $rule-key);
-      $value: null;
-
-      // Get value (ex.: 50%)
-      @if ($value-key == 'screen') {
-        $is-width-rule: index($width-rules, $rule-key) != null;
-        $value: if($is-width-rule, 100vw, 100vh);
-      } @else {
-        $value: map-get(pal-get('relative-units'), $value-key);
-      }
-
-      // Declaration
       #{$rule}: $value;
     }
 
