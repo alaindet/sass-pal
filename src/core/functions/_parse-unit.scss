@@ -1,0 +1,47 @@
+/// Transforms a string with a suffix via Sass Pal's stored values (`units` or
+/// `relative-units`), otherwise it just returns the number as it is. If given
+/// an unitless integer it treats it as `units`.
+///
+/// @access public
+/// @group core-functions
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-get
+/// @require {function} pal-number-is-integer
+///
+/// @example scss Parse numbers
+///   pal-parse-number('3/4u'); // 0.375rem
+///   pal-parse-number('1/2%'); // 50%
+///   pal-parse-number(1/2); // 0.5
+///   pal-parse-number(2); // 1rem
+///
+/// @param {Number | String} $input
+/// @return {Number}
+///
+@function pal-parse-unit($input, $default: 'units')
+{
+  // Exception: integer unitless numbers are parsed with a 'units' stored value
+  @if (type-of($input) == 'number') {
+    @if (pal-number-is-integer($input) and unitless($input)) {
+      @return pal-get('units.#{$input}');
+    }
+
+    @return $input;
+  }
+
+  // Extract last char
+  $last: str-slice($input, -1);
+  $query: str-slice($input, 1, str-length($input) - 1);
+
+  // Absolute units
+  @if ($last == 'u') {
+    @return pal-get('units.#{$query}');
+  }
+
+  // Relative units
+  @if ($last == '%') {
+    @return pal-get('relative-units.#{$query}');
+  }
+
+  // Default: absolute units
+  @return pal-get('#{$default}.#{$input}');
+}
