@@ -1,15 +1,34 @@
+$tests: (
+  (
+    'given': ('a.b.c', '.'),
+    'expected': 'a' 'b' 'c',
+  ),
+  (
+    'given': ('hello world'),
+    'expected': 'hello' 'world',
+  ),
+  (
+    'given': ('abcdef', ''),
+    'expected': 'a' 'b' 'c' 'd' 'e' 'f',
+  )
+);
+
 @include describe('[Helper Function] pal-string-split') {
   @include it('Splits a string into a list') {
 
-    // Test #1
-    $assertion: pal-string-split('a.b.c', '.');
-    $expected: 'a' 'b' 'c';
-    @include assert-equal($assertion, $expected);
-
-    // Test #1
-    $assertion: pal-string-split('hello world');
-    $expected: 'hello' 'world';
-    @include assert-equal($assertion, $expected);
+    @each $test in $tests {
+      $given: map-get($test, 'given');
+      $expected: map-get($test, 'expected');
+      $arg1: pal-list-get($given, 1);
+      $arg2: pal-list-get($given, 2);
+      $assertion: null;
+      @if ($arg2 == null) {
+        $assertion: pal-string-split($arg1);
+      } @else {
+        $assertion: pal-string-split($arg1, $arg2);
+      }
+      @include assert-equal($assertion, $expected);
+    }
 
   }
 }

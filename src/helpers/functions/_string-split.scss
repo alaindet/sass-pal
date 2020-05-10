@@ -16,6 +16,15 @@
 {
   $output: ();
 
+  // Divide the letters
+  @if ($separator == '') {
+    @for $i from 1 through str-length($string) {
+      $char: str-slice($string, $i, $i);
+      $output: append($output, $char);
+    }
+    @return $output;
+  }
+
   $index: str-index($string, $separator);
   @while ($index != null) {
     $bit: str-slice($string, 1, $index - 1);
