@@ -61,7 +61,6 @@
     }
   }
 
-
   // Multiple utility maps grouped by device query
   @else {
     @each $group in _pal-group-by-device-query($map) {
@@ -79,6 +78,8 @@
           }
         }
       }
+
     }
   }
+
 }
