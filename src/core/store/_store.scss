@@ -4,7 +4,7 @@
 /// @type Map
 /// @group core-stored-values
 /// @prop {Map} pal Contains Unmodifiable values used by Sass Pal
-/// @prop {List} pal.builders List of all Sass Pal builders
+/// @prop {Number} pal.decimals Number of decimal digits to round to
 /// @prop {Map} pal.media-query Map of all @media query related data
 /// @prop {String} pal.media-query.operator Default @media query operator
 /// @prop {Map} pal.media-query.operators Map of all @media query operators. Key: symbol, value: operator name
@@ -14,6 +14,8 @@ $_PAL_STORE: (
 
   // Unmodifiable values
   'pal': (
+
+    'decimals': 5,
 
     'media-query': (
 
