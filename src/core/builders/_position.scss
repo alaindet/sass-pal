@@ -12,7 +12,7 @@
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {function} _pal-use-unit
+/// @require {function} pal-parse-value
 ///
 /// @example scss With 4 numbers
 ///   pal-position((absolute, (0, 2rem, auto, 2rem)));
@@ -78,7 +78,7 @@
   @if (type-of($sides) == number) {
     $side: $sides;
     @each $rule in $side-rules {
-      #{$rule}: _pal-use-unit($side);
+      #{$rule}: pal-parse-value($side, 'units');
     }
   }
 
@@ -86,7 +86,7 @@
   @else if (length($sides) == 1) {
     $side: nth($sides, 1);
     @each $rule in $side-rules {
-      #{$rule}: _pal-use-unit($side);
+      #{$rule}: pal-parse-value($side, 'units');
     }
   }
 
@@ -96,7 +96,7 @@
       $side: nth($sides, $i);
       @if ($side != null) {
         @each $rule in nth($side-rule-groups, $i) {
-          #{$rule}: _pal-use-unit($side);
+          #{$rule}: pal-parse-value($side, 'units');
         }
       }
     }
@@ -108,7 +108,7 @@
       $side: nth($sides, $i);
       $rule: nth($side-rules, $i);
       @if ($side != null) {
-        #{$rule}: _pal-use-unit($side);
+        #{$rule}: pal-parse-value($side, 'units');
       }
     }
   }
