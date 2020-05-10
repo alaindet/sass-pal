@@ -1,0 +1,47 @@
+/// If given a string, it's used as key and it returns a Sass Pal's stored value
+/// using the given $from prefix. Any other value is returned as it is
+///
+/// @access public
+/// @group core-functions
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-get
+/// @require {function} pal-number-has-unit
+///
+/// @example scss Return values as is
+///   pal-parse-value(#aaa, 'color'); // #aaa
+///   pal-parse-value(16px, 'units');
+///
+/// @example scss Parse the value using Sass Pal's stored values
+///   pal-parse-value('indigo', 'color'); // #667eea
+///   pal-parse-value('3/4', 'units'); // 0.375rem
+///   pal-parse-value('3/4', 'relative-units'); // 75%
+///
+/// @param {Null | Bool | Number | Color | String | List | Map} $input
+/// @param {String} $from
+/// @return {Null | Bool | Number | Color | String | List | Map}
+///
+@function pal-parse-value($input, $from)
+{
+  @if ($input == auto or $from == null) {
+    @return $input;
+  }
+
+  // Treat unitless numbers separately
+  $type: type-of($input);
+  $from-units: $from == 'units';
+  $input-num: $type == 'number';
+  @if ($from-units and $input-num) {
+    @if (pal-number-has-unit($input)) {
+      @return $input;
+    } @else {
+      @return pal-get('#{$from}.#{$input}');  
+    }
+  }
+
+  // Any string is converted to a Sass Pal's value
+  @if ($type == 'string') {
+    @return pal-get('#{$from}.#{$input}');
+  }
+
+  @return $input;
+}
