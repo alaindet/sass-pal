@@ -19,6 +19,11 @@
 ///
 @function pal-parse-unit($input, $default: 'units')
 {
+  // Edge case
+  @if ($input == auto) {
+    @return $input;
+  }
+
   // Exception: integer unitless numbers are parsed with a 'units' stored value
   @if (type-of($input) == 'number') {
     @if (pal-number-is-integer($input) and unitless($input)) {
