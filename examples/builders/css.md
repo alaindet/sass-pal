@@ -1,6 +1,6 @@
 # Examples for `css` builder
 
-The `css` builder is used as a bypass and accepts a map so that keys are CSS rules and values are passed to that rule
+The `css` builder is used as a bypass and accepts a map so that keys are CSS rules and values are passed to that rule. See the [Documentation](https://alaindet.github.io/sass-pal/) for further details.
 
 All examples here use `pal-css`, but you can also pass the `css` key to `pal`
 

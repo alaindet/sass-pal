@@ -12,6 +12,7 @@
 /// - `end` for `flex-end`
 /// - `between` for `space-between`
 /// - `around` for `space-around`
+/// - `evenly` for `space-evenly`
 ///
 /// # Properties for flex containers
 /// - `dir`
@@ -229,10 +230,9 @@
     $value: map-get($map, 'basis');
     @if ($value != null) {
 
-      $relative-unit: map-get(pal-get('relative-units'), $value);
-
-      @if ($relative-unit != null) {
-        $value: $relative-unit;
+      // Convert via stored values
+      @if (type-of($value) == 'string') {
+        $value: pal-parse-unit($value, $default: 'relative-units');
       }
 
       flex-basis: $value;

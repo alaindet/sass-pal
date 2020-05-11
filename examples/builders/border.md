@@ -1,5 +1,7 @@
 # Examples for `border` builder
 
+See the [Documentation](https://alaindet.github.io/sass-pal/) for further details.
+
 All examples here use `pal-border`, but you can also pass the `border` key to `pal`
 
 ```scss
