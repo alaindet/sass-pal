@@ -122,7 +122,7 @@
 
       // Optionally transform given values to Sass Pal stored values
       $values: (
-        'width': pal-parse-value(map-get($values, 'width'), 'units'),
+        'width': pal-parse-unit(map-get($values, 'width'), 'units'),
         'style': map-get($values, 'style'),
         'color': pal-parse-value(map-get($values, 'color'), 'colors'),
         'radius': map-get($values, 'radius'),
@@ -198,10 +198,12 @@
         $radii: map-get($values, 'radius');
 
         @if (type-of($radii) == 'list') {
+          $parsed-radii: ();
           @each $radius in $radii {
-            $index: index($radii, $radius);
-            $_: set-nth($radii, $index, pal-parse-unit($radius, $default: 'relative-units'));
+            $value: pal-parse-unit($radius, $default: 'relative-units');
+            $parsed-radii: append($parsed-radii, $value);
           }
+          $radii: $parsed-radii;
         } @else {
           $radii: pal-parse-unit($radii, $default: 'relative-units');
         }
