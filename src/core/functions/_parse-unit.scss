@@ -19,8 +19,8 @@
 ///
 @function pal-parse-unit($input, $default: 'units')
 {
-  // Edge case
-  @if ($input == auto) {
+  // Edge cases
+  @if ($input == auto or $input == null) {
     @return $input;
   }
 
