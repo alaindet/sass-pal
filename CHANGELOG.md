@@ -25,6 +25,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Removed
 - `display` builder, use `css` builder instead
+- `pal-use-unit()`, replaced by `pal-parse-unit()`
+- `pal-color-parse`, replaced by `pal-parse-value()`
 
 ## [0.6.2] - 2020-05-04
 ### Fixed
