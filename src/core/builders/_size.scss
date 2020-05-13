@@ -10,8 +10,7 @@
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {function} pal-get
-/// @require {function} pal-list-sort-by-length
+/// @require {function} pal-parse-unit
 ///
 /// @example scss Set width and height with word aliases as size
 ///   pal-size(w-half h-full);
@@ -72,21 +71,8 @@
       $value: if($is-width-rule, 100vw, 100vh);
     }
 
-    // Absolute unit with 'u' suffix
-    @else if (str-slice($value-key, -1) == 'u') {
-      $value-key: str-slice($value-key, 0, str-length($value-key) - 1);
-      $value: pal-get('units.#{$value-key}');
-    }
-    
-    // Relative unit with '%' suffix
-    @else if (str-slice($value-key, -1) == '%') {
-      $value-key: str-slice($value-key, 0, str-length($value-key) - 1);
-      $value: pal-get('relative-units.#{$value-key}');
-    }
-
-    // Default: relative unit with no suffix
     @else {
-      $value: pal-get('relative-units.#{$value-key}');
+      $value: pal-parse-unit($value-key, $default: 'relative-units');
     }
 
     // Declaration
