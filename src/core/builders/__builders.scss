@@ -4,7 +4,8 @@
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @require {mixin} pal-border
-/// @require {mixin} pal-display
+/// @require {mixin} pal-color
+/// @require {mixin} pal-css
 /// @require {mixin} pal-flex
 /// @require {mixin} pal-position
 /// @require {mixin} pal-size
@@ -28,11 +29,6 @@
   }
   @if ('css' == $builder or '_' == $builder) {
     @include pal-css($value) {
-      @content;
-    }
-  }
-  @if ('display' == $builder) {
-    @include pal-display($value) {
       @content;
     }
   }
