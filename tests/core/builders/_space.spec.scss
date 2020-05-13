@@ -87,7 +87,7 @@
       }
     }
 
-     // Test #6
+    // Test #6
     @include assert {
       @include output {
         .test {
@@ -106,6 +106,22 @@
           padding-left: 0.0625rem;
           padding-top: 6.5rem;
           padding-bottom: 6.5rem;
+        }
+      }
+    }
+
+    // Test #7
+    @include assert {
+      @include output {
+        .test {
+          @include pal-space('m1/3%' 'px4u');
+        }
+      }
+      @include expect {
+        .test {
+          margin: 0.16667rem;
+          padding-right: 2rem;
+          padding-left: 2rem;
         }
       }
     }
