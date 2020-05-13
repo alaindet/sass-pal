@@ -53,6 +53,10 @@ For the impatients and visual learners out there, this
     size: w-1/3 h-1/2,
     position: absolute (2 4),
     border: 2 #ccc,
+    css: (
+      transform: rotate(45deg),
+      transition: all 0.2s ease-in,
+    )
   ));
 }
 ```
@@ -74,6 +78,8 @@ Outputs this
   left: 2rem;
   right: 2rem;
   border: 1rem solid #ccc;
+  transform: rotate(45deg);
+  transition: all 0.2s ease-in;
 }
 ```
 
@@ -86,10 +92,17 @@ But you can also nest multiple **request maps** in different **device queries**.
       space: my2 py2 px4,
       border: (x: 2 #ccc, y: 2 #ddd),
       position: absolute (2 4),
+      css: (
+        opacity: 0,
+        transition: opacity 0.2s,
+      )
     ),
     'tablet+': (
       space: my0 py5 px8,
       border: (x: 3 #ccc, y: 3 #ddd),
+      css: (
+        opacity: 1,
+      ),
     )
   ));
 }
@@ -114,10 +127,12 @@ Outputs this
   bottom: 1rem;
   left: 2rem;
   right: 2rem;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 @media screen and (min-width: 768px) {
-  .device-scoped-request-maps {
+  .multiple-requests {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 2.5rem;
@@ -128,6 +143,7 @@ Outputs this
     border-left: 1.5rem solid #ccc;
     border-top: 1.5rem solid #ddd;
     border-bottom: 1.5rem solid #ddd;
+    opacity: 1;
   }
 }
 ```
@@ -146,7 +162,7 @@ Refer to the **Examples** sections for implementations and to sections below or 
 
 - **Reducer**: It's a Sass function depending on a specific key of the store, which is called anytime the store updates. It allows to perform some processing on the store after you set a new value key it depends on. You can define custom reducers via the `pal-custom-reducers` function
 
-Ex.:
+Annoted example
 
 ```scss
 .terminology {
@@ -155,17 +171,27 @@ Ex.:
   @include pal((
 
     // This key is a wildcard meaning 'any device' (no @media query used)
+    // It could be '*' (alias)
     'any': (
 
       // This invokes the 'space' builder with a space-separated list builder value
-      space: my2 py2 px4,
+      // Note that 'p^b4' string needs quotes because it is using the ^ symbol
+      space: my2 'p^b4',
 
-      // Pass the 'border' builder a map
-      border: (x: 2 #ccc, y: 2 #ddd),
+      // Pass this builder a map specifying different borders for different sides
+      border: (x: 2 #ccc, y: 1 #ddd),
 
-      // Unitless numbers anywhere are converted to Sass Pal units
+      // Unitless integer numbers anywhere are converted to Sass Pal units
       // Ex.: 2 => 2 * base-unit => 2 * 0.5rem => 1rem
       position: absolute (2 4),
+
+      // You can also pass a *suffix unit* (u or %) to clarify you want an
+      // absolute or relative unit respectively. If no suffix, a default is used
+      size: (
+        w-3/4, // Use default
+        h-8u, // Absolute unit ('u' suffix)
+        wmin-1/2%, // Relative unit ('%' suffix)
+      ),
     ),
 
     // Here is a proper device query encapsulating output
@@ -190,19 +216,21 @@ Outputs
 .terminology {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 2rem;
   padding-right: 2rem;
   padding-left: 2rem;
-  border-right: 1rem solid #ccc; 
-  border-left: 1rem solid #ccc;  
-  border-top: 1rem solid #ddd;   
-  border-bottom: 1rem solid #ddd;
+  border-right: 1rem solid #ccc;
+  border-left: 1rem solid #ccc;
+  border-top: 0.5rem solid #ddd;
+  border-bottom: 0.5rem solid #ddd;
   position: absolute;
   top: 1rem;
   bottom: 1rem;
   left: 2rem;
   right: 2rem;
+  width: 75%;
+  height: 4rem;
+  min-width: 50%;
 }
 
 @media screen and (min-width: 768px) {
@@ -232,13 +260,13 @@ Outputs
 
 List of current default builders
 
-- border
-- color
-- display
-- flex
-- position
-- size
-- space
+- `border`
+- `color`
+- `css` or `_` (alias)
+- `flex`
+- `position`
+- `size`
+- `space`
 
 You can call a builder as a key of a request map passed to `pal` or directly via its mixin. All builders' mixins have the `pal-` prefix (ex.: `pal-size`)
 
@@ -503,7 +531,7 @@ The reducer multiplies all *units* (see below) by the new base unit
 
 Has a default reducer? **YES**
 
-The reducer multiplies all given values by the existing base unit
+These are **absolute units** as opposed to *relative units*. The reducer multiplies all given values by the existing base unit
 
 ```scss
 'units': (
@@ -682,6 +710,8 @@ Outputs
 ```
 
 ## Examples
+
+All examples are available into the `/examples/` directory of this repository
 
 ### A simple request map
 
