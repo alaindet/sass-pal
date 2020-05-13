@@ -8,8 +8,8 @@
           @include pal-border(#aaa) {
             content: 'border content';
           }
-          @include pal-display(inline-block) {
-            content: 'display content';
+          @include pal-css(( transform: rotate(45deg) )) {
+            content: 'css content';
           }
           @include pal-flex(center) {
             content: 'flex content';
@@ -29,8 +29,8 @@
         .test {
           content: 'border content';
           border: 1px solid #aaa;
-          content: 'display content';
-          display: inline-block;
+          content: 'css content';
+          transform: rotate(45deg);
           content: 'flex content';
           display: flex;
           justify-content: center;

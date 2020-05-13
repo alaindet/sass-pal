@@ -6,7 +6,7 @@
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @require {function} pal-map-set
 /// @require {function} pal-list-get
-/// @require {function} pal-color-parse
+/// @require {function} pal-parse-value
 ///
 /// @example scss Set the background color
 ///   .test {
@@ -97,16 +97,16 @@
 
   $background: map-get($input, 'background');
   @if ($background != null) {
-    background-color: pal-color-parse($background);
+    background-color: pal-parse-value($background, 'colors');
   }
 
   $text: map-get($input, 'text');
   @if ($text != null) {
-    color: pal-color-parse($text);
+    color: pal-parse-value($text, 'colors');
   }
 
   $border: map-get($input, 'border');
   @if ($border != null) {
-    border-color: pal-color-parse($border);
+    border-color: pal-parse-value($border, 'colors');
   }
 }

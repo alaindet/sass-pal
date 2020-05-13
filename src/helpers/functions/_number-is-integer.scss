@@ -1,0 +1,21 @@
+/// Returns whether the input number is an integer or not
+/// 
+/// @access public
+/// @group helper-functions-number
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// 
+/// @example scss Check if numbers are integers
+///   pal-number-is-integer(1); // true
+///   pal-number-is-integer(2rem); // true
+///   pal-number-is-integer(42%); // true
+///   pal-number-is-integer(0.5); // false
+///   pal-number-is-integer(0.75rem); // false
+///   pal-number-is-integer(12.34%); // false
+///
+/// @param {Number} $input
+/// @return {Bool} Is it an integer?
+///
+@function pal-number-is-integer($input)
+{
+  @return round($input) == $input;
+}

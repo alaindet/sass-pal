@@ -12,6 +12,7 @@
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @require {function} pal-get
 /// @require {function} pal-list-sort-by-length
+/// @require {function} pal-parse-unit
 /// 
 /// @example scss Set margins of 1rem on all sides
 ///   pal-space(m2);
@@ -122,7 +123,7 @@
     // Get actual values from keys
     $rule: map-get($rules, $rule-key);
     $sides: pal-get('pal.sides.#{$side-key}');
-    $unit: pal-get('units.#{$unit-key}');
+    $unit: pal-parse-unit($unit-key, $default: 'units');
 
     // Shorthand?
     @if (length($sides) == 4) {

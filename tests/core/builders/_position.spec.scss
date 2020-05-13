@@ -5,7 +5,7 @@
     @include assert {
       @include output {
         .test {
-          @include pal-position(('absolute', (0, 2rem, auto, 2rem)));
+          @include pal-position(absolute (0 2rem auto 2rem));
         }
       }
       @include expect {
@@ -23,7 +23,7 @@
     @include assert {
       @include output {
         .test {
-          @include pal-position(('relative', (10px 20px)));
+          @include pal-position(relative (10px 20px));
         }
       }
       @include expect {
@@ -41,7 +41,7 @@
     @include assert {
       @include output {
         .test {
-          @include pal-position(fixed (30px));
+          @include pal-position(fixed 30px);
         }
       }
       @include expect {
@@ -69,6 +69,54 @@
           right: 0.5rem;
           bottom: 1rem;
           left: 1.5rem;
+        }
+      }
+    }
+
+    // Test #5
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(absolute (0 '1/2u' '5/12' '2/5%'));
+        }
+      }
+      @include expect {
+        .test {
+          position: absolute;
+          top: 0;
+          right: 0.25rem;
+          bottom: 41.66667%;
+          left: 40%;
+        }
+      }
+    }
+
+    // Test #6
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(relative);
+        }
+      }
+      @include expect {
+        .test {
+          position: relative;
+        }
+      }
+    }
+
+    // Test #7
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(absolute (null null '5/12' '2/5%'));
+        }
+      }
+      @include expect {
+        .test {
+          position: absolute;
+          bottom: 41.66667%;
+          left: 40%;
         }
       }
     }

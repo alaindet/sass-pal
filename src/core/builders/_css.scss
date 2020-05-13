@@ -1,0 +1,39 @@
+/// Sass Pal builder to output CSS directly, it's just a bypass. Useful for
+/// readability. It accepts a map where key is CSS rule and value is whatever
+/// that rule accepts
+///
+/// @access public
+/// @group core-builders
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss Use builders and "native" css together
+///   .test {
+///     @include pal((
+///       color: 'red' 'teal',
+///       space: px3,
+///       css: (
+///         cursor: pointer,
+///         transform-origin: center,
+///       ),
+///     ));
+///   }
+///   // .test {
+///   //   background-color: #e53e3e;
+///   //   color: #38b2ac;
+///   //   padding-right: 1.5rem;
+///   //   padding-left: 1.5rem;
+///   //   cursor: pointer;
+///   //   transform-origin: center;
+///   // }
+/// 
+/// @param {Map} $input
+/// @output Native css declaration
+///
+@mixin pal-css($input)
+{
+  @content;
+
+  @each $rule, $value in $input {
+    #{$rule}: $value;
+  }
+}

@@ -7,7 +7,8 @@
 /// @require {function} pal-map-are-keys
 /// @require {function} pal-map-get-all
 /// @require {function} pal-parse-sides
-/// @require {function} _pal-use-unit
+/// @require {function} pal-parse-value
+/// @require {function} pal-parse-unit
 ///
 /// @example scss With 1 value
 ///   pal-border(#aaa);
@@ -95,7 +96,7 @@
       // width color
       @else if (length($list) == 2) {
         $values: map-merge($values, (
-          'width': _pal-use-unit(nth($list, 1)),
+          'width': nth($list, 1),
           'color': nth($list, 2),
         ));
       }
@@ -103,7 +104,7 @@
       // width style color
       @else if (length($list) == 3) {
         $values: map-merge($values, (
-          'width': _pal-use-unit(nth($list, 1)),
+          'width': nth($list, 1),
           'style': nth($list, 2),
           'color': nth($list, 3),
         ));
@@ -112,12 +113,20 @@
       // with style color radius
       @else if (length($list) == 4) {
         $values: map-merge($values, (
-          'width': _pal-use-unit(nth($list, 1)),
+          'width': nth($list, 1),
           'style': nth($list, 2),
           'color': nth($list, 3),
           'radius': nth($list, 4),
         ));
       }
+
+      // Optionally transform given values to Sass Pal stored values
+      $values: (
+        'width': pal-parse-unit(map-get($values, 'width'), 'units'),
+        'style': map-get($values, 'style'),
+        'color': pal-parse-value(map-get($values, 'color'), 'colors'),
+        'radius': map-get($values, 'radius'),
+      );
 
       // Merge input values with default values
       @each $key, $default in $defaults {
@@ -189,14 +198,14 @@
         $radii: map-get($values, 'radius');
 
         @if (type-of($radii) == 'list') {
+          $parsed-radii: ();
           @each $radius in $radii {
-            $index: index($radii, $radius);
-            $_: set-nth($radii, $index, _pal-use-unit($radius));
+            $value: pal-parse-unit($radius, $default: 'relative-units');
+            $parsed-radii: append($parsed-radii, $value);
           }
-        }
-
-        @if (type-of($radii) == 'number') {
-          $radii: _pal-use-unit($radii);
+          $radii: $parsed-radii;
+        } @else {
+          $radii: pal-parse-unit($radii, $default: 'relative-units');
         }
 
         border-radius: $radii;

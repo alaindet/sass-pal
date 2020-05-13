@@ -12,27 +12,29 @@
 /// @access public
 /// @group core-builders
 /// @author Alain D'Ettorre <alain.det@gmail.com>
-/// @require {function} _pal-use-unit
+/// @require {function} pal-parse-value
+/// @require {function} pal-parse-unit
+/// @require {function} pal-list-get
 ///
 /// @example scss With 4 numbers
-///   pal-position((absolute, (0, 2rem, auto, 2rem)));
+///   pal-position(absolute (0 2rem auto 2rem)));
 ///   // position: absolute;
 ///   // top: 0;
 ///   // right: 2rem;
 ///   // bottom: auto;
 ///   // left: 2rem;
 ///
-/// @example scss With 2 values (alternate list syntax without comma)
+/// @example scss With 2 numbers (alternate list syntax without comma)
 ///
-///   pal-position((relative, (10px 20px)));
+///   pal-position(relative (10px 20px));
 ///   // position: relative;
 ///   // top: 10px;
 ///   // bottom: 10px;
 ///   // right: 20px;
 ///   // left: 20px;
-/// @example scss With 1 value
 ///
-///   pal-position((fixed, 30px));
+/// @example scss With 1 number
+///   pal-position(fixed 30px);
 ///   // position: fixed;
 ///   // top: 30px;
 ///   // bottom: 30px;
@@ -40,7 +42,7 @@
 ///   // left: 30px;
 ///
 /// @example scss With null values
-///   pal-position((absolute, (null 40px)));
+///   pal-position(absolute (null 40px));
 ///   // position: absolute;
 ///   // right: 40px;
 ///   // left: 40px;
@@ -52,6 +54,18 @@
 ///   // right: 0.5rem;
 ///   // bottom: 1rem;
 ///   // left: 1.5rem;
+///
+/// @example scss Using Sass Pal's absolute  and relative values
+///   pal-position(fixed (0 '1/2u' '5/12%' '2/5%'));
+///   // position: fixed;
+///   // top: 0;
+///   // right: 0.25rem;
+///   // bottom: 41.66%;
+///   // left: 40%;
+///
+/// @example scss Passing only one string
+///   pal-position(relative);
+///   // position: relative;
 ///
 /// @param {List} $list
 /// @output Position-related rules
@@ -72,44 +86,48 @@
     position: $position;
   }
 
-  $sides: nth($list, 2);
+  $sides: pal-list-get($list, 2);
 
-  // 1 value: all sides
-  @if (type-of($sides) == number) {
-    $side: $sides;
-    @each $rule in $side-rules {
-      #{$rule}: _pal-use-unit($side);
+  @if ($sides != null) {
+
+    // 1 number: all sides
+    @if (type-of($sides) == number) {
+      $side: $sides;
+      @each $rule in $side-rules {
+        #{$rule}: pal-parse-unit($side, $default: 'relative-units');
+      }
     }
-  }
 
-  // 1 value: all sides
-  @else if (length($sides) == 1) {
-    $side: nth($sides, 1);
-    @each $rule in $side-rules {
-      #{$rule}: _pal-use-unit($side);
+    // 1 number: all sides (list)
+    @else if (length($sides) == 1) {
+      $side: nth($sides, 1);
+      @each $rule in $side-rules {
+        #{$rule}: pal-parse-unit($side, $default: 'relative-units');
+      }
     }
-  }
 
-  // 2 values: vertical, horizontal
-  @else if (length($sides) == 2) {
-    @for $i from 1 through 2 {
-      $side: nth($sides, $i);
-      @if ($side != null) {
-        @each $rule in nth($side-rule-groups, $i) {
-          #{$rule}: _pal-use-unit($side);
+    // 2 numbers: vertical, horizontal
+    @else if (length($sides) == 2) {
+      @for $i from 1 through 2 {
+        $side: nth($sides, $i);
+        @if ($side != null) {
+          @each $rule in nth($side-rule-groups, $i) {
+            #{$rule}: pal-parse-unit($side, $default: 'relative-units');
+          }
         }
       }
     }
-  }
 
-  // 4 values: all sides clockwise from top
-  @else if (length($sides) == 4) {
-    @for $i from 1 through 4 {
-      $side: nth($sides, $i);
-      $rule: nth($side-rules, $i);
-      @if ($side != null) {
-        #{$rule}: _pal-use-unit($side);
+    // 4 numbers: all sides clockwise from top
+    @else if (length($sides) == 4) {
+      @for $i from 1 through 4 {
+        $side: nth($sides, $i);
+        $rule: nth($side-rules, $i);
+        @if ($side != null) {
+          #{$rule}: pal-parse-unit($side, $default: 'relative-units');
+        }
       }
     }
+    
   }
 }

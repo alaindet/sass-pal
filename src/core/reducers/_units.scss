@@ -4,6 +4,8 @@
 /// @access private
 /// @group core-reducers
 /// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-number-decimals
+/// @require {function} pal-get
 ///
 /// @param {Map} $store
 /// @param {Map} $old-value
@@ -19,10 +21,9 @@
   $units: map-get($store, 'units');
 
   @each $label, $factor in $units {
-    $units: map-merge(
-      $units,
-      (#{$label}: if($factor == 0, 0, $factor * $base-unit))
-    );
+    $value: if($factor == 0, 0, $factor * $base-unit);
+    $value: pal-number-decimals($value, pal-get('pal.decimals'));
+    $units: map-merge($units, (#{$label}: $value));
   }
 
   @return map-merge($store, ('units': $units));

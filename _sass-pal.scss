@@ -1,9 +1,12 @@
+// Helper functions
 @import './src/helpers/functions/list-join';
 @import './src/helpers/functions/list-get';
 @import './src/helpers/functions/list-sort-by-length-desc';
 @import './src/helpers/functions/number-half-plus-one';
+@import './src/helpers/functions/number-decimals';
 @import './src/helpers/functions/number-get-unit';
 @import './src/helpers/functions/number-has-unit';
+@import './src/helpers/functions/number-is-integer';
 @import './src/helpers/functions/number-to-string';
 @import './src/helpers/functions/string-split';
 @import './src/helpers/functions/string-starts-with';
@@ -13,25 +16,29 @@
 @import './src/helpers/functions/map-is-any-key';
 @import './src/helpers/functions/map-set';
 
+// Helper mixins
 @import './src/helpers/mixins/media-query';
 @import './src/helpers/mixins/pseudo-class';
 
+// Core functions
 @import './src/core/functions/color-get';
-@import './src/core/functions/color-parse';
 @import './src/core/functions/has-any-device-query';
 @import './src/core/functions/parse-device-query';
 @import './src/core/functions/parse-sides';
+@import './src/core/functions/parse-unit';
+@import './src/core/functions/parse-value';
 @import './src/core/functions/group-by-device-query';
-@import './src/core/functions/use-unit';
 @import './src/core/functions/store-get';
 @import './src/core/functions/store-set';
 
+// Core reducers
 @import './src/core/reducers/devices';
 @import './src/core/reducers/relative-units';
 @import './src/core/reducers/units';
 @import './src/core/reducers/unit';
 @import './src/core/reducers/_reducers';
 
+// Core stored values
 @import './src/core/store/store';
 @import './src/core/store/colors';
 @import './src/core/store/pseudo-classes';
@@ -39,13 +46,15 @@
 @import './src/core/store/units';
 @import './src/core/store/relative-units';
 
+// Core builders
 @import './src/core/builders/border';
 @import './src/core/builders/color';
-@import './src/core/builders/display';
+@import './src/core/builders/css';
 @import './src/core/builders/flex';
 @import './src/core/builders/position';
 @import './src/core/builders/size';
 @import './src/core/builders/space';
 @import './src/core/builders/_builders';
 
+// Sass Pal
 @import './src/core/pal';

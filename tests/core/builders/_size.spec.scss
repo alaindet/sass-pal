@@ -72,5 +72,51 @@
       }
     }
 
+    // Test #5
+    @include assert {
+      @include output {
+        .test {
+          @include pal-size((
+            'wmin-1/2u',
+            'w-3/4',
+            'wmax-full',
+            'hmin-1/2',
+            'h-3/4u',
+            'hmax-full',
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          min-width: 0.25rem;
+          width: 75%;
+          max-width: 100%;
+          min-height: 50%;
+          height: 0.375rem;
+          max-height: 100%;
+        }
+      }
+    }
+
+    // Test #6
+    @include assert {
+      @include output {
+        .test {
+          @include pal-size((
+            'w-half',
+            'h-4u',
+            'wmin-3/4%',
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          width: 50%;
+          height: 2rem;
+          min-width: 75%;
+        }
+      }
+    }
+
   }
 }

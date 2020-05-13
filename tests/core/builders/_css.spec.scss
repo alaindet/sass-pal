@@ -1,0 +1,69 @@
+@include describe('[Core Mixin] pal-css') {
+  @include it('Builds native CSS rules') {
+
+    // Test #1
+    @include assert {
+      @include output {
+        .test {
+          @include pal-css((
+            cursor: pointer,
+            transform-origin: center,
+            transition: all 0.2s ease-in-out,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          cursor: pointer;
+          transform-origin: center;
+          transition: all 0.2s ease-in-out;
+        }
+      }
+    }
+
+    // Test #2
+    @include assert {
+      @include output {
+        .test {
+          @include pal((
+            css: (
+              cursor: pointer,
+              transform-origin: center,
+              transition: all 0.2s ease-in-out,
+            )
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          cursor: pointer;
+          transform-origin: center;
+          transition: all 0.2s ease-in-out;
+        }
+      }
+    }
+
+    // Test #2
+    @include assert {
+      @include output {
+        .test {
+          @include pal((
+            _: (
+              cursor: pointer,
+              transform-origin: center,
+              transition: all 0.2s ease-in-out,
+            )
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          cursor: pointer;
+          transform-origin: center;
+          transition: all 0.2s ease-in-out;
+        }
+      }
+    }
+
+  }
+}

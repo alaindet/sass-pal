@@ -10,9 +10,11 @@
 @import './helpers/functions/map-get.spec';
 @import './helpers/functions/map-is-any-key.spec';
 @import './helpers/functions/map-set.spec';
+@import './helpers/functions/number-decimals.spec';
 @import './helpers/functions/number-get-unit.spec';
 @import './helpers/functions/number-half-plus-one.spec';
 @import './helpers/functions/number-has-unit.spec';
+@import './helpers/functions/number-is-integer.spec';
 @import './helpers/functions/number-to-string.spec';
 @import './helpers/functions/string-split.spec';
 @import './helpers/functions/string-starts-with.spec';
@@ -31,17 +33,17 @@
 @import './core/functions/store-get.spec';
 @import './core/functions/store-set.spec';
 @import './core/functions/color-get.spec';
-@import './core/functions/color-parse.spec';
 @import './core/functions/group-by-device-query.spec';
 @import './core/functions/has-any-device-query.spec';
 @import './core/functions/parse-device-query.spec';
 @import './core/functions/parse-sides.spec';
-@import './core/functions/use-unit.spec';
+@import './core/functions/parse-unit.spec';
+@import './core/functions/parse-value.spec';
 
 // Core builders
 @import './core/builders/border.spec';
 @import './core/builders/color.spec';
-@import './core/builders/display.spec';
+@import './core/builders/css.spec';
 @import './core/builders/flex.spec';
 @import './core/builders/position.spec';
 @import './core/builders/size.spec';

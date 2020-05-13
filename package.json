@@ -1,6 +1,6 @@
 {
   "name": "sass-pal",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Sass Pal helps styling your applications without getting in the way",
   "main": "_sass-pal.scss",
   "scripts": {
@@ -32,7 +32,7 @@
     "glob": "^7.1.6",
     "jest": "^25.4.0",
     "node-sass": "^4.13.1",
-    "np": "5.2.1",
+    "np": "^5.2.1",
     "sass-true": "^5.0.0",
     "sassdoc": "^2.7.1",
     "standard-version": "^7.1.0"

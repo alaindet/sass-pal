@@ -67,5 +67,72 @@
       }
     }
 
+    // Test #4
+    @include assert {
+      @include output {
+        .test {
+          @include pal-flex((
+            'dir': column,
+            'main-axis': around,
+            'cross-axis': stretch,
+            'grow': normal,
+            'inline': true,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          display: inline-flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: stretch;
+          flex-grow: 1;
+        }
+      }
+    }
+
+    // Test #5
+    @include assert {
+      @include output {
+        .test {
+          @include pal-flex((
+            'dir': col,
+            'main-axis': center,
+            'cross-axis': stretch,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: stretch;
+        }
+      }
+    }
+
+    // Test #6
+    @include assert {
+      @include output {
+        .test-1 { @include pal-flex(( basis: '1/2' )); }
+        .test-2 { @include pal-flex(( basis: '1/2%' )); }
+        .test-3 { @include pal-flex(( basis: '1/2u' )); }
+      }
+      @include expect {
+        .test-1 {
+          flex-basis: 50%;
+        }
+
+        .test-2 {
+          flex-basis: 50%;
+        }
+
+        .test-3 {
+          flex-basis: 0.25rem;
+        }
+      }
+    }
+
   }
 }

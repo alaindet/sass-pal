@@ -12,51 +12,55 @@
 /// - `end` for `flex-end`
 /// - `between` for `space-between`
 /// - `around` for `space-around`
+/// - `evenly` for `space-evenly`
 ///
 /// # Properties for flex containers
 /// - `dir`
 ///   - *type*: String
-///   - *note*: Accepts anything `flex-direction` accepts
+///   - *note*: Also accepts anything `flex-direction` accepts
+/// - `inline`
+///   - *type*: Bool
+///   - *note*: Outputs `display: inline-flex`
 /// - `wrap`
 ///   - *type*: Bool
 ///   - *values*: true|false
 /// - `main-axis`
 ///   - *type*: String
 ///   - *aliases*: start|end|between|around
-///   - *note*: Accepts anything `justify-content` accepts
+///   - *note*: Also accepts anything `justify-content` accepts
 /// - `cross-axis`
 ///   - *type*: String
 ///   - *aliases*: start|end
-///   - *note*: Accepts anything `align-items` accepts
+///   - *note*: Also accepts anything `align-items` accepts
 /// - `cross-lines`
 ///   - *type*: String
 ///   - *aliases*: start|center|end|between|around
-///   - *note*: Accepts anything `align-content` accepts
-/// - `flex`
-///   - *type*: List
-///   - *values*: Any valid List for native `flex` CSS rule
+///   - *note*: Also accepts anything `align-content` accepts
 ///
 /// # Properties for flex items
 /// - `self-align`
 ///   - *type*: String
 ///   - *alias*: start|end
-///   - *note*: Accepts anything `align-self` accepts
+///   - *note*: Also accepts anything `align-self` accepts
 /// - `basis`
 ///   - *type*: Number|String
 ///   - *values*: Any of the defined `relative-units` (ex.: 'third')
-///   - *note*: Accepts anything `flex-basis` accepts
+///   - *note*: Also accepts anything `flex-basis` accepts
 /// - `grow`
 ///   - *type*: Number|String
 ///   - *values*: 'no'|'normal'|'more' or custom Number
-///   - *note*: Accepts anything `flex-grow` accepts
+///   - *note*: Also accepts anything `flex-grow` accepts
 /// - `shrink`
 ///   - *type*: Number|String
 ///   - *values*: 'least'|'less'|'normal'|'more'|'most' or custom Number
-///   - *note*: Accepts anything `flex-shrink` accepts
+///   - *note*: Also accepts anything `flex-shrink` accepts
 /// - `order`
 ///   - *type*: Number|String
 ///   - *values*: 'first'|'last' or custom Number
-///   - *note*: Accepts anything `order` accepts
+///   - *note*: Also accepts anything `order` accepts
+/// - `flex`
+///   - *type*: List
+///   - *values*: Any valid List for native `flex` CSS rule
 ///
 /// @access public
 /// @group core-builders
@@ -110,16 +114,32 @@
     align-items: center;
   } @else {
 
-    // Output display: flex only on Flexbox containers, not items!
-    $item-rules: ('self-align', 'basis', 'grow', 'shrink', 'order');
-    @if (pal-map-is-any-key($map, $item-rules) == false) {
-      display: flex;
+    // Output display: flex|inline-flex only for Flexbox containers!
+    $requires-display: ('dir', 'wrap', 'main-axis', 'cross-axis', 'cross-lines');
+    @if (pal-map-is-any-key($map, $requires-display)) {
+
+      // Container: Inline
+      @if (map-get($map, 'inline') == true) {
+        display: inline-flex;
+      } @else {
+        display: flex;
+      }
     }
 
     // Container: Direction
     $value: map-get($map, 'dir');
-    $allowed: 'row','row-reverse','column','column-reverse';
-    @if ($value != null and index($allowed, $value) != null) {
+    @if ($value != null) {
+
+      $aliases: (
+        'col': 'column',
+        'col-reverse': 'column-reverse',
+      );
+
+      // Aliased value
+      @if (index(map-keys($aliases), $value)) {
+        $value: map-get($aliases, $value);
+      }
+
       flex-direction: #{$value};
     }
 
@@ -132,17 +152,16 @@
     $value: map-get($map, 'main-axis');
     @if ($value != null) {
 
-      $values: (
+      $aliases: (
         'start': 'flex-start',
         'end': 'flex-end',
         'between': 'space-between',
         'around': 'space-around',
       );
-      $allowed: map-keys($values);
 
-      // Controlled value
-      @if (index($allowed, $value)) {
-        $value: map-get($values, $value);
+      // Aliased value
+      @if (index(map-keys($aliases), $value)) {
+        $value: map-get($aliases, $value);
       }
 
       justify-content: #{$value};
@@ -152,15 +171,14 @@
     $value: map-get($map, 'cross-axis');
     @if ($value != null) {
 
-      $values: (
+      $aliases: (
         'start': 'flex-start',
         'end': 'flex-end',
       );
-      $allowed: map-keys($values);
 
-      // Controlled value
-      @if (index($allowed, $value)) {
-        $value: map-get($values, $value);
+      // Aliased value
+      @if (index(map-keys($aliases), $value)) {
+        $value: map-get($aliases, $value);
       }
 
       align-items: #{$value};
@@ -170,17 +188,16 @@
     $value: map-get($map, 'cross-lines');
     @if ($value != null) {
 
-      $values: (
+      $aliases: (
         'start': 'flex-start',
         'end': 'flex-end',
         'between': 'space-between',
         'around': 'space-around',
       );
-      $allowed: map-keys($values);
 
-      // Controlled value
-      @if (index($allowed, $value)) {
-        $value: map-get($values, $value);
+      // Aliased value
+      @if (index(map-keys($aliases), $value)) {
+        $value: map-get($aliases, $value);
       }
 
       align-content: #{$value};
@@ -196,15 +213,14 @@
     $value: map-get($map, 'self-align');
     @if ($value != null) {
 
-      $values: (
+      $aliases: (
         'start': 'flex-start',
         'end': 'flex-end',
       );
-      $allowed: map-keys($values);
 
-      // Controlled value
-      @if (index($allowed, $value)) {
-        $value: map-get($values, $value);
+      // Aliased value
+      @if (index(map-keys($aliases), $value)) {
+        $value: map-get($aliases, $value);
       }
 
       align-self: #{$value};
@@ -214,10 +230,9 @@
     $value: map-get($map, 'basis');
     @if ($value != null) {
 
-      $relative-unit: map-get(pal-get('relative-units'), $value);
-
-      @if ($relative-unit != null) {
-        $value: $relative-unit;
+      // Convert via stored values
+      @if (type-of($value) == 'string') {
+        $value: pal-parse-unit($value, $default: 'relative-units');
       }
 
       flex-basis: $value;
@@ -227,14 +242,15 @@
     $value: map-get($map, 'grow');
     @if ($value != null) {
 
-      $values: (
+      $aliases: (
         'no': 0,
         'normal': 1,
         'more': 2,
       );
 
-      @if (map-get($values, $value) != null) {
-        $value: map-get($values, $value);
+      // Aliased value
+      @if (index(map-keys($aliases), $value) != null) {
+        $value: map-get($aliases, $value);
       }
 
       flex-grow: $value;
@@ -244,7 +260,7 @@
     $value: map-get($map, 'shrink');
     @if ($value != null) {
       
-      $values: (
+      $aliases: (
         'least': 0.25,
         'less': 0.5,
         'normal': 1,
@@ -252,8 +268,9 @@
         'most': 4,
       );
 
-      @if (map-get($values, $value) != null) {
-        $value: map-get($values, $value);
+      // Aliased value
+      @if (index(map-keys($aliases), $value) != null) {
+        $value: map-get($aliases, $value);
       }
 
       flex-shrink: $value;
@@ -263,13 +280,14 @@
     $value: map-get($map, 'order');
     @if ($value != null) {
 
-      $values: (
+      $aliases: (
         'first': -1000,
         'last': 1000,
       );
 
-      @if (map-get($values, $value) != null) {
-        $value: map-get($values, $value);
+      // Aliased value
+      @if (index(map-keys($aliases), $value) != null) {
+        $value: map-get($aliases, $value);
       }
 
       order: $value;
