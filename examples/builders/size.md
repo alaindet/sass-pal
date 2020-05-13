@@ -1,8 +1,8 @@
 # Examples for `size` builder
 
-The `size` builder is used to set `width`, `height` and their `max-` and `min-` variations. Values are treated as Sass Pal's `relative-units` by default, but you can pass a unit suffix to use `units` instead.
+The `size` builder is used to set `width`, `height` and their `max-` and `min-` variations. Numbers are treated as Sass Pal's `relative-units` by default, but you can pass a unit suffix to use `units` instead.
 
-See the [Documentation](https://alaindet.github.io/sass-pal/) for further details. All examples here use `pal-size`, but you can also pass the `size` key to `pal`
+See the [Documentation](https://alaindet.github.io/sass-pal/#core-builders-mixin-pal-size) for further details. All examples here use `pal-size`, but you can also pass the `size` key to `pal`
 
 ```scss
 .use-the-builder {

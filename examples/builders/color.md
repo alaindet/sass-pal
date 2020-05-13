@@ -5,7 +5,7 @@ The `color` builder accepts either a list of colors (1 to 3 elements) or a map w
 - `text` for `color`
 - `border` for `border-color`
 
-See the [Documentation](https://alaindet.github.io/sass-pal/) for further details.
+See the [Documentation](https://alaindet.github.io/sass-pal/#core-builders-mixin-pal-color) for further details.
 
 All examples here use `pal-color`, but you can also pass the `color` key to `pal`
 

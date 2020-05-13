@@ -1,6 +1,6 @@
 # Examples for `position` builder
 
-The `position` builder is especially useful when you need to set the position and then you need `top`, `right`, `bottom` and/or `left` as well. See the [Documentation](https://alaindet.github.io/sass-pal/) for further details. All examples here use `pal-position`, but you can also pass the `position` key to `pal`
+The `position` builder is especially useful when you need to set the position and then you need `top`, `right`, `bottom` and/or `left` as well. See the [Documentation](https://alaindet.github.io/sass-pal/#core-builders-mixin-pal-position) for further details. All examples here use `pal-position`, but you can also pass the `position` key to `pal`
 
 ```scss
 .use-the-builder {

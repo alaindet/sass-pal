@@ -1,6 +1,6 @@
 # Examples for `flex` builder
 
-The `flex` builder is used to set any Flexbox rule and accepts a map. It can also accept `'center'` as a bypass (see example #2). Keys of the map reflect existing CSS flex rules and the map values are either custom values (like aliases) or native CSS values. See the [Documentation](https://alaindet.github.io/sass-pal/) for further details.
+The `flex` builder is used to set any Flexbox rule and accepts a map. It can also accept `'center'` as a bypass (see example #2). Keys of the map reflect existing CSS flex rules and the map values are either custom values (like aliases) or native CSS values. See the [Documentation](https://alaindet.github.io/sass-pal/#core-builders-mixin-pal-flex) for further details.
 
 Aliases are
 - `start` for `flex-start`

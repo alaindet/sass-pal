@@ -1,6 +1,6 @@
 # Examples for `border` builder
 
-See the [Documentation](https://alaindet.github.io/sass-pal/) for further details.
+See the [Documentation](https://alaindet.github.io/sass-pal/#core-builders-mixin-pal-border) for further details.
 
 All examples here use `pal-border`, but you can also pass the `border` key to `pal`
 
