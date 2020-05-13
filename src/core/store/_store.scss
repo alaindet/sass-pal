@@ -39,9 +39,19 @@ $_PAL_STORE: (
       'b': ('bottom'),
       'l': ('left'),
 
-      // Two sides
+      // Two opposite sides
       'x': ('right', 'left'),
       'y': ('top', 'bottom'),
+
+      // Two adjacent sides (corners)
+      'tr': ('top', 'right'),
+      'rb': ('right', 'bottom'),
+      'bl': ('bottom', 'left'),
+      'lt': ('left', 'top'),
+      'rt': ('top', 'right'), // Alias of 'tr'
+      'br': ('bottom', 'right'), // Alias of 'rb'
+      'lb': ('bottom', 'left'), // Alias of 'bl'
+      'tl': ('left', 'top'), // Alias of 'tl'
 
       // Three sides
       '-t': ('right', 'bottom', 'left'),
