@@ -7,6 +7,8 @@ You can define custom Sass Pal builders by defining the `pal-custom-builders` mi
 ///
 @mixin shadow-builder($value)
 {
+  @content;
+
   // Parse input
   $side: nth($value, 1);
   $size: nth($value, 2);
@@ -30,6 +32,8 @@ You can define custom Sass Pal builders by defining the `pal-custom-builders` mi
 ///
 @mixin pal-custom-builders($builder, $value)
 {
+  @content;
+
   @if ('shadow' == $builder) {
     @include shadow-builder($value);
   }
