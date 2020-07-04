@@ -1,4 +1,4 @@
-# Examples for `border` builder
+# Examples for `color` builder
 
 The `color` builder accepts either a list of colors (1 to 3 elements) or a map with pre-determined but optional keys, which are
 - `background` for `background-color`

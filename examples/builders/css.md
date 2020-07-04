@@ -2,6 +2,8 @@
 
 The `css` builder is used as a bypass and accepts a map so that keys are CSS rules and values are passed to that rule.
 
+If you're using the builder in a *request map*, you can also use a shorter alias `_` (See *Example #3*)
+
 See the [Documentation](https://alaindet.github.io/sass-pal/#core-builders-mixin-pal-css) for further details. All examples here use `pal-css`, but you can also pass the `css` key to `pal`
 
 ```scss
@@ -31,7 +33,6 @@ See the [Documentation](https://alaindet.github.io/sass-pal/#core-builders-mixin
 ```
 
 ## Example #2: Pass CSS rules in a Sass Pal request map
-
 ```scss
 .example-2a {
   @include pal((
@@ -76,6 +77,33 @@ See the [Documentation](https://alaindet.github.io/sass-pal/#core-builders-mixin
   display: flex;
   justify-content: center;
   align-items: center;
+}
+*/
+```
+
+## Example #3: Using the `_` alias in a request map
+```scss
+.example-3 {
+  @include pal((
+    space: 'm1' 'p2',
+    size: 'w-full' 'h-full',
+    _: (
+      transition: 0.2s all ease-in,
+      transform-origin: center,
+      cursor: pointer,
+    )
+  ));
+}
+
+/*
+.example-3 {
+  margin: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  transition: 0.2s all ease-in;
+  transform-origin: center;    
+  cursor: pointer;
 }
 */
 ```

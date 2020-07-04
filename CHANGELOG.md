@@ -4,10 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## Unreleased
+## [0.7.2] - 2020-07-04
+
+### Added
+- Add examples for `_` builder (`css` alias) in `examples/builders/css.md`
 
 ### Fixed
 - Add `@content` to custom builder example
+- Fix typo in `examples/builders/color.md`
 
 ## [0.7.1] - 2020-05-14
 
