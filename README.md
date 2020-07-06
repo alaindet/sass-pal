@@ -459,7 +459,7 @@ The reducer ensures @media queries do not overlap by subtracting a very small le
   'mobile':  (320px,  768px),
   'tablet':  (768px,  1024px),
   'desktop': (1024px, 1440px),
-  'over':    (1440px, 9999px),
+  'wider':    (1440px, 9999px),
 )
 ```
 
