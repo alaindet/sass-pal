@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Added
 - Added "publish" npm script
 
+### Removed
+- `standard-version` package
+
 ### Fixed
 - Fix typo in `README.md`
 
