@@ -10,7 +10,7 @@
 ///
 /// @param {String} $key
 /// @param {Null | Bool | Number | Color | String | List | Map} $value
-/// @return {Null | Bool | Number | Color | String | List | Map} The set value
+/// @return {Null}
 ///
 @function pal-set($key, $value)
 {

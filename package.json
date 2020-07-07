@@ -34,7 +34,7 @@
     "node-sass": "^4.13.1",
     "np": "^5.2.1",
     "sass-true": "^5.0.0",
-    "sassdoc": "^2.7.1",
+    "sassdoc": "^2.7.1"
   },
   "config": {
     "access": "public"
