@@ -4,13 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## Unreleased
+
+### Changed
+- Use `pal-set-merge` where needed in the `examples/`
+
+
 ## [0.8.2] - 2020-07-07
+
+### Fixed
 - Fixed npm script for publishing the package thanks to [this](https://github.com/sindresorhus/np/issues/470).
+
 
 ## [0.8.1] - 2020-07-07
 
 ### Fixed
 - Fixed core initializers imports in `/_sass-pal.scss`
+
 
 ## [0.8.0] - 2020-07-07
 
@@ -26,6 +36,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Fixed
 - Fix typo in `README.md`
 
+
 ## [0.7.2] - 2020-07-04
 
 ### Added
@@ -35,11 +46,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Add `@content` to custom builder example
 - Fix typo in `examples/builders/color.md`
 
+
 ## [0.7.1] - 2020-05-14
 
 ### Fixed
 - `pal-builder` called removed builders
 - `pal-builder` sassdoc documentation
+
 
 ## [0.7.0] - 2020-05-14
 
@@ -64,6 +77,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - `display` builder, use `css` builder instead
 - `pal-use-unit()`, replaced by `pal-parse-unit()`
 - `pal-color-parse`, replaced by `pal-parse-value()`
+
 
 ## [0.6.2] - 2020-05-04
 ### Fixed

@@ -54,14 +54,14 @@ $_: pal-set('navbar', (
 */
 ```
 
-## Add to an existing value
+## Add to an existing map in store
 
-You can use default data while setting a value to add to it or just override a key, instead of an *hard override*
+If you just want to add and/or override a few keys in an already existing map into the store, you can use `pal-set-merge` instead of `pal-set`
 
 ```scss
-$_: pal-set('colors', map-merge(pal-get('colors'), (
+$_: pal-set-merge('colors', (
 
-  // Overwrite an existing color
+  // Override an existing color
   'blue': #0060ff,
 
   // Add two new colors
