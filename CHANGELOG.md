@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## Unreleased
 
+### Added
+- `pal-compare` helper function
+
 ### Changed
 - Use `pal-set-merge` where needed in the `examples/`
 

@@ -1,0 +1,20 @@
+/// Compares any two Sass values and returns true if they contain the same data.
+/// They don't have to be the same reference
+///
+/// @access public
+/// @group helper-functions-any
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss Compare some values
+///   pal-compare(null, null); // true
+///   pal-compare(1 2 3, 1 2 3); // true
+///   pal-compare((a:1,b:2), (a:1,b:2)); // true
+///
+/// @param {Null | Bool | Number | Color | String | List | Map} $a
+/// @param {Null | Bool | Number | Color | String | List | Map} $b
+/// @return {Bool}
+///
+@function pal-compare($a, $b)
+{
+  @return inspect($a) == inspect($b);
+}
