@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [0.8.0] - 2020-07-07
+
+### Added
+- Added `pal-init-reset` and `pal-init-normalize`
+- Added `pal-set-merge` core function
+- Added "publish" npm script
+- `examples/` and `package-lock.json` to `.npmignore`
+
+### Removed
+- `standard-version` package
+
+### Fixed
+- Fix typo in `README.md`
+
 ## [0.7.2] - 2020-07-04
 
 ### Added

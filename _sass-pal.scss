@@ -30,6 +30,7 @@
 @import './src/core/functions/group-by-device-query';
 @import './src/core/functions/store-get';
 @import './src/core/functions/store-set';
+@import './src/core/functions/store-set-merge';
 
 // Core reducers
 @import './src/core/reducers/devices';

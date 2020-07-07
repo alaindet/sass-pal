@@ -32,6 +32,7 @@
 // Core functions
 @import './core/functions/store-get.spec';
 @import './core/functions/store-set.spec';
+@import './core/functions/store-set-merge.spec';
 @import './core/functions/color-get.spec';
 @import './core/functions/group-by-device-query.spec';
 @import './core/functions/has-any-device-query.spec';

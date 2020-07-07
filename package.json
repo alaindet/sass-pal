@@ -1,6 +1,6 @@
 {
   "name": "sass-pal",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Sass Pal helps styling your applications without getting in the way",
   "main": "_sass-pal.scss",
   "scripts": {
@@ -8,7 +8,7 @@
     "doc": "sassdoc ./src --config ./sassdoc.yaml",
     "update-docs": "./scripts/doc.sh",
     "test": "jest",
-    "release": "standard-version"
+    "publish": "np"
   },
   "repository": {
     "type": "git",
@@ -34,8 +34,7 @@
     "node-sass": "^4.13.1",
     "np": "^5.2.1",
     "sass-true": "^5.0.0",
-    "sassdoc": "^2.7.1",
-    "standard-version": "^7.1.0"
+    "sassdoc": "^2.7.1"
   },
   "config": {
     "access": "public"

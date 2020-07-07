@@ -1,0 +1,13 @@
+@include describe('[Core Function] pal-set-merge') {
+  @include it('Merges input map with a stored map') {
+
+    // Test #1
+    $_: pal-set('test-1', ('a': 1, 'b': 2));
+    $given: ('b': 20, 'c': 30);
+    $_: pal-set-merge('test-1', $given);
+    $assertion: pal-get('test-1');
+    $expected: ('a': 1, 'b': 20, 'c': 30);
+    @include assert-equal($assertion, $expected);
+
+  }
+}

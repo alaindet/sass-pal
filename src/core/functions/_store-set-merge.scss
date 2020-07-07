@@ -1,0 +1,48 @@
+/// Merges a given map (the *merge map*) into an existing map (the *stored map*)
+/// inside the store, key by key
+/// - If stored map does not exist, store merge map as a new item of the store
+/// - If stored map does exist into the store
+///   - Keys existing only into the stored map are preserved
+///   - Keys existing in both maps are chosen from the merge map (overwrite)
+///   - Keys existing only into the merge map are added to the stored map
+/// **Works only when adding a map to an existing map in the store**
+/// 
+/// @access public
+/// @group core-functions
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-get
+/// @require {function} pal-set
+/// 
+/// @example scss Add a new device
+///   $_: pal-set-merge('devices', (
+///     'desktop-small': (1024px, 1280px),
+///     'desktop': (1280px, 1440px),
+///   ));
+///   pal-get('devices');
+///   // 'devices': (
+///   //   'mobile':  (320px,  768px),        // Preserved
+///   //   'tablet':  (768px,  1024px),       // Preserved
+///   //   'desktop': (1280, 1440px),         // Overwritten
+///   //   'wider':    (1440px, 9999px),      // Preserved
+///   //   'desktop-small': (1024px, 1280px), // Added
+///   // )
+///
+/// @param {String} $key
+/// @param {Map} $value
+/// @return {Null}
+///
+@function pal-set-merge($key, $value)
+{
+  $old-value: pal-get($key);
+  $new-value: null;
+
+  @if ($old-value != null) {
+    $new-value: map-merge($old-value, $value);
+  } @else {
+    $new-value: $value;
+  }
+
+  $_: pal-set($key, $new-value);
+
+  @return null;
+}
