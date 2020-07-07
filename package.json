@@ -8,7 +8,7 @@
     "doc": "sassdoc ./src --config ./sassdoc.yaml",
     "update-docs": "./scripts/doc.sh",
     "test": "jest",
-    "publish": "np"
+    "release": "np"
   },
   "repository": {
     "type": "git",
