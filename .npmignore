@@ -1,5 +1,7 @@
 scripts/
 doc/
+examples/
 demo.scss
 README.md
 sassdoc.yaml
+package-lock.json

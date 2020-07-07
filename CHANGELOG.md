@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Added
 - Added `pal-set-merge` core function
 - Added "publish" npm script
+- `examples/` and `package-lock.json` to `.npmignore`
 
 ### Removed
 - `standard-version` package
