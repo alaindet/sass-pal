@@ -57,5 +57,9 @@
 @import './src/core/builders/space';
 @import './src/core/builders/_builders';
 
+// Core initializers
+@import './src/core/init/normalize';
+@import './src/core/init/reset';
+
 // Sass Pal
 @import './src/core/pal';
