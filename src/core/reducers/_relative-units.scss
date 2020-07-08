@@ -1,5 +1,5 @@
-/// Updates the 'relative-units' key of the store.
-/// Transforms all relative units to percentages
+/// Transforms all relative units of the payload to percentages before storing
+/// Stores 'relative-units'
 ///
 /// @access private
 /// @group core-reducers
@@ -7,18 +7,28 @@
 /// @require {function} pal-number-decimals
 /// @require {function} pal-get
 ///
-/// @param {Map} $store
-/// @param {Map} $old-value
+/// @param {Map} $state
+/// @param {Map} $action
+/// @return {Map}
 ///
-@function _pal-relative-units-reducer($store, $old-value)
+@function _pal-relative-units-reducer($state, $action)
 {
-  $relative-units: map-get($store, 'relative-units');
-
-  @each $label, $factor in $relative-units {
-    $value: if($factor == 0, 0, $factor * 100%);
-    $value: pal-number-decimals($value, pal-get('pal.decimals'));
-    $relative-units: map-merge($relative-units, (#{$label}: $value));
+  @if (map-get($action, 'type') != 'relative-units') {
+    @return $state;
   }
 
-  @return map-merge($store, ('relative-units': $relative-units));
+  $result: ();
+
+  @each $label, $factor in map-get($action, 'payload') {
+
+    // Multiply the given factor by 100%, except for 0 (which MUST be unitless)
+    $value: if($factor == 0, 0, $factor * 100%);
+
+    // Get a fixed number of decimals
+    $value: pal-number-decimals($value, pal-get('pal.decimals'));
+
+    $result: map-merge($result, ( #{$label}: $value ));
+  }
+
+  @return map-merge($state, ('relative-units': $result ));
 }
