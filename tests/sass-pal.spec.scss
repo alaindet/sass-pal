@@ -2,6 +2,7 @@
 @import './../sass-pal';
 
 // Helper functions
+@import './helpers/functions/compare.spec';
 @import './helpers/functions/list-join.spec';
 @import './helpers/functions/list-get.spec';
 @import './helpers/functions/list-sort-by-length-desc.spec';

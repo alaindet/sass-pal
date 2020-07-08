@@ -1,6 +1,7 @@
-/// Updates the 'devices' key of the store.
-/// Substracts a tiny length to the upper end resolutions so that @media queries
-/// do not collide
+/// Updates the 'devices' key of the store
+/// Substracts a tiny length to the upper end resolutions so that @media
+/// queries do not overlap
+/// Stores 'devices'
 ///
 /// @access private
 /// @group core-reducers
@@ -9,17 +10,20 @@
 /// @param {Map} $store
 /// @param {Map} $old-value
 ///
-@function _pal-devices-reducer($store, $old-value)
+@function _pal-devices-reducer($state, $action)
 {
-  $devices: map-get($store, 'devices');
+  @if (map-get($action, 'type') != 'devices') {
+    @return $state;
+  }
+  
+  $result: ();
+  $epsilon: 0.0001px;
 
-  @each $device, $resolutions in $devices {
+  @each $label, $resolutions in map-get($action, 'payload') {
     $min: nth($resolutions, 1);
-    $max: nth($resolutions, 2) - 0.0001px;
-    $devices: map-merge($devices, (
-      #{$device}: ($min, $max)
-    ));
+    $max: nth($resolutions, 2) - $epsilon;
+    $result: map-merge($result, ( #{$label}: ($min, $max) ));
   }
 
-  @return map-merge($store, ('devices': $devices));
+  @return map-merge($state, ( 'devices': $result ));
 }

@@ -1,41 +1,37 @@
-/// Runs all the reducers
+/// Runs all the reducers. By default, reducers must create
 ///
 /// @access private
 /// @group core-reducers
 /// @author Alain D'Ettorre <alain.det@gmail.com>
 /// @require {function} _pal-devices-reducer
 /// @require {function} _pal-relative-units-reducer
+/// @require {function} _pal-unit-reducer
 /// @require {function} _pal-units-reducer
 /// 
-/// @param {String} $key The key being updated
-/// @param {Map} $old-store The old store
-/// @param {Map} $store The current store
+/// @param {Map} $state The current state
+/// @param {Map} $action Contains the type (store key) and the payload (new value)
+/// @return {MAp} The new state
 ///
-@function _pal-reducers($key, $old-store, $store)
+@function _pal-reducers($state, $action)
 {
-  @if ('devices' == $key) {
-    $old-value: map-get($old-store, $key);
-    @return _pal-devices-reducer($store, $old-value);
-  }
+  $new-state: ();
 
-  @if ('relative-units' == $key) {
-    $old-value: map-get($old-store, $key);
-    @return _pal-relative-units-reducer($store, $old-value);
-  }
-
-  @if ('unit' == $key) {
-    $old-value: map-get($old-store, $key);
-    @return _pal-unit-reducer($store, $old-value);
-  }
-
-  @if ('units' == $key) {
-    $old-value: map-get($old-store, $key);
-    @return _pal-units-reducer($store, $old-value);
-  }
+  $new-state: _pal-devices-reducer($state, $action);
+  $new-state: _pal-relative-units-reducer($new-state, $action);
+  $new-state: _pal-unit-reducer($new-state, $action);
+  $new-state: _pal-units-reducer($new-state, $action);
 
   @if (function-exists('pal-custom-reducers') == true) {
-    @return pal-custom-reducers($key, $old-store, $store);
+    $new-state: pal-custom-reducers($new-state, $action);
   }
 
-  @return $store;
+  // If state did not change at all (no reducer executed),
+  // add/override key manually
+  @if (pal-compare($state, $new-state) == true) {
+    $key: map-get($action, 'type');
+    $value: map-get($action, 'payload');
+    $new-state: map-merge($new-state, ( #{$key}: $value ));
+  }
+
+  @return $new-state;
 }

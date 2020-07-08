@@ -6,18 +6,18 @@
 
 ## What
 
-Sass Pal helps you write short and consistent Sass stylesheets without getting in the way. **No CSS is explitcly output** until you request it. Basically, you call the `pal` mixin anywhere you need it, pass it some instructions and Sass Pal does the rest.
+Sass Pal helps you write short and consistent Sass stylesheets without getting in the way. **No CSS is explitcly output** until you request it. Everything is optional and adoption is completely gradual in any existing code base. Basically, just include the `pal` mixin anywhere you need it, pass it some instructions and that's it.
 
-To its core, Sass Pal is a centralized store (containing colors, sizing, resolutions etc.), wrapped in a layer of functions and mixins (called *builders*) which help you generate CSS on demand. So, no hard-to-override pre-made components, no flooding of your HTML templates with hundreds of inline-like utility classes, no complex post-processing purging: your styling belongs to stylesheets and you only get as much as you need.
+To its core, Sass Pal is a centralized data store (containing colors, sizing, resolutions etc.), wrapped in a layer of functions and mixins (called *builders*) which help you generate CSS on demand. So, no hard-to-override pre-made components, no flooding of your HTML templates with hundreds of inline-like utility classes, no complex post-processing purging: your styling belongs to stylesheets and you only get as much as you need.
 
 It offers
 
 - A concise syntax
-- Powerful tools like builders, device queries and even state reducers
-- A centralized place to share data with sensible defaults
+- Powerful tools like builders and device queries
+- A centralized data store with sensible defaults and reducer functions
 - Easy encapsulation of your styling via *device queries*, abstracting away @media queries and pseudo-classes
 - No CSS output left unsupervised as all output is controlled by mixins
-- Gradual migration and coexistence: since functions and mixins are all prefixed with `pal-` and one single `$_PAL_STORE` variable is globally defined there's no real risk for conflicts
+- Gradual migration and coexistence: since functions and mixins are all prefixed with `pal-` and one single `$_PAL_STORE` variable is globally defined, there's no real risk for conflicts
 - A collection of `pal-` prefixed helper functions and mixins, like `pal-string-split` and `pal-list-join`
 - A comprehensive suite of unit tests with `sass-true` and `jest`
 - A complete online [Documentation](https://alaindet.github.io/sass-pal/) built with `sassdoc`
@@ -152,17 +152,17 @@ Outputs this
 
 Refer to the **Examples** sections for implementations and to sections below or the [Documentation](https://alaindet.github.io/sass-pal/) for further details
 
-- **Builder**: It's a Sass mixin that builds CSS output related to the builder's name (`flex`, `space`, etc.). The key-value pairs you pass to the `pal` mixin are actually builders invocations in the form of `builder-name: builder-value`. You can also call builders individually like `pal-flex` and `pal-border`. You can define custom builders too, via the `pal-custom-builders` mixin
+- **Builder**: It's a Sass mixin that builds CSS output related to the builder's name (`flex`, `space`, etc.). The key-value pairs you pass to the `pal` mixin are actually builders invocations in the form of `builder-name: builder-value`. You can also call builders individually like `pal-flex` and `pal-border`. You can define custom builders too, via the `pal-custom-builders` mixin (See examples)
 
 - **Request map**: It's a Sass map with keys being *builder* names and values being whatever the builder accepts as a value. You can pass simple or device-scoped request maps to `pal`
 
-- **Device query**: It's a string instructing Sass Pal on how to encapsulate some styling you're declaring, either in a @media query, in a pseudo-class or both. A *device* for Sass Pal is a just a name referring a 2-elements list with a min and a max resolution
+- **Device query**: It's a string telling Sass Pal how to encapsulate the styling you're declaring, either in a @media query, in a pseudo-class or both. A *device* for Sass Pal is a just a name referring a 2-elements list with a min and a max resolution
 
-- **Store**: It's a Sass map centralizing all shared data (colors, units, sizings, custom data, etc.). You can read, override defaults and set custom data via `pal-get` and `pal-set` core functions. It's the only globally-declared variable (`$_PAL_STORE`) of Sass Pal
+- **Store**: It's a Sass map centralizing all shared data (colors, units, sizings, custom data, etc.). You can read, override defaults and set custom data via `pal-get`, `pal-set` and `pal-set-merge` core functions. It's the only variable (`$_PAL_STORE`) Sass Pal declares
 
-- **Reducer**: It's a Sass function depending on a specific key of the store, which is called anytime the store updates. It allows to perform some processing on the store after you set a new value key it depends on. You can define custom reducers via the `pal-custom-reducers` function
+- **Reducer**: It's a Sass function that updates the store any time you you call `pal-set` or `pal-set-merge`. Having a piece of logic that performs store updates allows you to execute any logic before updating, say multiply the input value by 10. There are already built-int reducers but you can also define your own via the `pal-custom-reducers` function (See examples)
 
-Annoted example
+Here's a guided example
 
 ```scss
 .terminology {
@@ -405,11 +405,11 @@ Examples
 
 ## Store
 
-This holds all the Sass Pal values. Some default values are already set and listed below. You can override existing keys or add new ones, except for the `pal` key which holds core unmodifiable values.
+This holds all the Sass Pal data. Some default values are already set and listed below. You can override existing keys as well as add new ones, except for the `pal` key which holds core unmodifiable values, like the sides of a rectangle or the number of decimals returned by calculations.
 
 ### Colors
 
-Has a default reducer? **NO**
+Has a built-in reducer? **NO**
 
 ```scss
 'colors': (
@@ -450,7 +450,7 @@ Has a default reducer? **NO**
 
 ### Devices
 
-Has a default reducer? **YES**
+Has a built-in reducer? **YES**
 
 The reducer ensures @media queries do not overlap by subtracting a very small length (0.0001px) to all devices' max resolutions
 
@@ -465,7 +465,7 @@ The reducer ensures @media queries do not overlap by subtracting a very small le
 
 ### Pseudo-classes
 
-Has a default reducer? **NO**
+Has a built-in reducer? **NO**
 
 Please note you cannot add pseudo-class functions like `:host()`, but `:host` is fine
 
@@ -485,7 +485,7 @@ Please note you cannot add pseudo-class functions like `:host()`, but `:host` is
 
 ### Relative units
 
-Has a default reducer? **YES**
+Has a built-in reducer? **YES**
 
 The reducer transforms all these factors into percentages. You usually see them inside a `size` builder, ex.: `@include pal-size(w-7/12 wmin-3/12 h-full)`
 
@@ -519,7 +519,7 @@ The reducer transforms all these factors into percentages. You usually see them 
 
 ### Base unit
 
-Has a default reducer? **YES**
+Has a built-in reducer? **YES**
 
 The reducer multiplies all *units* (see below) by the new base unit
 
@@ -529,7 +529,7 @@ The reducer multiplies all *units* (see below) by the new base unit
 
 ### Units
 
-Has a default reducer? **YES**
+Has a built-in reducer? **YES**
 
 These are **absolute units** as opposed to *relative units*. The reducer multiplies all given values by the existing base unit
 
@@ -564,7 +564,7 @@ These are **absolute units** as opposed to *relative units*. The reducer multipl
 
 ## Changing stored values
 
-You can override existing values on the store as well as define new ones with the `pal-set` function. Reading is done with `pal-get` function.
+You can override existing values on the store as well as define new ones with the `pal-set` and `pal-set-merge` functions. Reading is done with `pal-get` function.
 
 Example
 
@@ -573,7 +573,7 @@ Example
 
 // The $_ variable is needed, but unused, since Sass functions must return something
 
-// Override the base unit (this triggers any existing reducer)
+// Override the base unit (this triggers any existing reducer acting on 'unit')
 $_: pal-set('unit', 0.67rem);
 
 // Store new values
@@ -615,97 +615,6 @@ Outputs
   color: #e0e0e0;        
   height: 100px;
   margin-bottom: 0.67rem;
-}
-```
-
-## Defining custom reducers
-
-If you define a function called `pal-custom-reducers` you can hook into Sass Pal's reducer system and perform some logic. Let's try to add a custom reducer and a custom stored value to calculate the relative height of some kittens (why not?)
-
-```scss
-@import '~sass-pal/sass-pal';
-
-/// Calculates the relative height of a bunch of kittens
-///
-@function kittens-reducer($store)
-{
-  $kittens: ();
-  $tallest: 0;
-
-  // Find the tallest fluffy ball
-  @each $kitten in map-get($store, 'kittens') {
-    $height: map-get($kitten, 'height');
-    @if ($height > $tallest) {
-      $tallest: $height;
-    }
-  }
-
-  // Calculate relative height for each kitten
-  @each $kitten in map-get($store, 'kittens') {
-    $kittens: append($kittens, (
-      'name': map-get($kitten, 'name'),
-      'height': map-get($kitten, 'height'),
-      'relative-height': map-get($kitten, 'height') / $tallest,
-    ));
-  }
-
-  // Update the 'kittens' key on the store
-  $store: map-merge($store, ('kittens': $kittens));
-
-  @return $store;
-}
-
-/// Define the custom function to hook into Sass Pal's reducers
-///
-/// @param {String} The keys the user is setting
-/// @param {Map} $old-store The old store, before setting the new value
-/// @param {Map} $store The current store with new value (transform this)
-///
-@function pal-custom-reducers($key, $old-store, $store)
-{
-  @if ('kittens' == $key) {
-    @return kittens-reducer($store);
-  }
-
-  // Add any other custom reducer here...
-
-  @return $store;
-}
-
-// Set a new stored value with the 'kittens' key
-// This will trigger the previously registered custom reducer
-// $_ is unused but it's needed because Sass functions must return something
-$_: pal-set('kittens', (
-  ( name: 'mr-fancy-pants', height: 4.0in ),
-  ( name: 'sir-eats-alot', height: 3.5in ),
-  ( name: 'snowball', height: 3.0in ),
-));
-
-// Use the reduced data
-.kitten {
-  @each $kitten in pal-get('kittens') {
-    $name: map-get($kitten, 'name');
-    $relative-height: map-get($kitten, 'relative-height');
-    &.#{$name} {
-      height: #{$relative-height}rem;
-    }
-  }
-}
-```
-
-Outputs
-
-```css
-.kitten.mr-fancy-pants {
-  height: 1rem;
-}
-
-.kitten.sir-eats-alot {
-  height: 0.875rem;
-}
-
-.kitten.snowball {
-  height: 0.75rem;
 }
 ```
 

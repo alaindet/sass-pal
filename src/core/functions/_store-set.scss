@@ -1,4 +1,6 @@
-/// Sets a new key-value into the Sass Pal store or overwrites an existing one
+/// Sets a new key-value into the Sass Pal store by dispatching an action.
+/// If the action has a reducer, some logic is performed, otherwise the value
+/// is set or overwritten as it is.
 /// 
 /// @access public
 /// @group core-functions
@@ -17,12 +19,13 @@
   @if ($key == 'pal') {
     @error 'You cannot override the "pal" key on the store';
   }
-
-  $old-store: $_PAL_STORE;
-  $new-store: map-merge($old-store, (#{$key}: $value));
-
-  // Run the reducers
-  $_PAL_STORE: _pal-reducers($key, $old-store, $new-store) !global;
+  
+  $action: (
+    'type': $key,
+    'payload': $value,
+  );
+  
+  $_PAL_STORE: _pal-reducers($_PAL_STORE, $action) !global;
 
   @return null;
 }

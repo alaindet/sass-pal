@@ -12,6 +12,7 @@ groups:
   core-functions: Core Functions
   core-reducers: Core Reducers
   core-builders: Core Builders
+  helper-functions-any: Helper Functions for any type
   helper-functions-list: Helper Functions for Lists
   helper-functions-map: Helper Functions for Maps
   helper-functions-number: Helper Functions for Numbers

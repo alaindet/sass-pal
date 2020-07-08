@@ -1,5 +1,5 @@
-/// Updates the 'unit' key of the store.
 /// Adjusts all existing units with the new base unit
+/// Stores 'unit' and 'units'
 ///
 /// @access private
 /// @group core-reducers
@@ -7,24 +7,34 @@
 /// @require {function} pal-number-decimals
 /// @require {function} pal-get
 ///
-/// @param {Map} $store
-/// @param {Number} $old-value
+/// @param {Map} $state
+/// @param {Map} $action
+/// @return {Map}
 ///
-@function _pal-unit-reducer($store, $old-value)
+@function _pal-unit-reducer($state, $action)
 {
-  $units: map-get($store, 'units');
-
-  @if ($units == null) {
-    @return $store;
+  @if (map-get($action, 'type') != 'unit') {
+    @return $state;
   }
 
-  $new-value: map-get($store, 'unit');
+  $units: map-get($state, 'units');
+  $new-unit: map-get($action, 'payload');
+
+  // No units yet
+  @if ($units == null) {
+    @return map-merge($state, ( 'unit': $new-unit ));
+  }
+
+  $old-unit: map-get($state, 'unit');
 
   @each $label, $factor in $units {
-    $value: $factor * ( $new-value / $old-value );
+    $value: $factor * ( $new-unit / $old-unit );
     $value: pal-number-decimals($value, pal-get('pal.decimals'));
-    $units: map-merge($units, (#{$label}: $value));
+    $units: map-merge($units, ( #{$label}: $value ));
   }
 
-  @return map-merge($store, ('units': $units));
+  @return map-merge($state, (
+    'unit': $new-unit,
+    'units': $units,
+  ));
 }
