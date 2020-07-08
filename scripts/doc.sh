@@ -27,15 +27,15 @@ echo "${PREFIX} 05/09 # Move new documentation to root"
 mv ./doc/assets/ ./assets/
 mv ./doc/index.html ./index.html
 
-# echo "${PREFIX} 06/09 # Commit and push new documention"
-# git add .
-# git commit -m "Update documentation to version ${1}"
-# git push origin gh-pages
+echo "${PREFIX} 06/09 # Commit and push new documention"
+git add .
+git commit -m "Update documentation to version ${1}"
+git push origin gh-pages
 
-# echo "${PREFIX} 07/09 # Switch back to master branch"
-# git checkout master
+echo "${PREFIX} 07/09 # Switch back to master branch"
+git checkout master
 
-# echo "${PREFIX} 08/09 # Cleanup old documentation again"
-# rm -rf ./assets ./index.html
+echo "${PREFIX} 08/09 # Cleanup old documentation again"
+rm -rf ./assets ./index.html
 
-# echo "${PREFIX} 09/09 # Finished"
+echo "${PREFIX} 09/09 # Finished"
