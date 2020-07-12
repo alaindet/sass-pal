@@ -28,21 +28,26 @@
 ///   // )
 ///
 /// @param {String} $key
-/// @param {Map} $value
+/// @param {Map} $payload
 /// @return {Null}
 ///
-@function pal-set-merge($key, $value)
+@function pal-set-merge($key, $payload)
 {
-  $old-value: pal-get($key);
-  $new-value: null;
+  // Backup old value
+  $old-stored-value: pal-get($key);
 
-  @if ($old-value != null) {
-    $new-value: map-merge($old-value, $value);
-  } @else {
-    $new-value: $value;
-  }
+  // Set new values triggering reducers
+  $_: pal-set($key, $payload);
 
-  $_: pal-set($key, $new-value);
+  // Extract the new stored value
+  $new-stored-value: pal-get($key);
+
+  // Merge stored values
+  $merged-stored-value: map-merge($old-stored-value, $new-stored-value);
+  $partial: ( #{$key}: $merged-stored-value );
+
+  // Manually set it into the store
+  $_PAL_STORE: map-merge($_PAL_STORE, $partial) !global;
 
   @return null;
 }
