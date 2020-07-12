@@ -20,6 +20,11 @@
   $result: ();
   $unit: map-get($state, 'unit');
 
+  // No base unit yet
+  @if ($unit == null) {
+    $unit: 1;
+  }
+
   @each $label, $factor in map-get($action, 'payload') {
     $value: if($factor == 0, 0, $factor * $unit);
     $value: pal-number-decimals($value, pal-get('pal.decimals'));
