@@ -1,5 +1,6 @@
 /// Sass Pal builder for color rules. It accepts either a map or a list. If given
-/// strings instead of colors
+/// strings instead of native colors, Sass Pal converts the strings into native
+/// colors based on values stored into the 'colors' key of the store.
 ///
 /// @access public
 /// @group core-builders
