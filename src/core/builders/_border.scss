@@ -1,5 +1,5 @@
-/// Sass Pal builder for border-* rules. If any value is 'default' or is not set,
-/// then default values are used. If any value is null, that rule is not set.
+/// Sass Pal builder for border-* rules. Any 'default' or missing value is 
+/// replaced by its default. Any `null` value is explicitly not set instead.
 ///
 /// @access public
 /// @group core-builders
@@ -31,11 +31,14 @@
 ///   // border-style: double;
 ///   // border-color: #ddd;
 ///   // border-radius: 1rem 2 rem;
-/// @example scss With null values
+/// @example scss With null values (do not set them)
 ///   pal-border(null dotted #eee null);
-///   // border-width: 1px; // Default
 ///   // border-style: dotted;
 ///   // border-color: #eee;
+/// @example scss With default values
+///   pal-border('default' dashed null);
+///   // border-width: 1px;
+///   // border-style: dashed; 
 /// @example scss Scoped by side
 ///   pal-border(('t': 1px red, 'b': 2px dashed black));
 ///   // border-top: 1px solid red;      
@@ -73,7 +76,12 @@
         $list: ($list);
       }
 
-      $values: ();
+      $values: (
+        'width': 'default', // <-- This means "if no value set, use default"
+        'style': 'default',
+        'color': 'default',
+        'radius': null, // <-- This means "if no value set, don't set radius"
+      );
 
       $defaults: (
         'width': 1px,
@@ -120,21 +128,13 @@
         ));
       }
 
-      // Optionally transform given values to Sass Pal stored values
-      $values: (
-        'width': pal-parse-unit(map-get($values, 'width'), 'units'),
-        'style': map-get($values, 'style'),
-        'color': pal-parse-value(map-get($values, 'color'), 'colors'),
-        'radius': map-get($values, 'radius'),
-      );
-
       // Merge input values with default values
       @each $key, $default in $defaults {
 
         $value: map-get($values, $key);
 
-        // Use default if no value is passed
-        @if ($value == null) {
+        // Use default if this value was not overridden
+        @if ($value == 'default') {
           $new-values: (#{$key}: $default);
           $values: map-merge($values, $new-values);
         }
@@ -150,6 +150,20 @@
         }
       }
 
+      // Transform width using stored value, if needed
+      // Ex.: width: 1 => width: 0.5rem
+      @if (map-get($values, 'width') != null) {
+        $width: pal-parse-unit(map-get($values, 'width'), 'units');
+        $values: map-merge($values, ('width': $width));
+      }
+
+      // Transform color using stored value, if needed
+      // Ex.: color: 'red' => color: #e53e3e
+      @if (map-get($values, 'color') != null) {
+        $color: pal-parse-value(map-get($values, 'color'), 'colors');
+        $values: map-merge($values, ('color': $color));
+      }
+
       // Shorthand property
       @if (pal-map-are-keys($values, ('width', 'style', 'color'))) {
         $border-list: pal-map-get-all($values, ('width', 'style', 'color'));
@@ -162,7 +176,7 @@
         }
       }
       
-      // Single properties (could be some null)
+      // Single properties (avoid setting null values)
       @else {
         @if (map-get($values, 'width') != null) {
           @if ($should-apply-to-all-sides) {
