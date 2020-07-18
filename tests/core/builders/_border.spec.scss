@@ -106,5 +106,48 @@
       }
     }
 
+    // Test #8
+    @include assert {
+      @include output {
+        .test {
+          @include pal-border(null null #ccc);
+        }
+      }
+      @include expect {
+        .test {
+          border-color: #ccc;
+        }
+      }
+    }
+
+    // Test #9
+    @include assert {
+      @include output {
+        .test {
+          @include pal-border('default' dashed 'default');
+        }
+      }
+      @include expect {
+        .test {
+          border: 1px dashed #ccc;
+        }
+      }
+    }
+
+    // Test #10
+    @include assert {
+      @include output {
+        .test {
+          @include pal-border('default' dashed null);
+        }
+      }
+      @include expect {
+        .test {
+          border-width: 1px;
+          border-style: dashed;
+        }
+      }
+    }
+
   }
 }

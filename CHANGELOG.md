@@ -4,7 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [0.9.2]
+## [0.10.0] - 2020-07-18
+
+### Added
+- Add `'default'` value to `pal-border` builder
+- New examples for `pal-border` builder
+
+### Changed
+- Changed how `null` values work on `pal-border` builder
+
+## [0.9.2] - 2020-07-12
 
 ### Fixed
 - Fix `pal-set-merge` core function

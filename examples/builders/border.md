@@ -78,7 +78,7 @@ The 4th value of the list argument is whatever `border-radius` accepts
 
 ## Example 5: Use Sass Pal values
 
-- If you provide a string where a number or a color is supposed to be used, Sass Pal will convert those with stored values accordingly
+- If you provide a string where a number or a color is supposed to be used, Sass Pal will replace those with stored values accordingly
 - If you do not provide a **unit suffix** ('u' for *absolute units* or '%' for *relative units*) these defaults are assumed
   - Border width (1st value) is an *absolute units* (ex.: '3' => 1.5rem)
   - Border radii (4th value) are *relative units* (ex.: '1/2' => 50%)
@@ -101,6 +101,36 @@ The 4th value of the list argument is whatever `border-radius` accepts
 .example-5b {
   border: 0.375rem solid #e53e3e;
   border-radius: 1rem 1.5rem;
+}
+*/
+```
+
+## Example 6: With `null` values
+You can explicitly tell Sass Pal to **not** set one or more CSS rules by providing `null` values to this builder. This example avoids `border-width` and `border-color` and only sets the `border-style`
+```scss
+.example-6 {
+  @include pal-border(null dashed null);
+}
+
+/*
+.example-6 {
+  border-style: dashed;
+}
+*/
+```
+
+## Example 7: With 'default' values
+Any missing or `'default'` value is replaced by the default values for that rule. You can mix and match `'default'` and `null`. For example, given the `border-style` is only set when you provide at least 3 values to the `border` builder, with the following example you set a custom `border-style`, a default `border-width` and avoid setting any `border-color`
+
+```scss
+.example-7 {
+  @include pal-border('default' groove null);
+}
+
+/*
+.example-7 {
+  border-width: 1px;
+  border-style: groove;
 }
 */
 ```
