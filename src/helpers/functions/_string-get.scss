@@ -1,0 +1,20 @@
+/// Extract a single character from a string given its **1-based** index
+/// (see examples). Accepts negative integers as it's an alias of the native
+/// `str-slice`.
+///
+/// @access public
+/// @group helper-functions-string
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss Get a character from a string
+///   pal-string-get('Hello world', 1); // 'H'
+///   pal-string-get('Hello world', -3); // 'r'
+///
+/// @param {String} $string The string to extract the character from
+/// @param {Number} $index The character index to be extracted
+/// @return {String}
+///
+@function pal-string-get($string, $index: 1)
+{
+  @return str-slice($string, $index, $index);
+}

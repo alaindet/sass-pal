@@ -11,3 +11,10 @@
     // ...
   ));
 }
+
+.test {
+  content: inspect(pal-string-get('Hello world', 0));
+  content: inspect(pal-string-get('Hello world', 1));
+  content: inspect(pal-string-get('Hello world', -1));
+  content: inspect(pal-string-get('Hello world', -3));
+}
