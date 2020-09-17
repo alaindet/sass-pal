@@ -4,11 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-# [Unreleased] - 2020-09-17
+# [0.11.0] - 2020-09-17
 
 ### Added
-- Add `pal-string-get` helper function
 - Add `pal-string-alphabet` helper function
+- Add `pal-string-get` helper function
+- Add `pal-string-is-css-class` helper function
 
 ## [0.10.0] - 2020-07-18
 
