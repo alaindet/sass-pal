@@ -16,7 +16,6 @@
 ///   // .test {
 ///   //   background-color: #aaa;
 ///   // }
-/// 
 /// @example scss Set all colors
 ///   .test {
 ///     @include pal-color(#aaa #bbb #ccc);
@@ -26,7 +25,6 @@
 ///   //   color: #bbb;
 ///   //   border-color: #ccc;
 ///   // }
-/// 
 /// @example scss Use Pal colors (pass strings)
 ///   .test {
 ///     @include pal-color('pink-light' blue 'red');
@@ -36,7 +34,6 @@
 ///   //   color: blue;
 ///   //   border-color: #e53e3e;
 ///   // }
-/// 
 /// @example scss Use a map
 ///   .test {
 ///     @include pal-color((
@@ -50,7 +47,6 @@
 ///   //   color: #bbb;
 ///   //   border-color: #ccc;
 ///   // }
-/// 
 /// @example scss Pass any number of map keys
 ///   .test {
 ///     @include pal-color((
@@ -60,7 +56,6 @@
 ///   // .test {
 ///   //   border-color: #ccc;
 ///   // }
-/// 
 /// @example scss Set all colors
 ///   .test {
 ///     @include pal-color(#aaa null #ccc);

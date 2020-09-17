@@ -1,0 +1,39 @@
+/// Returns the alphabet both lowercase and uppercase, optionally
+///
+/// @access public
+/// @group helper-functions-string
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+///
+/// @example scss Every letter of the alphabet (lowercase and uppercase)
+///   pal-string-alphabet();
+/// @example scss Every letter of the alphabet, only uppercase
+///   pal-string-alphabet($lowercase: false);
+/// @example scss Every letter of the alphabet, only lowercase
+///   pal-string-alphabet($uppercase: false);
+///
+/// @param {Bool} $lowercase Include lowercase letters?
+/// @param {Number} $uppercase Include uppercase letters?
+/// @return {List}
+///
+@function pal-string-alphabet($lowercase: true, $uppercase: true)
+{
+  $result: ();
+
+  @if ($lowercase == true) {
+    $result: join($result, (
+      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+      'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+      'u', 'v', 'w', 'x', 'y', 'z',
+    ));
+  }
+
+  @if ($uppercase == true) {
+    $result: join($result, (
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+      'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+      'U', 'V', 'W', 'X', 'Y', 'Z',
+    ));
+  }
+
+  @return $result;
+}
