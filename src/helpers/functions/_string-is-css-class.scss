@@ -1,0 +1,73 @@
+/// Checks if a string is a valid CSS class according to
+/// https://stackoverflow.com/questions/448981/which-characters-are-valid-in-css-class-names-selectors and
+/// http://www.w3.org/TR/CSS21/grammar.html#scanner
+///
+/// @access public
+/// @group helper-functions-string
+/// @author Alain D'Ettorre <alain.det@gmail.com>
+/// @require {function} pal-string-alphabet
+/// @require {function} pal-string-split
+///
+/// @example scss Check if given string is a valid CSS class
+///   pal-string-is-css-class('valid') // true
+///   pal-string-is-css-class('-valid') // true
+///   pal-string-is-css-class('42invalid') // false
+///   pal-string-is-css-class('_valid') // true
+///   pal-string-is-css-class('_42invalid') // false
+///   pal-string-is-css-class('-42invalid') // false
+///   pal-string-is-css-class('x') // false
+///   pal-string-is-css-class('') // false
+///   pal-string-is-css-class('valid42') // true
+///
+/// @param {String} $class The CSS class to check
+/// @return {Bool}
+///
+@function pal-string-is-css-class($class, $index: 1)
+{
+  $alphabet: pal-string-alphabet();
+  $numbers: ('1', '2', '3', '4', '5', '6', '7', '8', '9');
+  $whitelist: join(join($alphabet, $numbers), ('-', '_'));
+  $chars: pal-string-split($class, '');
+
+  // Check for illegal characters
+  @each $char in $chars {
+    @if (index($whitelist, $char) == null) {
+      @return false;
+    }
+  }
+
+  // Check for length
+  @if (length($chars) < 2) {
+    @return false;
+  }
+
+  // Check first character
+  $first: nth($chars, 1);
+  $whitelist: join($alphabet, ('-', '_'));
+  $valid: false;
+  @each $char in $whitelist {
+    @if ($char == $first) {
+      $valid: true;
+    }
+  }
+  @if ($valid == false) {
+    @return false;
+  }
+
+  // Check second character if first is '-'
+  @if ($first == '-') {
+    $second: nth($chars, 2);
+    $whitelist: join($alphabet, ('_'));
+    $valid: false;
+    @each $char in $whitelist {
+      @if ($char == $second) {
+        $valid: true;
+      }
+    }
+    @if ($valid == false) {
+      @return false;
+    }
+  }
+
+  @return true;
+}

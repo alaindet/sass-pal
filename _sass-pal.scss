@@ -1,21 +1,24 @@
 // Helper functions
 @import './src/helpers/functions/compare';
-@import './src/helpers/functions/list-join';
 @import './src/helpers/functions/list-get';
+@import './src/helpers/functions/list-join';
 @import './src/helpers/functions/list-sort-by-length-desc';
-@import './src/helpers/functions/number-half-plus-one';
+@import './src/helpers/functions/map-are-keys';
+@import './src/helpers/functions/map-get-all';
+@import './src/helpers/functions/map-get';
+@import './src/helpers/functions/map-is-any-key';
+@import './src/helpers/functions/map-set';
 @import './src/helpers/functions/number-decimals';
 @import './src/helpers/functions/number-get-unit';
+@import './src/helpers/functions/number-half-plus-one';
 @import './src/helpers/functions/number-has-unit';
 @import './src/helpers/functions/number-is-integer';
 @import './src/helpers/functions/number-to-string';
+@import './src/helpers/functions/string-alphabet';
+@import './src/helpers/functions/string-get';
+@import './src/helpers/functions/string-is-css-class';
 @import './src/helpers/functions/string-split';
 @import './src/helpers/functions/string-starts-with';
-@import './src/helpers/functions/map-get';
-@import './src/helpers/functions/map-get-all';
-@import './src/helpers/functions/map-are-keys';
-@import './src/helpers/functions/map-is-any-key';
-@import './src/helpers/functions/map-set';
 
 // Helper mixins
 @import './src/helpers/mixins/media-query';
