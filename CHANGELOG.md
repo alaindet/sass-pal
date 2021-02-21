@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-# [0.11.0] - 2020-09-17
+## [0.12.0] - Unreleased
+
+### Changed
+- Update `LICENSE` file
+
+## [0.11.0] - 2020-09-17
 
 ### Added
 - Add `pal-string-alphabet` helper function
