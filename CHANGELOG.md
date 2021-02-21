@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Changed
 - Update `LICENSE` file
+- Update `np` package version
+- Refactor `src/helpers`
+
 
 ## [0.11.0] - 2020-09-17
 
@@ -15,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Add `pal-string-alphabet` helper function
 - Add `pal-string-get` helper function
 - Add `pal-string-is-css-class` helper function
+
 
 ## [0.10.0] - 2020-07-18
 
@@ -24,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Changed
 - Changed how `null` values work on `pal-border` builder
+
 
 ## [0.9.2] - 2020-07-12
 
@@ -120,6 +125,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 
 ## [0.6.2] - 2020-05-04
+
 ### Fixed
 - The core function `pal-parse-device-query` now works correctly
 
