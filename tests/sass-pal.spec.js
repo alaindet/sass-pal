@@ -6,9 +6,10 @@ const sassTrue = require('sass-true');
 
 describe('Sass-Pal', () => {
   const srcDir = path.join(process.cwd(), 'src');
+  const includePaths = [srcDir];
   const globPattern = `${srcDir}/**/*.spec.scss`;
   const files = glob.sync(globPattern);
   for (const file of files) {
-    sassTrue.runSass({ file }, { describe, it });
+    sassTrue.runSass({ file, includePaths }, { describe, it });
   }
 });

@@ -1,5 +1,5 @@
 @import 'true';
-@import './compare';
+@import 'sass-pal';
 
 $tests: (
   (
@@ -40,8 +40,8 @@ $tests: (
   @include it('Checks if any two values are equal (by value, not reference)') {
     @each $test in $tests {
       $given: map-get($test, 'given');
-      $arg1: nth($given, 1);
-      $arg2: nth($given, 2);
+      $arg1: pal-list-get($given, 1);
+      $arg2: pal-list-get($given, 2);
       $assertion: pal-compare($arg1, $arg2);
       $expected: map-get($test, 'expected');
       @include assert-equal($assertion, $expected);
