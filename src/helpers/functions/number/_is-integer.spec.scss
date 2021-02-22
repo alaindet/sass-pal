@@ -1,0 +1,43 @@
+@import 'true';
+@import 'sass-pal';
+
+$tests: (
+  (
+    'given': 0,
+    'expected': true,
+  ),
+  (
+    'given': 1,
+    'expected': true,
+  ),
+  (
+    'given': 2rem,
+    'expected': true,
+  ),
+  (
+    'given': 42%,
+    'expected': true,
+  ),
+  (
+    'given': 0.5,
+    'expected': false,
+  ),
+  (
+    'given': 0.75rem,
+    'expected': false,
+  ),
+   (
+    'given': 12.34%,
+    'expected': false,
+  ),
+);
+
+@include describe('[Helper Function] pal-number-is-integer') {
+  @include it('Checks if a number is integer') {
+    @each $test in $tests {
+      $assertion: pal-number-is-integer(map-get($test, 'given'));
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}

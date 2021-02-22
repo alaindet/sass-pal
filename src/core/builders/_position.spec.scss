@@ -1,0 +1,128 @@
+@import 'true';
+@import 'sass-pal';
+
+@include describe('[Core Mixin] pal-position') {
+  @include it('Builds position-related rules') {
+
+    // Test #1
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(absolute (0 2rem auto 2rem));
+        }
+      }
+      @include expect {
+        .test {
+          position: absolute;
+          top: 0;
+          right: 2rem;
+          bottom: auto;
+          left: 2rem;
+        }
+      }
+    }
+
+    // Test #2
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(relative (10px 20px));
+        }
+      }
+      @include expect {
+        .test {
+          position: relative;
+          top: 10px;
+          bottom: 10px;
+          left: 20px;
+          right: 20px;
+        }
+      }
+    }
+
+    // Test #3
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(fixed 30px);
+        }
+      }
+      @include expect {
+        .test {
+          position: fixed;
+          top: 30px;
+          right: 30px;
+          bottom: 30px;
+          left: 30px;
+        }
+      }
+    }
+
+    // Test #4
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(absolute (0 1 2 3));
+        }
+      }
+      @include expect {
+        .test {
+          position: absolute;
+          top: 0;
+          right: 0.5rem;
+          bottom: 1rem;
+          left: 1.5rem;
+        }
+      }
+    }
+
+    // Test #5
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(absolute (0 '1/2u' '5/12' '2/5%'));
+        }
+      }
+      @include expect {
+        .test {
+          position: absolute;
+          top: 0;
+          right: 0.25rem;
+          bottom: 41.66667%;
+          left: 40%;
+        }
+      }
+    }
+
+    // Test #6
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(relative);
+        }
+      }
+      @include expect {
+        .test {
+          position: relative;
+        }
+      }
+    }
+
+    // Test #7
+    @include assert {
+      @include output {
+        .test {
+          @include pal-position(absolute (null null '5/12' '2/5%'));
+        }
+      }
+      @include expect {
+        .test {
+          position: absolute;
+          bottom: 41.66667%;
+          left: 40%;
+        }
+      }
+    }
+
+  }
+}

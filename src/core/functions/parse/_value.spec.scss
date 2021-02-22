@@ -1,0 +1,58 @@
+@import 'true';
+@import 'sass-pal';
+
+$tests: (
+  (
+    'given': (#aaa, 'colors'),
+    'expected': #aaa,
+  ),
+  (
+    'given': ('3/4', 'units'),
+    'expected': 0.375rem,
+  ),
+  (
+    'given': ('3/4', 'relative-units'),
+    'expected': 75%,
+  ),
+  (
+    'given': ('blue', 'colors'),
+    'expected': #4299e1,
+  ),
+  (
+    'given': (red, 'colors'),
+    'expected': red,
+  ),
+  (
+    'given': (#333, 'colors'),
+    'expected': #333,
+  ),
+  (
+    'given': (rgba(1,2,3,0.5), 'colors'),
+    'expected': rgba(1,2,3,0.5),
+  ),
+  (
+    'given': (24px, 'units'),
+    'expected': 24px,
+  ),
+  (
+    'given': (3, 'units'),
+    'expected': 1.5rem,
+  ),
+  (
+    'given': ('1/2', 'units'),
+    'expected': 0.25rem,
+  )
+);
+
+@include describe('[Core Function] pal-parse-value') {
+  @include it('Parses values as Sass Pal\'s stored values, if needed') {
+    @each $test in $tests {
+      $given: map-get($test, 'given');
+      $arg1: nth($given, 1);
+      $arg2: nth($given, 2);
+      $assertion: pal-parse-value($arg1, $arg2);
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}

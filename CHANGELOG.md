@@ -4,13 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [0.12.0] - Unreleased
+## [0.12.0] - 2021-02-22
 
 ### Changed
 - Update `LICENSE` file
 - Update `np` package version
 - Refactor `src/helpers`
 - Refactor `src/core`
+- Refactor unit tests
 
 
 ## [0.11.0] - 2020-09-17

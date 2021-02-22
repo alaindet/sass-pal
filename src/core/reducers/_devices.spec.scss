@@ -1,0 +1,25 @@
+@import 'true';
+@import 'sass-pal';
+
+$backup: $_PAL_STORE;
+
+@include describe('[Core Reducer] _pal-devices-reducer') {
+  @include it('Reduces the \'device\' stored value') {
+
+    // Test #1
+    $given: (
+      'fridge': (100px, 200px),
+      'oven': (200px, 300px),
+    );
+    $expected: (
+      'fridge': (100px, 199.9999px),
+      'oven': (200px, 299.9999px),
+    );
+    $_: pal-set('devices', $given);
+    $assertion: pal-get('devices');
+    @include assert-equal($assertion, $expected);
+
+  }
+}
+
+$_PAL_STORE: $backup;

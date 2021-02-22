@@ -1,0 +1,29 @@
+@import 'true';
+@import 'sass-pal';
+
+$backup: $_PAL_STORE;
+
+@include describe('[Core Reducer] _pal-unit-reducer') {
+  @include it('Reduces the \'unit\' stored value') {
+
+    // Test #1
+    $unit: 2rem;
+    $units: (
+      '2': 2,
+      '3': 3,
+      '4': 4,
+    );
+    $expected: (
+      '2': 4rem,
+      '3': 6rem,
+      '4': 8rem,
+    );
+    $null: pal-set('units', $units);
+    $null: pal-set('unit', $unit);
+    $assertion: pal-get('units');
+    @include assert-equal($assertion, $expected);
+
+  }
+}
+
+$_PAL_STORE: $backup;

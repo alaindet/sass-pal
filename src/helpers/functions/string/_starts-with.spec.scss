@@ -1,0 +1,23 @@
+@import 'true';
+@import 'sass-pal';
+
+@include describe('[Helper Function] pal-string-starts-with') {
+  @include it('Checks if a string starts with a substring') {
+
+    // Test #1
+    $assertion: pal-string-starts-with('hello world', 'hello');
+    $expected: true;
+    @include assert-equal($assertion, $expected);
+
+    // Test #2
+    $assertion: pal-string-starts-with('hello world', 'world');
+    $expected: false;
+    @include assert-equal($assertion, $expected);
+
+    // Test #3
+    $assertion: pal-string-starts-with(11 22 33);
+    $expected: false;
+    @include assert-equal($assertion, $expected);
+
+  }
+}
