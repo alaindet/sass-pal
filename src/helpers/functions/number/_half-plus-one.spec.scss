@@ -1,0 +1,31 @@
+@import 'true';
+@import 'sass-pal';
+
+$tests: (
+  (
+    given: 5,
+    expected: 3,
+  ),
+  (
+    given: 10,
+    expected: 6,
+  ),
+  (
+    given: 11,
+    expected: 6,
+  ),
+  (
+    given: 123,
+    expected: 62,
+  ),
+);
+
+@include describe('[Helper Function] pal-number-half-plus-one') {
+  @include it('Return the half plus one of a number, always an integer') {
+    @each $test in $tests {
+      $assertion: pal-number-half-plus-one(map-get($test, 'given'));
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}

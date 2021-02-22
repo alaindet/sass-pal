@@ -1,0 +1,31 @@
+@import 'true';
+@import 'sass-pal';
+
+$tests: (
+  (
+    given: 24px,
+    expected: true,
+  ),
+  (
+    given: 5,
+    expected: false,
+  ),
+  (
+    given: 3rem,
+    expected: true,
+  ),
+  (
+    given: 42%,
+    expected: true,
+  ),
+);
+
+@include describe('[Helper Function] pal-number-has-unit') {
+  @include it('Checks if a number has a length unit') {
+    @each $test in $tests {
+      $assertion: pal-number-has-unit(map-get($test, 'given'));
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}

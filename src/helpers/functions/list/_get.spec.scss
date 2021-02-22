@@ -1,0 +1,18 @@
+@import 'true';
+@import 'sass-pal';
+
+@include describe('[Helper Function] pal-list-get') {
+  @include it('Returns an element of a list by index (null if none)') {
+
+    // Test #1
+    $assertion: pal-list-get(a b c, 2);
+    $expected: 'b';
+    @include assert-equal($assertion, $expected);
+
+    // Test #2
+    $assertion: pal-list-get(a b c, 42);
+    $expected: null;
+    @include assert-equal($assertion, $expected);
+
+  }
+}

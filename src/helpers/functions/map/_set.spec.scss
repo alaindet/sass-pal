@@ -1,0 +1,22 @@
+@import 'true';
+@import 'sass-pal';
+
+@include describe('[Helper Function] pal-map-set') {
+  @include it('Sets a new value on a map by its key, overwrites existing keys') {
+
+    $map: (
+      'a': 111,
+    );
+
+    // Test #1
+    $assertion: pal-map-set($map, 'b', 222);
+    $expected: ('a': 111, 'b': 222);
+    @include assert-equal($assertion, $expected);
+
+    // Test #2
+    $assertion: pal-map-set($map, 'a', 333);
+    $expected: ('a': 333);
+    @include assert-equal($assertion, $expected);
+
+  }
+}

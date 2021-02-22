@@ -1,0 +1,23 @@
+@import 'true';
+@import 'sass-pal';
+
+$tests: (
+  (
+    given: 111,
+    expected: '111',
+  ),
+  (
+    given: 222px,
+    expected: '222px',
+  ),
+);
+
+@include describe('[Helper Function] pal-number-to-string') {
+  @include it('Casts a number to a string') {
+    @each $test in $tests {
+      $assertion: pal-number-to-string(map-get($test, 'given'));
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}
