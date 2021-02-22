@@ -1,0 +1,23 @@
+@import 'true';
+@import 'sass-pal';
+
+@include describe('[Helper Function] pal-list-join') {
+  @include it('Turns a list of strings into a string (optional separator)') {
+
+    // Test #1
+    $assertion: pal-list-join(('mobile', 'tablet', 'desktop'), '_');
+    $expected: 'mobile_tablet_desktop';
+    @include assert-equal($assertion, $expected);
+
+    // Test #2
+    $assertion: pal-list-join(foo bar baz);
+    $expected: 'foo,bar,baz';
+    @include assert-equal($assertion, $expected);
+
+    // Test #3
+    $assertion: pal-list-join((foo, bar, baz), '...');
+    $expected: 'foo...bar...baz';
+    @include assert-equal($assertion, $expected);
+
+  }
+}

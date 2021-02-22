@@ -1,0 +1,25 @@
+@import 'true';
+@import 'sass-pal';
+
+$backup: $_PAL_STORE;
+
+@include describe('[Core Reducer] _pal-relative-units-reducer') {
+  @include it('Reduces the \'relative-units\' stored value') {
+
+    // Test #1
+    $given: (
+      'three-quarters': 3/4,
+      'half': 1/2,
+    );
+    $expected: (
+      'three-quarters': 75%,
+      'half': 50%,
+    );
+    $_: pal-set('relative-units', $given);
+    $assertion: pal-get('relative-units');
+    @include assert-equal($assertion, $expected);
+
+  }
+}
+
+$_PAL_STORE: $backup;

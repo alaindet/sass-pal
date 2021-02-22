@@ -1,0 +1,41 @@
+@import 'true';
+@import 'sass-pal';
+
+$tests: (
+  (
+    'given': ('Hello world', 1),
+    'expected': 'H',
+  ),
+  (
+    'given': ('Hello world', 0),
+    'expected': '',
+  ),
+  (
+    'given': ('Hello world', -1),
+    'expected': 'd',
+  ),
+  (
+    'given': ('Hello world', -5),
+    'expected': 'w',
+  ),
+);
+
+@include describe('[Helper Function] pal-string-get') {
+  @include it('Extracts a character from a string') {
+
+    @each $test in $tests {
+      $given: map-get($test, 'given');
+      $expected: map-get($test, 'expected');
+      $arg1: pal-list-get($given, 1);
+      $arg2: pal-list-get($given, 2);
+      $assertion: null;
+      @if ($arg2 == null) {
+        $assertion: pal-string-get($arg1);
+      } @else {
+        $assertion: pal-string-get($arg1, $arg2);
+      }
+      @include assert-equal($assertion, $expected);
+    }
+
+  }
+}

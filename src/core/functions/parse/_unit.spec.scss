@@ -1,0 +1,32 @@
+@import 'true';
+@import 'sass-pal';
+
+$tests: (
+  (
+    'given': '3/4u',
+    'expected': 0.375rem,
+  ),
+  (
+    'given': '1/2%',
+    'expected': 50%,
+  ),
+  (
+    'given': 1/2,
+    'expected': 0.5,
+  ),
+  (
+    'given': 2,
+    'expected': 1rem,
+  ),
+);
+
+@include describe('[Core Function] pal-parse-unit') {
+  @include it('Parses numbers | strings as Sass Pal\'s stored values, if needed') {
+    @each $test in $tests {
+      $given: map-get($test, 'given');
+      $assertion: pal-parse-unit($given);
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}

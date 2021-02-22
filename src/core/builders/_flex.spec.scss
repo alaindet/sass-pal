@@ -1,0 +1,141 @@
+@import 'true';
+@import 'sass-pal';
+
+@include describe('[Core Mixin] pal-flex') {
+  @include it('Builds Flexbox rules') {
+
+    // Test #1
+    @include assert {
+      @include output {
+        .test {
+          @include pal-flex(center);
+        }
+      }
+      @include expect {
+        .test {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+
+    // Test #2
+    @include assert {
+      @include output {
+        .test {
+          @include pal-flex((
+            dir: column,
+            wrap: false,
+            main-axis: around,
+            cross-axis: end,
+            cross-lines: between,
+            flex: 1 0 50%,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: flex-end;
+          align-content: space-between;
+          flex: 1 0 50%;
+        }
+      }
+    }
+
+    // Test #3
+    @include assert {
+      @include output {
+        .test {
+          @include pal-flex((
+            self-align: end,
+            basis: 'quarter',
+            grow: 'more',
+            shrink: 'less',
+            order: 'last',
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          align-self: flex-end;
+          flex-basis: 25%;
+          flex-grow: 2;
+          flex-shrink: 0.5;
+          order: 1000;
+        }
+      }
+    }
+
+    // Test #4
+    @include assert {
+      @include output {
+        .test {
+          @include pal-flex((
+            'dir': column,
+            'main-axis': around,
+            'cross-axis': stretch,
+            'grow': normal,
+            'inline': true,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          display: inline-flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: stretch;
+          flex-grow: 1;
+        }
+      }
+    }
+
+    // Test #5
+    @include assert {
+      @include output {
+        .test {
+          @include pal-flex((
+            'dir': col,
+            'main-axis': center,
+            'cross-axis': stretch,
+          ));
+        }
+      }
+      @include expect {
+        .test {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: stretch;
+        }
+      }
+    }
+
+    // Test #6
+    @include assert {
+      @include output {
+        .test-1 { @include pal-flex(( basis: '1/2' )); }
+        .test-2 { @include pal-flex(( basis: '1/2%' )); }
+        .test-3 { @include pal-flex(( basis: '1/2u' )); }
+      }
+      @include expect {
+        .test-1 {
+          flex-basis: 50%;
+        }
+
+        .test-2 {
+          flex-basis: 50%;
+        }
+
+        .test-3 {
+          flex-basis: 0.25rem;
+        }
+      }
+    }
+
+  }
+}

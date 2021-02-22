@@ -1,0 +1,41 @@
+@import 'true';
+@import 'sass-pal';
+
+@include describe('[Helper Function] pal-map-get-all') {
+  @include it('Returns list of values from a map, given a list of keys') {
+
+    // Test #1
+    $assertion: pal-map-get-all(
+      (
+        'a': 11,
+        'b': 22,
+        'c': 33,
+      ),
+      (
+        'a',
+        'c',
+      )
+    );
+    $expected: 11 33;
+    @include assert-equal($assertion, $expected);
+
+    // Test #2
+    $assertion: pal-map-get-all(
+      (
+        'a': (
+          'b': 'hello',
+          'c': (
+            'd': 'world',
+          )
+        )
+      ),
+      (
+        'a.b',
+        'a.c.d',
+      )
+    );
+    $expected: 'hello' 'world';
+    @include assert-equal($assertion, $expected);
+
+  }
+}

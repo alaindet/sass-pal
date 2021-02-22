@@ -1,0 +1,31 @@
+@import 'true';
+@import 'sass-pal';
+
+$tests: (
+  (
+    'given': 'b',
+    'expected': ('bottom'),
+  ),
+  (
+    'given': 'tr',
+    'expected': ('top', 'right'),
+  ),
+  (
+    'given': '*',
+    'expected': ('top', 'right', 'bottom', 'left'),
+  ),
+  (
+    'given': '^t',
+    'expected': ('right', 'bottom', 'left'),
+  )
+);
+
+@include describe('[Core Function] pal-parse-sides') {
+  @include it('Parses side abbreviations into a list of sides') {
+    @each $test in $tests {
+      $assertion: pal-parse-sides(map-get($test, 'given'));
+      $expected: map-get($test, 'expected');
+      @include assert-equal($assertion, $expected);
+    }
+  }
+}
